@@ -1,0 +1,12 @@
+@import "../core/index-noreset.scss";
+
+.#{$css-prefix}dialog-show-table {
+
+    .#{$css-prefix}dialog-show-table-content {
+        min-height: 100px;
+        width: 700px;
+        overflow: auto;
+    }
+}
+
+

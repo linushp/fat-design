@@ -1,0 +1,248 @@
+/* eslint-disable callback-return */
+import {asyncMap, asyncMapPromise, processErrorResults, toErrorsArray,} from './util';
+import {getValidationMethod} from './validator';
+import zhCn from "../locale/zh-cn.js";
+import {deepMerge} from "../util/object.js";
+
+
+const defaultMessages = zhCn.Form.Validate;
+
+function noop() {
+}
+
+/**
+ * 返回值：
+ * 1. Promise.resolve() ; Promise.reject("xxx错误")
+ * 2. {message: 'xxx错误'}
+ * 3. “xxx错误”
+ * @param res
+ * @param cb
+ */
+function handleRes(res, cb) {
+    if (res && typeof res.then === "function") {
+        res.then(
+            (s) => cb(s),
+            e => cb(e)
+        );
+    } else if (res && res.message) {
+        cb(res)
+    } else if (typeof res === "string") {
+        cb(res)
+    } else {
+        cb();
+    }
+}
+
+
+/**
+ * @param {Object} source {name: value, name2: value2}
+ * @param {Object} rules {name: [rule1, rule2]}
+ * @returns {Object} {name:[{value,rule1},{value, rule2}]}
+ */
+function serializeRules(source, rules) {
+    // serialize rules
+    let arr;
+    let value;
+    const series = {};
+    const names = Object.keys(rules);
+    names.forEach(name => {
+        arr = rules[name];
+        value = source[name];
+
+        if (!Array.isArray(arr)) {
+            arr = [arr];
+        }
+
+        arr.forEach(rule => {
+            rule.validator = getValidationMethod(rule);
+            rule.field = name;
+            if (!rule.validator) {
+                return;
+            }
+            series[name] = series[name] || [];
+            series[name].push({rule, value, source, field: name});
+        });
+    });
+
+    return series;
+}
+
+class SchemaValidate {
+    constructor(rules, options = {}) {
+        this._rules = rules;
+
+        const messages = {};
+        deepMerge(messages, defaultMessages);
+        if (options.messages){
+            deepMerge(messages, options.messages);
+        }
+
+        this._options = {...options, messages};
+        this.complete = [];
+    }
+
+    abort() {
+        for (let i = 0; i < this.complete.length; i++) {
+            this.complete[i] = noop;
+        }
+    }
+
+    messages(messages) {
+        this._options.messages = Object.assign(
+            {},
+            this._options.messages,
+            messages
+        );
+    }
+
+    /**
+     *
+     * @param {Object} source - map of field names and values to use in validation
+     * @param {Function} callback - OPTIONAL - callback to run after all
+     * @returns {null | Promise}
+     *          - { null } - if using callbacks
+     *          - { Promise }
+     *              - { errors: null } - if no rules or no errors
+     *              - { errors: Array, fields: Object } - errors from validation and fields that have errors
+     */
+    validate(source, callback) {
+        if (!callback) {
+            return this.validatePromise(source);
+        }
+
+        if (!this._rules || Object.keys(this._rules).length === 0) {
+            if (callback) {
+                callback(null);
+            }
+            return;
+        }
+
+        const series = serializeRules(source, this._rules);
+
+        if (Object.keys(series).length === 0) {
+            callback(null);
+        }
+
+        // callback function for all rules return
+        function complete(results) {
+            let i;
+            let field;
+            let errors = [];
+            let fields = {};
+
+            function add(e) {
+                if (Array.isArray(e)) {
+                    errors = errors.concat(e);
+                } else {
+                    errors.push(e);
+                }
+            }
+
+            for (i = 0; i < results.length; i++) {
+                add(results[i]);
+            }
+            if (!errors.length) {
+                errors = null;
+                fields = null;
+            } else {
+                for (i = 0; i < errors.length; i++) {
+                    field = errors[i].field;
+                    fields[field] = fields[field] || [];
+                    fields[field].push(errors[i]);
+                }
+            }
+            callback(errors, fields);
+        }
+
+        // 这里用数组的原因，是为了方便外部做 abort 调用
+        // eg: input onChange 时调用有 异步 validator 被异步调用多次，我们只取最后一次调用。否则可能出现 前一个 validator 返回导致
+        this.complete.push(complete);
+        const idx = this.complete.length;
+
+        // async validate
+        asyncMap(
+            series,
+            this._options,
+            (data, next) => {
+                const rule = data.rule;
+                rule.field = data.field;
+
+                function cb(e) {
+                    const errors = toErrorsArray(e, rule);
+                    next(errors);
+                }
+
+                try {
+                    const res = rule.validator(rule, data.value, cb, this._options);
+                    handleRes(res, cb);
+                } catch (e) {
+                    handleRes(e, cb)
+                }
+
+            },
+            results => {
+                this.complete[idx - 1](results);
+            }
+        );
+    }
+
+    /**
+     *
+     * @param {Object} source - map of field names and values to use in validation
+     * @returns {Promise}
+     *          - { errors: null } if no rules or no errors
+     *          - { errors: Array, fields: Object } - errors from validation and fields that have errors
+     */
+    async validatePromise(source) {
+        if (!this._rules || Object.keys(this._rules).length === 0) {
+            return {errors: null};
+        }
+
+        const series = serializeRules(source, this._rules);
+
+        if (Object.keys(series).length === 0) {
+            return {errors: null};
+        }
+
+        const results = await asyncMapPromise(
+            series,
+            this._options,
+            async data => {
+                const rule = data.rule;
+                rule.field = data.field;
+
+                let errors;
+
+                try {
+
+                    errors = await new Promise((resolve, reject) => {
+                        function cb(e) {
+                            resolve(e);
+                        }
+
+                        try {
+                            const res = rule.validator(rule, data.value, cb, this._options);
+                            handleRes(res, cb)
+                        } catch (e) {
+                            handleRes(e, cb)
+                        }
+
+                    });
+                } catch (error) {
+                    errors = error;
+                }
+
+                if (errors) {
+                    return toErrorsArray(errors, rule);
+                } else {
+                    return [];
+                }
+            }
+        );
+
+        return processErrorResults(results);
+    }
+}
+
+// https://github.com/alibaba-fusion/validate
+export default SchemaValidate;

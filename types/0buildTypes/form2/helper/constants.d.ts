@@ -1,0 +1,24 @@
+declare const formDefaultProps: {
+    prefix: string;
+    onSubmit: typeof import("../../util/func").preventDefault;
+    size: string;
+    labelAlign: string;
+    onChange: () => void;
+    component: string;
+    device: string;
+    locale: any;
+    colon: boolean;
+    autoValidate: boolean;
+    useLabelForErrorMessage: boolean;
+    helpPos: string;
+    disabled: boolean;
+    isPreview: boolean;
+    display: boolean;
+    autoValidateOnCreated: boolean;
+    previewPlaceholder: string;
+};
+export declare const FORM_ITEM_TYPE_MARK: string;
+export declare const FORM_SUBMIT_TYPE_MARK: string;
+export declare const FORM_RESET_TYPE_MARK: string;
+export declare const FORM_BUTTON_TYPE_MARK: string;
+export { formDefaultProps };

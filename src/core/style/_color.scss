@@ -1,0 +1,331 @@
+////
+/// @module color: 颜色
+/// @type Color
+/// @category style
+////
+
+
+// ----------- 品牌主色 ----------- //
+
+/// brand1-1
+/// @group brand
+/// @semantic 浅
+/// @export
+$color-brand1-1 : var(--color-brand1-1, #D0D4FF);
+/// brand1-6
+/// @group brand
+/// @semantic 常规
+/// @export
+$color-brand1-6 : var(--color-brand1-6, #5263ff);
+/// brand1-9
+/// @group brand
+/// @semantic 深
+/// @export
+$color-brand1-9 : var(--color-brand1-9, #4253b2);
+
+// ----------- 功能色 ----------- //
+
+// 成功
+
+/// success-1
+/// @group function
+/// @semantic 浅
+/// @export
+$color-success-1 : var(--color-success-1, #d6f0db);
+/// success-2
+/// @group function
+/// @semantic 常规
+/// @export
+$color-success-2 : var(--color-success-2, #85d394);
+/// success-3
+/// @group function
+/// @semantic 深
+/// @export
+$color-success-3 : var(--color-success-3, #00b853);
+/// success-4
+/// @group function
+/// @semantic 重
+/// @export
+$color-success-4 : var(--color-success-4, #00a249);
+
+// 提示
+
+/// notice-1
+/// @group function
+/// @semantic 浅
+/// @export
+$color-notice-1 : var(--color-notice-1, #e5f3ff);
+/// notice-2
+/// @group function
+/// @semantic 常规
+/// @export
+$color-notice-2 : var(--color-notice-2, #99d0ff);
+/// notice-3
+/// @group function
+/// @semantic 深
+/// @export
+$color-notice-3 : var(--color-notice-3, #5263ff);
+/// notice-4
+/// @group function
+/// @semantic 重
+/// @export
+$color-notice-4 : var(--color-notice-4, #4253b2);
+
+// 警告
+
+/// warning-1
+/// @group function
+/// @semantic 浅
+/// @export
+$color-warning-1 : var(--color-warning-1, #fff2cc);
+/// warning-2
+/// @group function
+/// @semantic 常规
+/// @export
+$color-warning-2 : var(--color-warning-2, #ffe599);
+/// warning-3
+/// @group function
+/// @semantic 深
+/// @export
+$color-warning-3 : var(--color-warning-3, #ff9f00);
+/// warning-4
+/// @group function
+/// @semantic 重
+/// @export
+$color-warning-4 : var(--color-warning-4, #f09000);
+
+// 错误
+
+/// error-1
+/// @group function
+/// @semantic 浅
+/// @export
+$color-error-1 : var(--color-error-1, #f9d9d5);
+/// error-2
+/// @group function
+/// @semantic 常规
+/// @export
+$color-error-2 : var(--color-error-2, #f4b3ab);
+/// error-3
+/// @group function
+/// @semantic 深
+/// @export
+$color-error-3 : var(--color-error-3, #f04631);
+/// error-4
+/// @group function
+/// @semantic 重
+/// @export
+$color-error-4 : var(--color-error-4, #f03118);
+
+// 帮助
+
+/// help-1
+/// @group function
+/// @semantic 浅
+/// @export
+$color-help-1 : var(--color-help-1, #d8ebf7);
+/// help-2
+/// @group function
+/// @semantic 常规
+/// @export
+$color-help-2 : var(--color-help-2, #b1d6ef);
+/// help-3
+/// @group function
+/// @semantic 深
+/// @export
+$color-help-3 : var(--color-help-3, #3c99d8);
+/// help-4
+/// @group function
+/// @semantic 重
+/// @export
+$color-help-4 : var(--color-help-4, #2e76a6);
+
+// 链接
+
+/// link-1
+/// @group function
+/// @semantic 默认
+/// @export
+$color-link-1 : var(--color-link-1, #5263ff);
+/// link-2
+/// @group function
+/// @semantic 已访问
+/// @export
+$color-link-2 : var(--color-link-2, #021b40);
+/// link-3
+/// @group function
+/// @semantic 鼠标滑过
+/// @export
+$color-link-3 : var(--color-link-3, #0a61de);
+
+// 其它
+
+/// other-1
+/// @group function
+/// @export
+$color-other-1 : var(--color-other-1, #fff);
+
+/// other-2
+/// @group function
+/// @export
+$color-other-2 : var(--color-other-2, #1f3858);
+
+/// other-3
+/// @group function
+/// @export
+$color-other-3 : var(--color-other-3, #2c2f33);
+
+// ----------- 中立色 ----------- //
+
+// 预设
+
+/// white
+/// @semantic 纯白
+/// @export
+$color-white : var(--color-white, #fff);
+/// black
+/// @semantic 纯黑
+/// @export
+$color-black : var(--color-black, #000);
+/// transparent
+/// @export
+$color-transparent : var(--color-transparent, transparent);
+
+// 线条
+
+/// line1-1
+/// @group neutural
+/// @semantic 浅
+/// @export
+$color-line1-1 : var(--color-line1-1, #f2f3f5);
+/// line1-2
+/// @group neutural
+/// @semantic 常规
+/// @export
+$color-line1-2 : var(--color-line1-2, #e6ebf1);
+/// line1-3
+/// @group neutural
+/// @semantic 深
+/// @export
+$color-line1-3 : var(--color-line1-3, #d2d7de);
+/// line1-4
+/// @group neutural
+/// @semantic 重
+/// @export
+$color-line1-4 : var(--color-line1-4, #bbc3cc);
+
+// 填充
+
+/// fill1-1
+/// @group neutural
+/// @semantic 浅
+/// @export
+$color-fill1-1 : var(--color-fill1-1, #f2f3f5);
+/// fill1-2
+/// @group neutural
+/// @semantic 常规
+/// @export
+$color-fill1-2 : var(--color-fill1-2, #f2f3f5);
+/// fill1-3
+/// @group neutural
+/// @semantic 深
+/// @export
+$color-fill1-3 : var(--color-fill1-3, #e8ebee);
+/// fill1-4
+/// @group neutural
+/// @semantic 重
+/// @export
+$color-fill1-4 : var(--color-fill1-4, #d2d7de);
+
+// 文字
+
+/// text1-1
+/// @group neutural
+/// @semantic 禁用
+/// @export
+$color-text1-1 : var(--color-text1-1, #ccc);
+/// text1-2
+/// @group neutural
+/// @semantic 水印/提示
+/// @export
+$color-text1-2 : var(--color-text1-2, #999);
+/// text1-3
+/// @group neutural
+/// @semantic 正文/标题
+/// @export
+$color-text1-3 : var(--color-text1-3, #666);
+/// text1-4
+/// @group neutural
+/// @semantic 正文/标题
+/// @export
+$color-text1-4 : var(--color-text1-4, #333);
+
+
+
+// ----------- 数据色 ----------- //
+
+// 数据序列
+
+/// data1-1
+/// @group data
+/// @export
+$color-data1-1 : var(--color-data1-1, #29a5ff);
+/// data1-2
+/// @group data
+/// @export
+$color-data1-2 : var(--color-data1-2, #82cb79);
+/// data1-3
+/// @group data
+/// @export
+$color-data1-3 : var(--color-data1-3, #ffcc2c);
+/// data1-4
+/// @group data
+/// @export
+$color-data1-4 : var(--color-data1-4, #c45dd8);
+/// data1-5
+/// @group data
+/// @export
+$color-data1-5 : var(--color-data1-5, #f68e4f);
+/// data1-6
+/// @group data
+/// @export
+$color-data1-6 : var(--color-data1-6, #fc555d);
+/// data1-7
+/// @group data
+/// @export
+$color-data1-7 : var(--color-data1-7, #c2c2c2);
+/// data1-8
+/// @group data
+/// @export
+$color-data1-8 : var(--color-data1-8, #6a76ff);
+
+
+// ----------- 背景色 ----------- //
+$color-bg1-1 : var(--color-bg1-1, #f4f6f9);
+$color-bg1-2 : var(--color-bg1-1, #f2f3f5);
+
+// ----------- 按钮 ----------- //
+$color-btn1-normal : var(--color-btn1-normal, #8f9aa9);
+
+
+
+// ----------- 渐变色值 ----------- //
+
+/// gradient-1
+/// @group gradient
+/// @export
+$color-gradient-1 : var(--color-gradient-1, linear-gradient(270deg, rgb(121, 232, 199) 0%, rgb(8, 194, 158) 100%));
+/// gradient-2
+/// @group gradient
+/// @export
+$color-gradient-2 : var(--color-gradient-2, linear-gradient(270deg, rgb(125, 238, 255) 0%, rgb(3, 193, 253) 100%));
+/// gradient-3
+/// @group gradient
+/// @export
+$color-gradient-3 : var(--color-gradient-3, linear-gradient(270deg, rgb(255, 237, 117) 0%, rgb(245, 203, 34) 100%));
+/// gradient-4
+/// @group gradient
+/// @export
+$color-gradient-4 : var(--color-gradient-4, linear-gradient(270deg, rgb(255, 163, 166) 0%, rgb(245, 39, 67) 100%));
+
+

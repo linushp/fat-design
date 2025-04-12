@@ -1,0 +1,44 @@
+/// <reference types="react" />
+
+import * as React from 'react';
+import CommonProps from '../util';
+
+export interface VirtualListProps extends React.HTMLAttributes<HTMLElement>, CommonProps {
+    /**
+     * 渲染的子节点
+     */
+    children?: any;
+
+    /**
+     * 最小加载数量
+     */
+    minSize?: number;
+
+    /**
+     * 一屏数量
+     */
+    pageSize?: number;
+
+    /**
+     * 父渲染函数，默认为 (items, ref) => <ul ref={ref}>{items}</ul>
+     */
+    itemsRenderer?: () => void;
+
+    /**
+     * 缓冲区高度
+     */
+    threshold?: number;
+
+    /**
+     * 获取 item 高度的函数
+     * @en the function to get the height of the item
+     */
+    itemSizeGetter?: (index?: number) => number;
+
+    /**
+     * 设置跳转位置，需要设置 itemSizeGetter 才能生效, 不设置认为元素等高并取第一个元素高度作为默认高
+     */
+    jumpIndex?: number;
+}
+
+export default class VirtualList extends React.Component<VirtualListProps, any> {}

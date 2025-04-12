@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@import "../core/index-noreset.scss";
+@import "./widget/main.scss";
+
+.#{$css-prefix}tablepro {
+
+}
+
+.#{$css-prefix}tablepro-comp {
+
+}
+
+.#{$css-prefix}tablepro-query-form {
+  margin-bottom: 15px;
+}
+
+.#{$css-prefix}tablepro-content {
+  padding: 16px;
+  border-radius: $card-border-radius;
+  background: white;
+}
+
+.#{$css-prefix}tablepro-table {
+  margin-bottom: 15px;
+}
+
+.#{$css-prefix}tablepro-table-bottom {
+  position: relative;
+}
+
+.#{$css-prefix}tablepro-pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.#{$css-prefix}tablepro-row-selected {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 30px;
+}
+
+
+.#{$css-prefix}tablepro-total-render {
+  font-size: 12px;
+  color: $color-text1-4;
+}
+
+.#{$css-prefix}tablepro-row-selected-msg {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: $color-text1-3;
+}
+
+
+
+

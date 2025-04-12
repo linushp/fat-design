@@ -1,0 +1,93 @@
+@import "../../core/index-noreset";
+
+.#{$css-prefix}detail-page {
+  background: #f0f1f2;
+  padding: 16px 16px;
+  box-sizing: border-box;
+}
+
+.#{$css-prefix}detail-page-inner {
+
+}
+
+.#{$css-prefix}detail-page-card-form {
+  box-sizing: border-box;
+  padding: 16px;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+
+.#{$css-prefix}detail-page-section {
+  border-bottom: 1px solid #e0e1e4;
+  padding: 20px 0px 15px 0px;
+  box-sizing: border-box;
+
+  &:first-child {
+    //margin-top: 16px;
+  }
+
+  &:last-child {
+    border-bottom: 0px solid #e0e1e4;
+    //margin-bottom: 16px;
+  }
+}
+
+
+.#{$css-prefix}detail-page-section-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+
+.#{$css-prefix}detail-page-summary {
+  margin-bottom: 16px;
+  margin-top: 0;
+  padding: 12px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.#{$css-prefix}detail-page-summary-item {
+  font-size: 12px;
+  color:#666666;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.#{$css-prefix}detail-page-summary-item-label {
+  padding-right: 5px;
+  position: relative;
+  &::after {
+    content: ":";
+    position: relative;
+    top: -.5px;
+    margin: 0 0 0 2px;
+  }
+}
+
+.#{$css-prefix}detail-page-summary-item-value {
+
+}
+
+.#{$css-prefix}detail-page-summary-item-help {
+  position: relative;
+  left: 3px;
+  width: 16px;
+}
+
+
+
+.#{$css-prefix}detail-page-summary-item-primary {
+  .#{$css-prefix}detail-page-summary-item-value {
+    color:#f38b2e;
+    font-size: 20px;
+  }
+}

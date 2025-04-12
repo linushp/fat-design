@@ -1,0 +1,28 @@
+@import "../core/index-noreset.scss";
+
+.#{$css-prefix}filter {
+  flex-flow: row wrap;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
+}
+
+
+.#{$css-prefix}filter-item {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 12px;
+  line-height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+
+.#{$css-prefix}filter-item-active {
+  background-color: rgb(239 240 241);
+  color: $color-brand1-6;
+}
+

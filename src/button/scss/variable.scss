@@ -1,0 +1,602 @@
+////
+/// @module button: 按钮
+/// @tag Button
+/// @category component
+/// @family general
+/// @varPrefix $btn-
+/// @classPrefix {prefix}-btn
+/// @order {"statement/normal":10,"statement/hover":11,"statement/disabled":12,"statement/active":13,"statement/loading":14,"size/bounding":10,"size/text":11,"size/icon":12,"size/normal":13}
+////
+@import "../../core/index-noreset.scss";
+
+
+
+$btn-prefix: '.' + $css-prefix + 'btn';
+
+$btn-icon-prefix: '.' + $css-prefix + 'icon';
+
+// Global
+// ----------------------------------------
+
+/// shadow
+/// @namespace statement/normal
+$btn-shadow: none;
+
+/// shadow
+/// @namespace statement/hover
+$btn-shadow-hover: none;
+
+// Small
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-size-s-height: 28px;
+
+/// padding
+/// @namespace size/bounding
+$btn-size-s-padding: 8px;
+
+/// border width
+/// @namespace size/bounding
+$btn-size-s-border-width: 1px;
+
+/// size
+/// @namespace size/text
+$btn-size-s-font: 12px;
+
+/// size
+/// @namespace size/icon
+$btn-size-s-icon-size: 16px;
+
+/// margin
+/// @namespace size/icon
+$btn-size-s-icon-margin: 4px;
+
+/// split icon
+/// @namespace size/icon
+$btn-size-s-icon-split-size: 12px;
+
+/// corner
+/// @namespace size/normal
+$btn-size-s-corner: 4px;
+
+// Medium
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-size-m-height: 32px;
+
+/// padding
+/// @namespace size/bounding
+$btn-size-m-padding: 16px;
+
+/// border width
+/// @namespace size/bounding
+$btn-size-m-border-width: 1px;
+
+/// size
+/// @namespace size/text
+$btn-size-m-font: 12px;
+
+/// size
+/// @namespace size/icon
+$btn-size-m-icon-size: 12px;
+
+/// margin
+/// @namespace size/icon
+$btn-size-m-icon-margin: 4px;
+
+/// split icon
+/// @namespace size/icon
+$btn-size-m-icon-split-size: 12px;
+
+/// corner
+/// @namespace size/normal
+$btn-size-m-corner: 4px;
+
+// Large
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-size-l-height: 36px;
+
+/// padding
+/// @namespace size/bounding
+$btn-size-l-padding: 12px;
+
+/// border width
+/// @namespace size/bounding
+$btn-size-l-border-width: 1px;
+
+/// size
+/// @namespace size/text
+$btn-size-l-font: 14px;
+
+/// size
+/// @namespace size/icon
+$btn-size-l-icon-size: 20px;
+
+/// margin
+/// @namespace size/icon
+$btn-size-l-icon-margin: 4px;
+
+/// split icon
+/// @namespace size/icon
+$btn-size-l-icon-split-size: 16px;
+
+/// corner
+/// @namespace size/normal
+$btn-size-l-corner: 4px;
+
+// Pure
+// ----------------------------------------
+
+/// text
+/// @namespace statement/disabled
+$btn-pure-color-disabled: $color-line1-4;
+/// background
+/// @namespace statement/disabled
+$btn-pure-bg-disabled: $color-fill1-1;
+/// border color
+/// @namespace statement/disabled
+$btn-pure-border-color-disabled: $color-fill1-4;
+
+/// text
+/// @namespace statement/disabled
+$btn-pure-normal-color-disabled: $color-line1-4;
+/// background
+/// @namespace statement/disabled
+$btn-pure-normal-bg-disabled: $color-fill1-1;
+/// border color
+/// @namespace statement/disabled
+$btn-pure-normal-border-color-disabled: $color-fill1-4;
+/// text
+/// @namespace statement/normal
+$btn-pure-normal-color: $color-btn1-normal;
+/// text
+/// @namespace statement/hover
+$btn-pure-normal-color-hover: #4c6079;
+/// text
+/// @namespace statement/active
+$btn-pure-normal-color-active: #4c6079;
+/// background
+/// @namespace statement/normal
+$btn-pure-normal-bg: #fff;
+/// background
+/// @namespace statement/hover
+$btn-pure-normal-bg-hover: $color-fill1-1;
+/// background
+/// @namespace statement/active
+$btn-pure-normal-bg-active: $color-fill1-1;
+/// border color
+/// @namespace statement/normal
+$btn-pure-normal-border-color: #d3dae3;
+/// border color
+/// @namespace statement/hover
+$btn-pure-normal-border-color-hover: $color-btn1-normal;
+/// border color
+/// @namespace statement/active
+$btn-pure-normal-border-color-active: $color-btn1-normal;
+/// border style
+/// @namespace statement/normal
+$btn-pure-normal-border-style: solid;
+
+// Secondary
+// ----------------------------------------
+/// text
+/// @namespace statement/disabled
+$btn-pure-secondary-color-disabled: $color-line1-4;
+/// background
+/// @namespace statement/disabled
+$btn-pure-secondary-bg-disabled: $color-fill1-1;
+/// border color
+/// @namespace statement/disabled
+$btn-pure-secondary-border-color-disabled: $color-fill1-4;
+/// text
+/// @namespace statement/normal
+$btn-pure-secondary-color: $color-brand1-6;
+/// text
+/// @namespace statement/hover
+$btn-pure-secondary-color-hover: $color-brand1-6;
+/// text
+/// @namespace statement/active
+$btn-pure-secondary-color-active: $color-brand1-6;
+/// background
+/// @namespace statement/normal
+$btn-pure-secondary-bg: #fff;
+/// background
+/// @namespace statement/hover
+$btn-pure-secondary-bg-hover: #ebf6ff;
+/// background
+/// @namespace statement/active
+$btn-pure-secondary-bg-active: #ebf6ff;
+/// border color
+/// @namespace statement/normal
+$btn-pure-secondary-border-color: $color-brand1-6;
+/// border color
+/// @namespace statement/hover
+$btn-pure-secondary-border-color-hover: $color-brand1-6;
+/// border color
+/// @namespace statement/active
+$btn-pure-secondary-border-color-active: $color-brand1-6;
+/// border style
+/// @namespace statement/normal
+$btn-pure-secondary-border-style: solid;
+
+// Primary
+// ----------------------------------------
+/// text
+/// @namespace statement/disabled
+$btn-pure-primary-color-disabled: $color-line1-4;
+/// background
+/// @namespace statement/disabled
+$btn-pure-primary-bg-disabled: $color-fill1-1;
+/// border color
+/// @namespace statement/disabled
+$btn-pure-primary-border-color-disabled: $color-fill1-4;
+/// text
+/// @namespace statement/normal
+$btn-pure-primary-color: #fff;
+/// text
+/// @namespace statement/hover
+$btn-pure-primary-color-hover: #fff;
+/// text
+/// @namespace statement/active
+$btn-pure-primary-color-active: #fff;
+/// background
+/// @supportGradient
+/// @namespace statement/normal
+$btn-pure-primary-bg: $color-brand1-6;
+/// background
+/// @supportGradient
+/// @namespace statement/hover
+$btn-pure-primary-bg-hover: #4253b2;
+/// background
+/// @supportGradient
+/// @namespace statement/active
+$btn-pure-primary-bg-active: #4253b2;
+/// border color
+/// @namespace statement/normal
+$btn-pure-primary-border-color: transparent;
+/// border color
+/// @namespace statement/hover
+$btn-pure-primary-border-color-hover: transparent;
+/// border color
+/// @namespace statement/active
+$btn-pure-primary-border-color-active: transparent;
+/// border style
+/// @namespace statement/normal
+$btn-pure-primary-border-style: solid;
+
+// Ghost Dark
+// ----------------------------------------
+
+/// border style
+/// @namespace statement/normal
+$btn-ghost-border-style: solid;
+
+/// text
+/// @namespace statement/normal
+$btn-ghost-dark-color: #fff;
+
+/// border color
+/// @namespace statement/normal
+$btn-ghost-dark-border-color: #fff;
+
+/// text
+/// @namespace statement/hover
+$btn-ghost-dark-color-hover: #fff;
+
+/// background
+/// @namespace statement/normal
+$btn-ghost-dark-bg: transparent;
+
+/// bg opacity
+/// @namespace statement/normal
+/// @type alpha
+$btn-ghost-dark-bg-opacity: 0;
+$btn-ghost-dark-bg-normal: rgba(get-compiling-value($btn-ghost-dark-bg), get-compiling-value($btn-ghost-dark-bg-opacity)) !default;
+
+/// background
+/// @namespace statement/hover
+$btn-ghost-dark-bg-hover-rgb: #fff;
+
+/// bg opacity
+/// @namespace statement/hover
+/// @type alpha
+$btn-ghost-dark-bg-hover-opacity: 0.3;
+$btn-ghost-dark-bg-hover: rgba(get-compiling-value($btn-ghost-dark-bg-hover-rgb), get-compiling-value($btn-ghost-dark-bg-hover-opacity)) !default;
+
+/// border
+/// @namespace statement/hover
+$btn-ghost-dark-border-color-hover: #fff;
+
+/// color
+/// @namespace statement/disabled
+$btn-ghost-dark-color-disabled-rgb: #fff;
+
+/// color opacity
+/// @namespace statement/disabled
+/// @type alpha
+$btn-ghost-dark-color-disabled-opacity: .4;
+$btn-ghost-dark-color-disabled: rgba(get-compiling-value($btn-ghost-dark-color-disabled-rgb), get-compiling-value($btn-ghost-dark-color-disabled-opacity)) !default;
+
+/// background
+/// @namespace statement/disabled
+$btn-ghost-dark-bg-disabled: transparent;
+
+/// border
+/// @namespace statement/disabled
+$btn-ghost-dark-border-color-disabled-rgb: #fff;
+
+/// border opacity
+/// @namespace statement/disabled
+/// @type alpha
+$btn-ghost-dark-border-color-disabled-opacity: .4;
+$btn-ghost-dark-border-color-disabled: rgba(get-compiling-value($btn-ghost-dark-border-color-disabled-rgb), get-compiling-value($btn-ghost-dark-border-color-disabled-opacity)) !default;
+
+// Ghost Light
+// ----------------------------------------
+
+/// text
+/// @namespace statement/normal
+$btn-ghost-light-color: $color-brand1-6;
+
+/// border
+/// @namespace statement/normal
+$btn-ghost-light-border-color: $color-brand1-6;
+
+/// background
+/// @namespace statement/normal
+$btn-ghost-light-bg: transparent;
+
+/// bg opacity
+/// @namespace statement/normal
+/// @type alpha
+$btn-ghost-light-bg-opacity: 0;
+$btn-ghost-light-bg-normal: rgba(get-compiling-value($btn-ghost-light-bg), get-compiling-value($btn-ghost-light-bg-opacity)) !default;
+
+/// text
+/// @namespace statement/hover
+$btn-ghost-light-color-hover: #fff;
+
+/// border
+/// @namespace statement/hover
+$btn-ghost-light-border-color-hover: $color-brand1-6;
+
+/// background
+/// @namespace statement/hover
+$btn-ghost-light-bg-hover-rgb: $color-brand1-6;
+
+/// bg opacity
+/// @namespace statement/hover
+/// @type alpha
+$btn-ghost-light-bg-hover-opacity: 1;
+$btn-ghost-light-bg-hover: rgba(get-compiling-value($btn-ghost-light-bg-hover-rgb), get-compiling-value($btn-ghost-light-bg-hover-opacity)) !default;
+
+/// text
+/// @namespace statement/disabled
+$btn-ghost-light-color-disabled-rgb: #000;
+
+/// text opacity
+/// @namespace statement/disabled
+/// @type alpha
+$btn-ghost-light-color-disabled-opacity: .1;
+$btn-ghost-light-color-disabled: rgba(get-compiling-value($btn-ghost-light-color-disabled-rgb), get-compiling-value($btn-ghost-light-color-disabled-opacity)) !default;
+
+/// background
+/// @namespace statement/disabled
+$btn-ghost-light-bg-disabled: transparent;
+
+/// border
+/// @namespace statement/disabled
+$btn-ghost-light-border-color-disabled-rgb: #000;
+
+/// border opacity
+/// @namespace statement/disabled
+/// @type alpha
+$btn-ghost-light-border-color-disabled-opacity: .1;
+$btn-ghost-light-border-color-disabled: rgba(get-compiling-value($btn-ghost-light-border-color-disabled-rgb), get-compiling-value($btn-ghost-light-border-color-disabled-opacity)) !default;
+
+// Warning Primary
+// ----------------------------------------
+
+/// border style
+/// @namespace statement/normal
+$btn-warning-border-style: solid;
+
+/// text
+/// @namespace statement/normal
+$btn-warning-primary-color: #fff;
+
+/// text
+/// @namespace statement/hover
+$btn-warning-primary-color-hover: #fff;
+/// text
+/// @namespace statement/active
+$btn-warning-primary-color-active: #fff;
+
+/// border color
+/// @namespace statement/normal
+$btn-warning-primary-border-color: #f04631;
+
+/// border color
+/// @namespace statement/hover
+$btn-warning-primary-border-color-hover: #f03118;
+/// border color
+/// @namespace statement/active
+$btn-warning-primary-border-color-active: #f03118;
+
+/// background
+/// @namespace statement/normal
+$btn-warning-primary-bg: #f04631;
+
+/// background
+/// @namespace statement/hover
+$btn-warning-primary-bg-hover: #f03118;
+/// background
+/// @namespace statement/active
+$btn-warning-primary-bg-active: #f03118;
+
+/// text
+/// @namespace statement/disabled
+$btn-warning-primary-color-disabled: #ccc;
+
+/// border
+/// @namespace statement/disabled
+$btn-warning-primary-border-color-disabled: #e8ebee;
+
+/// background
+/// @namespace statement/disabled
+$btn-warning-primary-bg-disabled: $color-fill1-1;
+
+// Warning Normal
+// ----------------------------------------
+
+/// text
+/// @namespace statement/normal
+$btn-warning-normal-color: #f04631;
+
+/// text
+/// @namespace statement/hover
+$btn-warning-normal-color-hover: #f04631;
+
+/// text
+/// @namespace statement/active
+$btn-warning-normal-color-active: #f04631;
+
+/// border
+/// @namespace statement/normal
+$btn-warning-normal-border-color: #f04631;
+
+/// border
+/// @namespace statement/hover
+$btn-warning-normal-border-color-hover: #f03118;
+/// border
+/// @namespace statement/active
+$btn-warning-normal-border-color-active: #f03118;
+
+/// background
+/// @namespace statement/normal
+$btn-warning-normal-bg: #fff;
+
+/// background
+/// @namespace statement/hover
+$btn-warning-normal-bg-hover: #f9d9d5;
+
+/// background
+/// @namespace statement/active
+$btn-warning-normal-bg-active: #f9d9d5;
+
+/// text
+/// @namespace statement/disabled
+$btn-warning-normal-color-disabled: #ccc;
+
+/// border
+/// @namespace statement/disabled
+$btn-warning-normal-border-color-disabled: $color-fill1-1;
+
+/// background
+/// @namespace statement/disabled
+$btn-warning-normal-bg-disabled: $color-fill1-1;
+
+// Text primary & disabled & loading
+// ----------------------------------------
+
+/// text
+/// @namespace statement/normal
+$btn-text-primary-color: $color-brand1-6;
+
+/// text
+/// @namespace statement/hover
+$btn-text-primary-color-hover: #4253b2;
+
+/// text
+/// @namespace statement/disabled
+$btn-text-disabled-color: $color-fill1-4;
+
+/// text
+/// @namespace statement/loading
+$btn-text-loading-color: #333;
+
+// Text secondary
+// ----------------------------------------
+
+/// text
+/// @namespace statement/normal
+$btn-text-secondary-color: #33a1ff;
+
+/// text
+/// @namespace statement/hover
+$btn-text-secondary-color-hover: #0078e0;
+
+// Text normal
+// ----------------------------------------
+
+/// text
+/// @namespace statement/normal
+$btn-text-normal-color: #79889b;
+
+/// text
+/// @namespace statement/hover
+$btn-text-normal-color-hover: $color-brand1-6;
+
+// Text small
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-text-size-s-height: 16px;
+
+/// text
+/// @namespace size/text
+$btn-text-size-s-font: 10px;
+
+/// icon
+/// @namespace size/icon
+$btn-text-icon-size-s: 16px;
+
+/// margin
+/// @namespace size/icon
+$btn-text-icon-s-margin: 4px;
+
+// Text medium
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-text-size-m-height: 20px;
+
+/// text
+/// @namespace size/text
+$btn-text-size-m-font: 12px;
+
+/// icon
+/// @namespace size/icon
+$btn-text-icon-size-m: 20px;
+
+/// margin
+/// @namespace size/icon
+$btn-text-icon-m-margin: 4px;
+
+// Text large
+// ----------------------------------------
+
+/// height
+/// @namespace size/bounding
+$btn-text-size-l-height: 24px;
+
+/// text
+/// @namespace size/text
+$btn-text-size-l-font: 14px;
+
+/// icon
+/// @namespace size/icon
+$btn-text-icon-size-l: 24px;
+
+/// margin
+/// @namespace size/icon
+$btn-text-icon-l-margin: 4px;

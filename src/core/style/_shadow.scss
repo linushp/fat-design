@@ -1,0 +1,206 @@
+@import "./_color";
+@import "../util/_function";
+
+////
+/// @module shadow: 阴影
+/// @category style
+////
+
+// Elevation & Shadow
+// 在现实生活中，不同对象可以被堆积或粘贴起来，但是不能彼此交叉。对象自身塑造了自己的阴影并返回自己的光影。
+// 规则: x == y, 所有方向阴影的 blur 值, 透明度, 颜色都应该相同
+// -------------------------------
+
+// 变量: x, y, color, opacity, elevation
+// 常量: base(45度), top, right, bottom, left
+
+// ---------------- 阴影方向 ---------------- //
+
+/// Sides Base
+/// @type String
+$shadow-sides-base: "base";
+/// Sides Up
+/// @type String
+$shadow-sides-up: "up";
+/// Sides Right
+/// @type String
+$shadow-sides-right: "right";
+/// Sides Down
+/// @type String
+$shadow-sides-down: "down";
+/// Sides Left
+/// @type String
+$shadow-sides-left: "left";
+
+// ---------------- 阴影距离 ----------------- //
+
+/// Distance 1x
+/// @type Number
+$shadow-distance-sd1: 1;
+/// Distance 2x
+/// @type Number
+$shadow-distance-sd2: 2;
+/// Distance 3x
+/// @type Number
+$shadow-distance-sd3: 4;
+
+/// Distance 1y
+/// @type Number
+$shadow-distance-sd1y: 1;
+/// Distance 2y
+/// @type Number
+$shadow-distance-sd2y: 2;
+/// Distance 3y
+/// @type Number
+$shadow-distance-sd3y: 4;
+
+// ---------------- 阴影透明度 ----------------- //
+
+/// Opacity 1
+/// @type Number
+$shadow-opacity-sd1: .20;
+/// Opacity 2
+/// @type Number
+$shadow-opacity-sd2: .15;
+/// Opacity 3
+/// @type Number
+$shadow-opacity-sd3: .15;
+
+// ---------------- 阴影颜色 ----------------- //
+
+/// Color 1
+/// @type Color
+$shadow-color-sd1: #1f3858;
+
+/// Color 2
+/// @type Color
+$shadow-color-sd2: #1f3858;
+
+/// Color 3
+/// @type Color
+$shadow-color-sd3: #1f3858;
+
+// 带透明度的颜色变量
+$shadow-color-opacity-sd1: rgba($shadow-color-sd1, $shadow-opacity-sd1) !default;
+$shadow-color-opacity-sd2: rgba($shadow-color-sd2, $shadow-opacity-sd2) !default;
+$shadow-color-opacity-sd3: rgba($shadow-color-sd3, $shadow-opacity-sd3) !default;
+
+// ------------------ 阴影羽化值 ---------------- //
+
+/// Blur 1
+/// @type Number
+$shadow-blur-sd1: 4;
+
+/// Blur 2
+/// @type Number
+$shadow-blur-sd2: 10;
+
+/// Blur 3
+/// @type Number
+$shadow-blur-sd3: 15;
+
+// ------------------ 阴影扩散值 ---------------- //
+
+/// Spread 1
+/// @type Number
+$shadow-spread-sd1: 0;
+
+/// Spread 2
+/// @type Number
+$shadow-spread-sd2: 0;
+
+/// Spread 3
+/// @type Number
+$shadow-spread-sd3: 0;
+
+// ------------------ Shadow Values ---------------- //
+
+/// shadow-zero
+/// @export
+/// @unconfigurable
+$shadow-zero: none;
+
+/// shadow-1
+/// @semantic 阴影1-右下
+/// @export
+/// @unconfigurable
+$shadow-1: 1px 1px 4px 0px rgba(31,56,88,.2);
+
+/// shadow-1-up
+/// @semantic 阴影1-上
+/// @export
+/// @unconfigurable
+$shadow-1-up: 0px -1px 4px 0px rgba(31,56,88,.2);
+
+/// shadow-1-right
+/// @semantic 阴影1-右
+/// @export
+/// @unconfigurable
+$shadow-1-right: 1px 0px 4px 0px rgba(31,56,88,.2);
+
+/// shadow-1-down
+/// @semantic 阴影1-下
+/// @export
+/// @unconfigurable
+$shadow-1-down: 0px 1px 4px 0px rgba(31,56,88,.2);
+
+/// shadow-1-left
+/// @semantic 阴影1-左
+/// @export
+/// @unconfigurable
+$shadow-1-left: -1px 0px 4px 0px rgba(31,56,88,.2);
+
+/// shadow-2
+/// @semantic 阴影2-右下
+/// @export
+/// @unconfigurable
+$shadow-2: 2px 2px 10px 0px rgba(31,56,88,.15);
+/// shadow-2-up
+/// @semantic 阴影2-上
+/// @export
+/// @unconfigurable
+$shadow-2-up: 0px -2px 10px 0px rgba(31,56,88,.15);
+/// shadow-2-right
+/// @semantic 阴影2-右
+/// @export
+/// @unconfigurable
+$shadow-2-right: 2px 0px 10px 0px rgba(31,56,88,.15);
+/// shadow-2-down
+/// @semantic 阴影2-下
+/// @export
+/// @unconfigurable
+$shadow-2-down: 0px 2px 10px 0px rgba(31,56,88,.15);
+/// shadow-2-left
+/// @semantic 阴影2-左
+/// @export
+/// @unconfigurable
+$shadow-2-left: -2px 0px 10px 0px rgba(31,56,88,.15);
+
+/// shadow-3
+/// @semantic 阴影3-右下
+/// @export
+/// @unconfigurable
+$shadow-3: 4px 4px 15px 0px rgba(31,56,88,.15);
+/// shadow-3-up
+/// @semantic 阴影3-上
+/// @export
+/// @unconfigurable
+$shadow-3-up: 0px -4px 15px 0px rgba(31,56,88,.15);
+/// shadow-3-right
+/// @semantic 阴影3-右
+/// @export
+/// @unconfigurable
+$shadow-3-right: 4px 0px 15px 0px rgba(31,56,88,.15);
+/// shadow-3-down
+/// @semantic 阴影3-下
+/// @export
+/// @unconfigurable
+$shadow-3-down: 0px 4px 15px 0px rgba(31,56,88,.15);
+/// shadow-3-left
+/// @semantic 阴影3-左
+/// @export
+/// @unconfigurable
+$shadow-3-left: -4px 0px 15px 0px rgba(31,56,88,.15);
+
+// ----------- patch ----------- //
+$shadow-0: none;

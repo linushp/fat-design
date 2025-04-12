@@ -1,0 +1,187 @@
+@import "../../core/index-noreset";
+@charset "UTF-8";
+
+////
+/// @module table: 表格
+/// @tag Table
+/// @category component
+/// @family data-display
+/// @varPrefix $table-
+/// @classPrefix {prefix}-table
+/// @order {"size/bounding":10,"size/head":11,"size/body":12,"size/body empty":13,"size/cell":14,"size/group list":15,"statement/normal":10,"statement/normal/bounding":100,"statement/normal/head":101,"statement/normal/group header":102,"statement/normal/body":103,"statement/normal/body empty":104,"statement/normal/group footer":105,"statement/hover":11,"statement/hover/body":110,"statement/selected":12,"statement/selected/body":120,"statement/active":13,"statement/active/head":130,"statement/disabled":14,"statement/disabled/body":140}
+////
+
+// table variables
+// --------------------------------------------------
+
+$table-prefix: '.#{$css-prefix}table' !default;
+
+/// border width
+/// @namespace size/bounding
+$table-normal-border-width: 1px;
+/// text
+/// @namespace size/head
+$table-th-font-size: 12px;
+/// text weight
+/// @namespace size/head
+$table-th-font-weight: bold;
+/// sort icon
+/// @namespace size/head
+$table-sort-icon-size: 12px;
+/// filter icon
+/// @namespace size/head
+$table-filter-icon-size: 12px;
+/// text
+/// @namespace size/body
+$table-body-font-size: 12px;
+/// padding (t, b)
+/// @namespace size/body empty
+$table-empty-padding: 32px;
+/// expanded icon
+/// @namespace size/body
+$table-expanded-icon-size: 16px;
+/// tree icon
+/// @namespace size/body
+$table-tree-expanded-icon-size: 12px;
+/// padding (t, b)
+/// @namespace size/cell
+$table-cell-padding-top: 12px;
+/// padding (l, r)
+/// @namespace size/cell
+$table-cell-padding-left: 12px;
+/// padding (t, b)
+/// @namespace size/head
+$table-header-padding-top: 12px;
+/// padding (l, r)
+/// @namespace size/head
+$table-header-padding-left: 12px;
+/// icon margin
+/// @namespace size/head
+$table-header-icon-margin-left: 8px;
+/// corner top
+/// @namespace size/head
+$table-header-corner-top: 0;
+/// corner bottom
+/// @namespace size/head
+$table-header-corner-bottom: 0;
+
+/// padding (t, b)
+/// @namespace size/cell
+$table-size-s-cell-padding-top: 8px;
+/// padding (l, r)
+/// @namespace size/cell
+$table-size-s-cell-padding-left: 8px;
+/// padding (t, b)
+/// @namespace size/head
+$table-size-s-header-padding-top: 8px;
+/// padding (l, r)
+/// @namespace size/head
+$table-size-s-header-padding-left: 8px;
+
+
+/// margin (t, b)
+/// @namespace size/group list
+$table-group-split: 0px;
+
+/// corner top
+/// @namespace size/group header
+$table-group-header-corner-top: 0;
+/// corner bottom
+/// @namespace size/group header
+$table-group-header-corner-bottom: 0;
+
+/// corner(t)
+/// @namespace size/group footer
+$table-group-footer-corner-top: 0;
+/// corner(b)
+/// @namespace size/group footer
+$table-group-footer-corner-bottom: 0;
+
+/// border
+/// @namespace statement/normal/bounding
+$table-normal-border-color: #e8ebee;
+/// border style
+/// @namespace statement/normal/bounding
+$table-normal-border-style: solid;
+/// background
+/// @namespace statement/normal/head
+$table-th-bg: $color-bg1-2;
+/// text
+/// @namespace statement/normal/head
+$table-th-color: $color-text1-4;
+/// icon
+/// @namespace statement/normal/head
+$table-sort-color: #a5afbc;
+$table-tips-color: #a5afbc;
+/// background
+/// @namespace statement/normal/group header
+$table-group-th-bg: $color-bg1-2;
+/// text
+/// @namespace statement/normal/group header
+$table-group-th-color: $color-text1-3;
+
+
+/// background
+/// @namespace statement/normal/body
+$table-row-bg: #fff;
+/// text
+/// @namespace statement/normal/body
+$table-row-color: $color-text1-3;
+/// zebra deep color
+/// @namespace statement/normal/body
+$table-td-gray: $color-bg1-2;
+/// zebra thin color
+/// @namespace statement/normal/body
+$table-td-normal: #fff;
+/// text
+/// @namespace statement/normal/body empty
+$table-empty-color: #bbc3cc;
+/// background
+/// @namespace statement/normal/group footer
+$table-group-footer-bg: #fff;
+/// text
+/// @namespace statement/normal/group footer
+$table-group-footer-color: $color-text1-3;
+
+/// background
+/// @namespace statement/hover/body
+$table-row-hover-bg: $color-bg1-1;
+/// text
+/// @namespace statement/hover/body
+$table-row-hover-color: $color-text1-3;
+
+/// background
+/// @namespace statement/selected/body
+//$table-row-selected-bg: transparent;
+$table-row-selected-bg: #fff;
+/// text
+/// @namespace statement/selected/body
+$table-row-selected-color: $color-text1-3;
+
+/// icon
+/// @namespace statement/active/head
+$table-sort-color-current: $color-brand1-6;
+
+/// expanded icon
+/// @namespace statement/disabled/body
+$table-expanded-ctrl-disabled-color: #999;
+
+/// tree fold icon
+/// @namespace statement/normal
+/// @type icon
+$table-tree-fold-icon-content: "\E619";
+
+/// tree unfold icon
+/// @namespace statement/normal
+/// @type icon
+$table-tree-unfold-icon-content: "\E63D";
+
+/// expand fold icon
+/// @namespace statement/normal
+/// @type icon
+$table-expand-fold-icon-content: "\E655";
+
+/// expand unfold icon
+/// @namespace statement/normal
+/// @type icon
+$table-expand-unfold-icon-content: "\E601";

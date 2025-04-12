@@ -1,0 +1,58 @@
+@import "../../../core/index-noreset.scss";
+
+.#{$css-prefix}query-form-table-operate-cell-wrapped {
+  display: inline-flex;
+}
+
+.#{$css-prefix}query-form-table-operate-cell-wrapped-col {
+  display: block;
+  .#{$css-prefix}query-form-table-operate-cell-button-wrapped {
+    display: block;
+  }
+}
+
+.#{$css-prefix}query-form-table-operate-cell-wrapped-row {
+  .#{$css-prefix}query-form-table-operate-cell-button-wrapped {
+    position: relative;
+    padding: 0 5px;
+    display: inline-block;
+    box-sizing: border-box;
+
+
+    &:after {
+      content: "|";
+      color: #e3e3e3;
+      padding: 0 4px;
+      height: 14px;
+      position: absolute;
+      top: 0;
+      right: -5px;
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+
+.#{$css-prefix}query-form-table-operate-cell-button-wrapped {
+
+}
+.#{$css-prefix}query-form-table-operate-cell-menu {
+
+}
+.#{$css-prefix}query-form-table-operate-cell-menu-item {
+  text-align: center;
+}
+
+.#{$css-prefix}query-form-table-operate-cell-btn {
+  display: inline-block !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  height: inherit !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,72 @@
+@charset "UTF-8";
+@import "../core/index-noreset.scss";
+
+$border-color: #e8ebee;
+$header-bg: #f2f3f5;
+
+.#{$css-prefix}sortable-table {
+  width: 100%;
+  min-height: 10px;
+  background: #FFFFFF;
+  color: #666;
+  border: 1px solid $border-color;
+  border-bottom: none;
+  box-sizing: border-box;
+  * {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+}
+
+.#{$css-prefix}sortable-table-header {
+  background: $header-bg;
+  color: #333;
+}
+.#{$css-prefix}sortable-table-body {
+
+}
+
+
+.#{$css-prefix}sortable-table-tr {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $border-color;
+}
+
+
+.#{$css-prefix}sortable-table-td,.#{$css-prefix}sortable-table-th {
+  padding: 12px;
+  font-size: 12px;
+  border-right: 1px solid $border-color;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.#{$css-prefix}sortable-table-td,.#{$css-prefix}sortable-table-th {
+  &:last-child {
+    border-right: none;
+  }
+}
+
+
+.#{$css-prefix}sortable-table-th {
+
+}
+
+
+.#{$css-prefix}sortable-table-td-draggable {
+  cursor: move;
+  user-select: none;
+}
+
+
+.#{$css-prefix}sortable-table-tr-dragged {
+  border: 1px solid $border-color;
+  background: #eef3f5;
+}

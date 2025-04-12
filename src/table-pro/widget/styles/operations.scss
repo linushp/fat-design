@@ -1,0 +1,32 @@
+@import "../../../core/index-noreset.scss";
+
+.#{$css-prefix}query-form-table-operations {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.#{$css-prefix}query-form-table-operations-menu-popup {
+
+}
+
+.#{$css-prefix}query-form-table-operations-menu-icon {
+  &:before {
+    font-size: 12px !important;
+  }
+}
+
+.#{$css-prefix}query-form-table-operation-btn {
+  display: inline-block;
+  padding: 3px;
+}
+
+.#{$css-prefix}query-form-table-operation-icon {
+  display: inline-block;
+  margin-right: 6px;
+}
+.#{$css-prefix}query-form-table-operation-text {
+}
+
+
+

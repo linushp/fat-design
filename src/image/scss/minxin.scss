@@ -1,0 +1,16 @@
+@import "../../core/index-noreset.scss";
+
+@mixin box($position: absolute) {
+  position: $position;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+$icon-prefix: #{$css-prefix}icon !default;
+$image-prefix-cls: "#{$css-prefix}image";
+$image-preview-prefix-cls: "#{$image-prefix-cls}-preview";
+
+$footer-height: 58px

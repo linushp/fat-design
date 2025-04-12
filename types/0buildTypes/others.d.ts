@@ -1,0 +1,10 @@
+import { Logger } from "./util/log";
+import { ComponentsStore } from "./util/comp";
+import { constants } from "./util";
+import dependencies from "./dependencies";
+import { storageInstance } from "./util/localforage";
+declare function configReactDOM18(ReactDOM: any, ReactDOMClient: any): void;
+declare function configReactDOM19(ReactDOM: any, ReactDOMClient: any): void;
+declare function configReactDOM(ReactDOM: any): void;
+declare const logger: Logger;
+export { logger, constants, dependencies, storageInstance, configReactDOM18, configReactDOM19, configReactDOM, ComponentsStore, };

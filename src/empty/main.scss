@@ -1,0 +1,84 @@
+@import "../core/index-noreset.scss";
+
+$empty-prefix: ".#{$css-prefix}empty";
+
+#{$empty-prefix} {
+  margin: 0 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+
+  &-image {
+    height: 100px;
+    margin-bottom: 8px
+  }
+
+  &-image img {
+    height: 100%
+  }
+
+  &-image svg {
+    height: 100%;
+    margin: auto
+  }
+
+  &-footer {
+    margin-top: 16px
+  }
+
+  &-normal {
+    margin: 32px 0;
+    color: #dddde2
+  }
+
+  &-normal &-image {
+    height: 40px
+  }
+
+  &-description {
+    color: #bbbbc1
+  }
+
+  &-small {
+    margin: 8px 0;
+    color: #dddde2
+  }
+
+  &-small &-image {
+    height: 35px
+  }
+
+  &-img-default-ellipse {
+    fill: #f5f5f5;
+    fill-opacity: .8
+  }
+
+  &-img-default-path-1 {
+    fill: #aeb8c2
+  }
+
+  &-img-default-path-3 {
+    fill: #f5f5f7
+  }
+
+  &-img-default-path-4, &-img-default-path-5 {
+    fill: #dce0e6
+  }
+
+  &-img-default-g {
+    fill: #fff
+  }
+
+  &-img-simple-ellipse {
+    fill: #f5f5f5
+  }
+
+  &-img-simple-g {
+    stroke: #d9d9d9
+  }
+
+  &-img-simple-path {
+    fill: #fafafa
+  }
+
+}

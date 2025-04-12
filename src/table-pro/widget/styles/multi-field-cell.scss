@@ -1,0 +1,23 @@
+@import "../../../core/index-noreset.scss";
+
+.#{$css-prefix}multi-field-cell-item {
+  margin-bottom: 2px;
+}
+
+
+.#{$css-prefix}multi-field-cell-item-title {
+  display: inline-block;
+  color: #8691a5;
+}
+
+
+.#{$css-prefix}multi-field-cell-item-split {
+  display: inline-block;
+  margin: 0 2px;
+  color: #8691a5;
+}
+
+
+.#{$css-prefix}multi-field-cell-item-content {
+  color: rgba(51,51,51,1);
+}

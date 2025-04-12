@@ -1,0 +1,21 @@
+@import "../../../core/index-noreset.scss";
+
+.#{$css-prefix}column-setting-dialog-title {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+.#{$css-prefix}column-setting-dialog-save {
+    //position: absolute;
+    //right: 26px;
+    //top: -5px;
+}
+
+.#{$css-prefix}column-setting-dialog-save-group {
+    position: absolute;
+    right: 26px;
+    top: -5px;
+}
+

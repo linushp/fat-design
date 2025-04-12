@@ -1,0 +1,12 @@
+@import "../core/index-noreset.scss";
+
+.#{$css-prefix}dialog-show-input {
+  .#{$css-prefix}input.#{$css-prefix}input-textarea {
+    height: 82px;
+  }
+  .#{$css-prefix}dialog-body {
+    padding: 0 20px;
+  }
+}
+
+

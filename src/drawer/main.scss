@@ -1,0 +1,117 @@
+@charset "UTF-8";
+@import "../core/index-noreset.scss";
+@import "./scss/mixin.scss";
+@import "./scss/variable.scss";
+
+
+#{$drawer-prefix} {
+    @include box-sizing;
+    position: fixed;
+    z-index: 1001;
+    background: $drawer-bg;
+    border: $drawer-border-width $drawer-border-style $drawer-border-color;
+    box-shadow: $drawer-shadow;
+    overflow: auto;
+    animation-duration: $motion-duration-standard;
+    animation-timing-function: $motion-ease-in-out;
+    box-sizing: border-box;
+
+    &-right {
+        height: 100%;
+        max-width: 80%;
+        width: 30%;
+    }
+
+    &-left {
+        height: 100%;
+        max-width: 80%;
+        width: 30%;
+    }
+
+    &-top {
+        width: 100%;
+    }
+
+    &-bottom {
+        width: 100%;
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    &-header {
+        padding: $drawer-title-padding-top $drawer-title-padding-left-right $drawer-title-padding-bottom $drawer-title-padding-left-right;
+        border-bottom: $drawer-title-border-width $line-solid $drawer-title-border-color;
+        font-size: $drawer-title-font-size;
+        background: $drawer-title-bg-color;
+        color: $drawer-title-color;
+        box-sizing: border-box;
+        height: 46px;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    &-no-title {
+        padding: 0;
+        border-bottom: 0;
+    }
+
+    &-body {
+        padding: $drawer-content-padding-top $drawer-content-padding-left-right $drawer-content-padding-bottom $drawer-content-padding-left-right;
+        font-size: $drawer-content-font-size;
+        line-height: $font-lineheight-2;
+        color: $drawer-content-color;
+        box-sizing: border-box;
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: auto;
+    }
+
+    &-footer {
+        box-sizing: border-box;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 60px;
+        border-top: 1px solid $drawer-footer-border-color;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-close {
+        position: absolute;
+        top: $drawer-close-top;
+        right: $drawer-close-right;
+        width: $drawer-close-width;
+        height: $drawer-close-width;
+        color: $drawer-close-color;
+        cursor: pointer;
+
+        &:link,
+        &:visited {
+            height: $drawer-close-width;
+            color: $drawer-close-color;
+        }
+
+        &:hover {
+            background: $drawer-close-bg-hovered;
+            color: $drawer-close-color-hovered;
+        }
+
+        & &-icon.#{$css-prefix}icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include icon-square-size(
+                $size: $drawer-close-size,
+                $marginTop: calc(0px - #{$drawer-close-size} / 2),
+                $marginLeft: calc(0px - #{$drawer-close-size} / 2)
+            );
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@charset "UTF-8";
+@import "../../core/index-noreset.scss";
+
+.#{$css-prefix}from-float-layout {
+    .#{$css-prefix}form-item {
+        float: left;
+        margin-right: 8px;
+        margin-bottom: 0;
+        min-width: 160px;
+    }
+    .#{$css-prefix}query-form-button-group {
+        flex-direction: row;
+    }
+}
+
+
+.#{$css-prefix}from-float-layout::after {
+    content: ' ';
+    clear: both;
+    display: block;
+}
+
+
+.#{$css-prefix}from-float-layout-w-180 { .#{$css-prefix}form-item {width: 180px;} }
+.#{$css-prefix}from-float-layout-w-200 { .#{$css-prefix}form-item {width: 200px;} }
+.#{$css-prefix}from-float-layout-w-220 { .#{$css-prefix}form-item {width: 220px;} }
+.#{$css-prefix}from-float-layout-w-240 { .#{$css-prefix}form-item {width: 240px;} }
+.#{$css-prefix}from-float-layout-w-260 { .#{$css-prefix}form-item {width: 260px;} }
+.#{$css-prefix}from-float-layout-w-280 { .#{$css-prefix}form-item {width: 280px;} }
+.#{$css-prefix}from-float-layout-w-300 { .#{$css-prefix}form-item {width: 300px;} }
+.#{$css-prefix}from-float-layout-w-320 { .#{$css-prefix}form-item {width: 320px;} }
+.#{$css-prefix}from-float-layout-w-340 { .#{$css-prefix}form-item {width: 340px;} }

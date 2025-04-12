@@ -1,0 +1,25 @@
+
+.crud-api-detail-card {
+    margin-bottom: 16px;
+}
+
+.crud-api-detail-card-content {
+    padding: 5px 16px;
+    box-sizing: border-box;
+}
+
+.crud-api-detail-card-prehandle-button {
+    margin: 10px 0;
+}
+
+.crud-api-detail-card-setting-table {
+    padding: 15px 10px 10px 10px;
+    box-sizing: border-box;
+}
+.crud-api-detail-card-setting-table-add {
+    margin-top: 10px;
+}
+.crud-api-detail-card-setting-tab-formitems {
+    padding: 20px;
+    box-sizing: border-box;
+}

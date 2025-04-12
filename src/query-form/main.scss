@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import "../core/index-noreset.scss";
+
+.#{$css-prefix}query-form-card {
+  position: relative;
+  padding: 10px 16px 16px 16px;
+  background-color: white;
+  border-radius: $card-border-radius;
+}
+
+
+.#{$css-prefix}query-form-button-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.#{$css-prefix}query-form {
+  .#{$css-prefix}form-item-help {
+    display: none;
+  }
+}

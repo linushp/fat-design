@@ -1,0 +1,35 @@
+
+1 children组件。  - DONE
+2 props变更测试 -- DONE
+3 布局样式支持 --DONE
+4 测试用例
+5 enum支持 --DONE
+6 isPreview --DONE
+7. xProps 联动计算 --DONE
+8. colspan 生效 --DONE
+9. 智能布局 --DONE
+10. FormItem onChange --DONE
+
+
+onChange后的执行顺序
+1. setValue
+2. item - onChange setValue
+3. linkage disable/display/isPreview/xProps setValue
+4. form - onChange setValue
+5. commit - notify - render
+
+
+几种布局方式：
+1.  layout: 'responsive',
+    layoutProps: {
+        gap: 8,
+        columns: 5
+    }
+
+2. 从左往右布局
+   labelAlign: 'inset',
+   layout: 'float',
+
+3. 没有layout, 从上往下布局
+   但是可以使用labelCol、wrapperCol指定宽度。
+

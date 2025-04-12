@@ -1,0 +1,58 @@
+////
+/// @group popup
+/// @module popup: 弹层通用
+/// @type String
+/// @tag popup
+/// @category utility
+/// @family popup
+/// @varPrefix $popup-
+/// @classPrefix {prefix}-popup
+////
+
+/// popup spacing (l, r)
+/// @semantic 左右留白
+$popup-spacing-lr: 0px;
+
+/// popup spacing (t, b)
+/// @semantic 上下留白
+$popup-spacing-tb: 0px;
+
+/// border width
+/// @semantic 边框宽度
+$popup-local-border-width: 1px;
+
+/// border style
+/// @semantic 边框样式
+$popup-local-border-style: solid;
+
+/// border color
+/// @semantic 边框颜色
+$popup-local-border-color: #d2d7de;
+
+/// corner
+/// @semantic 圆角
+$popup-local-corner: 4px;
+
+/// shadow
+/// @semantic 阴影
+$popup-local-shadow: 1px 1px 4px 0px rgba(31,56,88,.2);
+
+/// border width
+/// @semantic 边框宽度
+$popup-global-border-width: 0px;
+
+/// border style
+/// @semantic 边框样式
+$popup-global-border-style: solid;
+
+/// border color
+/// @semantic 边框颜色
+$popup-global-border-color: #e8ebee;
+
+/// corner
+/// @semantic 圆角
+$popup-global-corner: 4px;
+
+/// shadow
+/// @semantic 阴影
+$popup-global-shadow: 0px 2px 10px 0px rgba(31,56,88,.15);

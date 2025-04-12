@@ -1,0 +1,289 @@
+////
+/// @module size: 尺寸
+/// @type String
+/// @category style
+////
+
+
+///
+/// 尺寸 基础尺寸
+/// 命名能在语义的前提下简单就尽量简单, 这里可以是 size-2x, space-2x, size-base ...
+/// 不过可以在语义的前提下做的更精简一些, 于是用了s2, s1等
+/// 可用变量: `$s1 - $s8`
+/// @example scss - 使用
+///   .element {
+///     padding: $s1 !default;
+///   }
+///
+/// @example css - CSS 输出
+///   .element {
+///     padding: 4px !default;
+///   }
+///
+
+/// size-base
+/// @semantic 基础尺寸
+/// @type Length
+$size-base: 4px;
+
+$s-auto: auto;
+
+/// s-zero
+/// @export
+/// @unconfigurable
+$s-zero: 0px;
+
+/// s-1
+/// @unconfigurable
+/// @export
+$s-1: 4px;
+
+/// s-2
+/// @export
+/// @unconfigurable
+$s-2: 8px;
+
+/// s-3
+/// @export
+/// @unconfigurable
+$s-3: 12px;
+
+/// s-4
+/// @export
+/// @unconfigurable
+$s-4: 16px;
+
+/// s-5
+/// @export
+/// @unconfigurable
+$s-5: 20px;
+
+/// s-6
+/// @export
+/// @unconfigurable
+$s-6: 24px;
+
+/// s-7
+/// @export
+/// @unconfigurable
+$s-7: 28px;
+
+/// s-8
+/// @export
+/// @unconfigurable
+$s-8: 32px;
+
+/// s-9
+/// @export
+/// @unconfigurable
+$s-9: 36px;
+
+/// s-10
+/// @export
+/// @unconfigurable
+$s-10: 40px;
+
+/// s-11
+/// @export
+/// @unconfigurable
+$s-11: 44px;
+
+/// s-12
+/// @export
+/// @unconfigurable
+$s-12: 48px;
+
+/// s-13
+/// @export
+/// @unconfigurable
+$s-13: 52px;
+
+/// s-14
+/// @export
+/// @unconfigurable
+$s-14: 56px;
+
+/// s-15
+/// @export
+/// @unconfigurable
+$s-15: 60px;
+
+/// s-16
+/// @export
+/// @unconfigurable
+$s-16: 64px;
+
+/// s-17
+/// @export
+/// @unconfigurable
+$s-17: 68px;
+
+/// s-18
+/// @export
+/// @unconfigurable
+$s-18: 72px;
+
+/// s-19
+/// @export
+/// @unconfigurable
+$s-19: 76px;
+
+/// s-20
+/// @export
+/// @unconfigurable
+$s-20: 80px;
+
+/// s-21
+/// @export
+/// @unconfigurable
+$s-21: 84px;
+
+/// s-22
+/// @export
+/// @unconfigurable
+$s-22: 88px;
+
+/// s-23
+/// @export
+/// @unconfigurable
+$s-23: 92px;
+
+/// s-24
+/// @export
+/// @unconfigurable
+$s-24: 96px;
+
+/// s-25
+/// @export
+/// @unconfigurable
+$s-25: 100px;
+
+/// s-26
+/// @export
+/// @unconfigurable
+$s-26: 104px;
+
+/// s-27
+/// @export
+/// @unconfigurable
+$s-27: 108px;
+
+/// s-28
+/// @export
+/// @unconfigurable
+$s-28: 112px;
+
+/// s-29
+/// @export
+/// @unconfigurable
+$s-29: 116px;
+
+/// s-30
+/// @export
+/// @unconfigurable
+$s-30: 120px;
+
+/// s-31
+/// @export
+/// @unconfigurable
+$s-31: 124px;
+
+/// s-32
+/// @export
+/// @unconfigurable
+$s-32: 128px;
+
+/// s-33
+/// @export
+/// @unconfigurable
+$s-33: 132px;
+
+/// s-34
+/// @export
+/// @unconfigurable
+$s-34: 136px;
+
+/// s-35
+/// @export
+/// @unconfigurable
+$s-35: 140px;
+
+/// s-36
+/// @export
+/// @unconfigurable
+$s-36: 144px;
+
+/// s-37
+/// @export
+/// @unconfigurable
+$s-37: 148px;
+
+/// s-38
+/// @export
+/// @unconfigurable
+$s-38: 152px;
+
+/// s-39
+/// @export
+/// @unconfigurable
+$s-39: 156px;
+
+/// s-40
+/// @export
+/// @unconfigurable
+$s-40: 160px;
+
+/// s-41
+/// @export
+/// @unconfigurable
+$s-41: 164px;
+
+/// s-42
+/// @export
+/// @unconfigurable
+$s-42: 168px;
+
+/// s-43
+/// @export
+/// @unconfigurable
+$s-43: 172px;
+
+/// s-44
+/// @export
+/// @unconfigurable
+$s-44: 176px;
+
+/// s-45
+/// @export
+/// @unconfigurable
+$s-45: 180px;
+
+/// s-46
+/// @export
+/// @unconfigurable
+$s-46: 184px;
+
+/// s-47
+/// @export
+/// @unconfigurable
+$s-47: 188px;
+
+/// s-48
+/// @export
+/// @unconfigurable
+$s-48: 192px;
+
+/// s-49
+/// @export
+/// @unconfigurable
+$s-49: 196px;
+
+/// s-50
+/// @export
+/// @unconfigurable
+$s-50: 200px;
+
+// ----------- patch ----------- //
+$s-0: 0px;
+
+$card-border-radius: 8px;
