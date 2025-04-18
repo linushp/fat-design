@@ -138,7 +138,8 @@ export default class Row extends React.Component {
             });
 
             const newStyle = { ...attrs.style, ...cellStyle };
-
+            delete attrs.key;
+            delete others.key;
             return (
                 <Cell
                     key={`${__rowIndex}-${colIndex}`}

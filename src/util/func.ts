@@ -1,3 +1,4 @@
+import get from "lodash.get";
 import {isPromise} from './object';
 import datejs from './date';
 
@@ -275,6 +276,20 @@ export function parseJsonObject(str: any) : any{
                 return JSON.parse(str);
             } catch (e) {
                 return null;
+            }
+        }
+    }
+    return null;
+}
+
+
+export function getByAny(obj: any, strList: string[]) {
+    if (obj && Array.isArray(strList)) {
+        for (let i = 0; i < strList.length; i++) {
+            const str = strList[i];
+            const value = get(obj, str);
+            if (typeof value !== 'undefined' && value!==null) {
+                return value;
             }
         }
     }

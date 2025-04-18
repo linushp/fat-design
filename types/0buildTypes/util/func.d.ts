@@ -70,3 +70,4 @@ export declare function wrapperFn(fn: any, setLoading: any, callback: any, origi
 export declare function isEmpty(obj: any): boolean;
 export declare function isNotEmpty(obj: any): boolean;
 export declare function parseJsonObject(str: any): any;
+export declare function getByAny(obj: any, strList: string[]): any;

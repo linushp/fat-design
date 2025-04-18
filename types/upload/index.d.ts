@@ -320,6 +320,15 @@ export interface CardProps extends HTMLAttributesWeak, CommonProps {
 
 export class Card extends React.Component<CardProps, any> {}
 
+export interface SimpleJSONUploadProps extends UploadProps, CardProps {
+    uploadComponent?: any; // 可以指定上传组件
+}
+
+export class SimpleJSONUpload extends React.Component<SimpleJSONUploadProps, any> {} {
+
+}
+
+
 export interface DraggerProps extends UploadProps {
 
 }
@@ -397,6 +406,7 @@ export class Uploader {
      */
     abort(file: any): void;
 }
+
 
 export interface UploadProps extends HTMLAttributesWeak, CommonProps {
     /**
@@ -664,7 +674,9 @@ export default class Upload extends React.Component<UploadProps, any> {
     static Dragger: typeof Dragger;
     static Selecter: typeof Selecter;
     static Uploader: typeof Uploader;
+    static SimpleJSONUpload: typeof SimpleJSONUpload;
     static ErrorCode: typeof ErrorCode;
+
     /**
      * 添加文件
      * @param files

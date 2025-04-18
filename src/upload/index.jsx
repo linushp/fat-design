@@ -6,6 +6,7 @@ import transform from './transform';
 import Upload from './upload';
 import List from './list';
 import Card from './card';
+import { SimpleJSONUpload } from './simple.jsx';
 import Dragger from './dragger';
 import Selecter from './runtime/selecter';
 import Uploader from './runtime/uploader';
@@ -14,6 +15,7 @@ Upload.Card = ConfigProvider.config(Card, { componentName: 'Upload' });
 Upload.Dragger = ConfigProvider.config(Dragger, { componentName: 'Upload' });
 Upload.Selecter = Selecter;
 Upload.Uploader = Uploader;
+Upload.SimpleJSONUpload = SimpleJSONUpload;
 Upload.ErrorCode = errorCode;
 
 // compatible with 0.x version
