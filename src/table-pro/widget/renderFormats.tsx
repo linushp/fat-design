@@ -64,11 +64,23 @@ function renderString(value: any) {
 const renderDateTimeString = (value: any, formatter: string): string => {
 
     const tryFormat = (v): string => {
+        if (!v) {
+            return ''
+        }
         try {
             return datejs(v).format(formatter);
         } catch (e) {
             return 'FORMAT ERROR : ' + v;
         }
+    }
+    const tryFormatArray = (value:any[]): string => {
+        const filtered = value.filter((aaa)=>{
+            return !!aaa;
+        });
+        if (filtered.length === 0) {
+            return '';
+        }
+        return value.map(tryFormat).join(' ~ ');
     }
 
     if (isNil(value)) {
@@ -76,7 +88,7 @@ const renderDateTimeString = (value: any, formatter: string): string => {
     }
 
     if (Array.isArray(value)) {
-        return value.map(tryFormat).join(' ~ ');
+        return tryFormatArray(value)
     }
 
     if (typeof value === 'string') {
@@ -84,7 +96,9 @@ const renderDateTimeString = (value: any, formatter: string): string => {
         // 可能是数组。
         if (valueTrim.startsWith('[') || valueTrim.endsWith(']')) {
             const arr = parseJsonObject(valueTrim) || [];
-            return arr.map(tryFormat).join(' ~ ');
+            if (Array.isArray(arr)) {
+                return tryFormatArray(arr)
+            }
         }
     }
 
