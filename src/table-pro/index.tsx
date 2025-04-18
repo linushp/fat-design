@@ -2,25 +2,30 @@ import React from "react";
 import {TableProInner} from "./table-pro";
 import {useTablePro} from "./useTablePro";
 import tableUtils from "./widget";
-import {TableProProps} from "./types";
+import {IUseTableProParams, TableProProps} from "./types";
+
+
+export type RenderFunc = (value: any) => React.JSX.Element;
+export type TypeGetTableColumnsBySetting = (tableProProps: TableProProps)=> Promise<any[]>;
+export type TypeUseTablePro = (params: IUseTableProParams) => any;
 
 
 class TablePro extends React.Component<TableProProps, any> {
 
-    static useTablePro = useTablePro;
-    static getTableColumnsBySetting: typeof tableUtils.getTableColumnsBySetting = tableUtils.getTableColumnsBySetting;
+    static useTablePro: TypeUseTablePro = useTablePro;
+    static getTableColumnsBySetting: TypeGetTableColumnsBySetting = tableUtils.getTableColumnsBySetting;
     static TableOperations: typeof tableUtils.TableOperations = tableUtils.TableOperations;
     static TableToolbar: typeof tableUtils.TableToolbar = tableUtils.TableToolbar;
     static renderTableToolbar: typeof tableUtils.renderTableToolbar = tableUtils.renderTableToolbar;
     static renderOperationCell: typeof tableUtils.renderOperationCell = tableUtils.renderOperationCell;
     static renderMultiFieldCell: typeof tableUtils.renderMultiFieldCell = tableUtils.renderMultiFieldCell;
-    static renderJSON: typeof tableUtils.renderJSON = tableUtils.renderJSON;
-    static renderString: typeof tableUtils.renderString = tableUtils.renderString;
-    static renderDay: typeof tableUtils.renderDay = tableUtils.renderDay;
-    static renderTime: typeof tableUtils.renderTime = tableUtils.renderTime;
-    static renderThousands: typeof tableUtils.renderThousands = tableUtils.renderThousands;
-    static renderHTML: typeof tableUtils.renderHTML = tableUtils.renderHTML;
-    static renderBoolean: typeof tableUtils.renderBoolean = tableUtils.renderBoolean;
+    static renderJSON: RenderFunc = tableUtils.renderJSON;
+    static renderString: RenderFunc = tableUtils.renderString;
+    static renderDay: RenderFunc = tableUtils.renderDay;
+    static renderTime: RenderFunc = tableUtils.renderTime;
+    static renderThousands: RenderFunc = tableUtils.renderThousands;
+    static renderHTML: RenderFunc = tableUtils.renderHTML;
+    static renderBoolean: RenderFunc = tableUtils.renderBoolean;
 
     render() {
         return (<TableProInner {...this.props}/>);
