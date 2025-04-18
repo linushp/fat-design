@@ -1,5 +1,5 @@
 import {useMemo, useState} from 'react';
-import {OperateCellItemProps, OperateCellProps} from "./table-utils-types";
+import {OperateCellItemProps, OperateCellProps} from "../types";
 import { getDep} from "./deps";
 import ConfigProvider from "../../config-provider";
 import classNames from "classnames";

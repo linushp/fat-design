@@ -1,19 +1,8 @@
 import React from 'react';
-import {constants} from "../../util/constants";
+import {constants} from "../../util";
 import ConfigProvider from "../../config-provider";
+import {MultiFieldCellItem, MultiFieldCellItem2, MultiFieldCellProps} from "../types";
 
-interface MultiFieldCellItem {
-    content?: any;
-    title?: any;
-    display?: boolean;
-}
-
-type MultiFieldCellItem2 = MultiFieldCellItem | string | boolean | number;
-
-interface MultiFieldCellProps {
-    itemList: MultiFieldCellItem2[];
-    prefix: any;
-}
 
 function isNil(item: any): boolean {
     return typeof item === "undefined" || item === null;

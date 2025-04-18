@@ -2,30 +2,39 @@ import React from "react";
 import {TableProInner} from "./table-pro";
 import {useTablePro} from "./useTablePro";
 import tableUtils from "./widget";
-import {IUseTableProParams, TableProProps} from "./types";
+import {
+    TableProProps,
+    ICellRenderFunc,
+    IUseTableProFunc,
+    IGetTableColumnsBySettingFunc, OperationsProps,
+    TableToolbarProps,
+    IRenderTableToolbar,
+    IRenderOperationCell,
+    IRenderMultiFieldCell
+} from "./types";
 
 
-export type RenderFunc = (value: any) => React.JSX.Element;
-export type TypeGetTableColumnsBySetting = (tableProProps: TableProProps)=> Promise<any[]>;
-export type TypeUseTablePro = (params: IUseTableProParams) => any;
-
-
+// TableToolbarProps
 class TablePro extends React.Component<TableProProps, any> {
 
-    static useTablePro: TypeUseTablePro = useTablePro;
-    static getTableColumnsBySetting: TypeGetTableColumnsBySetting = tableUtils.getTableColumnsBySetting;
-    static TableOperations: typeof tableUtils.TableOperations = tableUtils.TableOperations;
-    static TableToolbar: typeof tableUtils.TableToolbar = tableUtils.TableToolbar;
-    static renderTableToolbar: typeof tableUtils.renderTableToolbar = tableUtils.renderTableToolbar;
-    static renderOperationCell: typeof tableUtils.renderOperationCell = tableUtils.renderOperationCell;
-    static renderMultiFieldCell: typeof tableUtils.renderMultiFieldCell = tableUtils.renderMultiFieldCell;
-    static renderJSON: RenderFunc = tableUtils.renderJSON;
-    static renderString: RenderFunc = tableUtils.renderString;
-    static renderDay: RenderFunc = tableUtils.renderDay;
-    static renderTime: RenderFunc = tableUtils.renderTime;
-    static renderThousands: RenderFunc = tableUtils.renderThousands;
-    static renderHTML: RenderFunc = tableUtils.renderHTML;
-    static renderBoolean: RenderFunc = tableUtils.renderBoolean;
+    static TableOperations: React.FC<OperationsProps> = tableUtils.TableOperations;
+    static TableToolbar:  React.FC<TableToolbarProps> = tableUtils.TableToolbar;
+
+    static useTablePro: IUseTableProFunc = useTablePro;
+
+    static getTableColumnsBySetting: IGetTableColumnsBySettingFunc = tableUtils.getTableColumnsBySetting;
+
+    static renderTableToolbar: IRenderTableToolbar = tableUtils.renderTableToolbar;
+    static renderOperationCell: IRenderOperationCell = tableUtils.renderOperationCell;
+    static renderMultiFieldCell: IRenderMultiFieldCell = tableUtils.renderMultiFieldCell;
+
+    static renderJSON: ICellRenderFunc = tableUtils.renderJSON;
+    static renderString: ICellRenderFunc = tableUtils.renderString;
+    static renderDay: ICellRenderFunc = tableUtils.renderDay;
+    static renderTime: ICellRenderFunc = tableUtils.renderTime;
+    static renderThousands: ICellRenderFunc = tableUtils.renderThousands;
+    static renderHTML: ICellRenderFunc = tableUtils.renderHTML;
+    static renderBoolean: ICellRenderFunc = tableUtils.renderBoolean;
 
     render() {
         return (<TableProInner {...this.props}/>);

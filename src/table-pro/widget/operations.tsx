@@ -1,5 +1,5 @@
 import React from "react";
-import {OperationBtnItem, OperationsProps} from "./table-utils-types";
+import {OperationBtnItem, OperationsProps} from "../types";
 import Box from "../../box";
 import Button from '../../button';
 import Icon from '../../icon';

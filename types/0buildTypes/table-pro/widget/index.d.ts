@@ -1,26 +1,19 @@
-import React from 'react';
-import { TableOperations } from "./operations";
-import { TableToolbar } from "./renderToolbar";
+/// <reference types="react" />
 import { renderOperationCell } from "./renderOperationCell";
-import { renderMultiFieldCell } from "./renderMultiFieldCell";
 import { getTableColumnsBySetting } from "./column-setting";
-import { TableToolbarProps } from "./table-utils-types";
-export type RenderFunc = (value: any) => React.JSX.Element;
-export type IRenderTableToolbar = (props: TableToolbarProps) => React.JSX.Element;
-export interface ITableUtilsTypes {
+declare const tableUtils: {
     getTableColumnsBySetting: typeof getTableColumnsBySetting;
-    TableOperations: typeof TableOperations;
-    TableToolbar: typeof TableToolbar;
-    renderTableToolbar: IRenderTableToolbar;
+    TableOperations: (props: import("../types").OperationsProps, ref: any) => import("react").JSX.Element;
+    TableToolbar: (props: import("../types").TableToolbarProps, ref: any) => import("react").JSX.Element;
+    renderTableToolbar: (props: import("../types").TableToolbarProps) => import("react").JSX.Element;
     renderOperationCell: typeof renderOperationCell;
-    renderMultiFieldCell: typeof renderMultiFieldCell;
-    renderJSON: RenderFunc;
-    renderString: RenderFunc;
-    renderDay: RenderFunc;
-    renderTime: RenderFunc;
-    renderThousands: RenderFunc;
-    renderHTML: RenderFunc;
-    renderBoolean: RenderFunc;
-}
-declare const tableUtils: ITableUtilsTypes;
+    renderMultiFieldCell: (itemList: import("../types").MultiFieldCellItem2[]) => import("react").JSX.Element;
+    renderJSON: (value: any) => import("react").JSX.Element;
+    renderString: (value: any) => import("react").JSX.Element;
+    renderDay: (value: any) => import("react").JSX.Element;
+    renderTime: (value: any) => import("react").JSX.Element;
+    renderThousands: (value: any) => import("react").JSX.Element;
+    renderHTML: (value: any) => import("react").JSX.Element;
+    renderBoolean: (value: any) => import("react").JSX.Element;
+};
 export default tableUtils;

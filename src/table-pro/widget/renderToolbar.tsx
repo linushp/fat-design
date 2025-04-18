@@ -1,7 +1,7 @@
 import React from "react";
 import Filter from "../../filter";
 import {TableOperations} from "./operations";
-import {TableToolbarProps} from "./table-utils-types";
+import {TableToolbarProps} from "../types";
 import ConfigProvider from "../../config-provider";
 import {isNotEmpty} from "../../util/func";
 
