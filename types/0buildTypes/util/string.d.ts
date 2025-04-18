@@ -23,3 +23,4 @@ export declare function camelToUnderscore(str: any): any;
  * @return {String}        例：
  */
 export declare function template(tpl: any, object?: {}): any;
+export declare function formatUrl(url: any, baseUrl?: string): string;

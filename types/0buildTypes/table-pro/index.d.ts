@@ -15,6 +15,10 @@ declare class TablePro extends React.Component<TableProProps, any> {
     static renderThousands: ICellRenderFunc;
     static renderHTML: ICellRenderFunc;
     static renderBoolean: ICellRenderFunc;
+    static renderRelativeTime: ICellRenderFunc;
+    static renderFileDownload: ICellRenderFunc;
+    static renderFileImage: ICellRenderFunc;
+    static renderEnumTag: ICellRenderFunc;
     render(): React.JSX.Element;
 }
 export default TablePro;

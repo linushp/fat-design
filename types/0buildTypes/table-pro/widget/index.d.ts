@@ -15,5 +15,9 @@ declare const tableUtils: {
     renderThousands: (value: any) => import("react").JSX.Element;
     renderHTML: (value: any) => import("react").JSX.Element;
     renderBoolean: (value: any) => import("react").JSX.Element;
+    renderRelativeTime: (value: any) => import("react").JSX.Element;
+    renderFileDownload: (value: any) => import("react").JSX.Element;
+    renderFileImage: (value: any) => import("react").JSX.Element;
+    renderEnumTag: (value: any) => import("react").JSX.Element;
 };
 export default tableUtils;

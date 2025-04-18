@@ -35,6 +35,10 @@ class TablePro extends React.Component<TableProProps, any> {
     static renderThousands: ICellRenderFunc = tableUtils.renderThousands;
     static renderHTML: ICellRenderFunc = tableUtils.renderHTML;
     static renderBoolean: ICellRenderFunc = tableUtils.renderBoolean;
+    static renderRelativeTime: ICellRenderFunc = tableUtils.renderRelativeTime;
+    static renderFileDownload: ICellRenderFunc = tableUtils.renderFileDownload;
+    static renderFileImage: ICellRenderFunc = tableUtils.renderFileImage;
+    static renderEnumTag: ICellRenderFunc = tableUtils.renderEnumTag;
 
     render() {
         return (<TableProInner {...this.props}/>);

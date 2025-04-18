@@ -19,6 +19,10 @@ const tableUtils = {
     renderThousands: renderFormats.renderThousands,
     renderHTML: renderFormats.renderHTML,
     renderBoolean: renderFormats.renderBoolean,
+    renderRelativeTime: renderFormats.renderRelativeTime,
+    renderFileDownload: renderFormats.renderFileDownload,
+    renderFileImage: renderFormats.renderFileImage,
+    renderEnumTag: renderFormats.renderEnumTag,
 }
 
 

@@ -70,3 +70,45 @@ export function template(tpl, object = {}) {
         return object[key] || '';
     });
 }
+
+
+export function formatUrl(url: any, baseUrl?: string): string {
+    try {
+
+        if (!url || typeof url !== 'string') {
+            return ''
+        }
+
+        // 如果 URL 已经是以 http 或 https 开头，直接返回
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            return url;
+        }
+
+        // 如果没有提供 baseUrl，则使用当前页面的 URL 作为 baseUrl
+        if (!baseUrl) {
+            baseUrl = window.location.href;
+        }
+
+        // 创建一个 URL 对象用于处理 baseUrl
+        const base = new URL(baseUrl);
+
+        if (url.startsWith('//')) {
+            // 如果 URL 以 // 开头，使用 baseUrl 的协议
+            return `${base.protocol}${url}`;
+        } else if (url.startsWith('/')) {
+            // 如果 URL 以 / 开头，使用 baseUrl 的协议、主机和路径
+            return `${base.origin}${url}`;
+        } else if (url.startsWith('../') || url.startsWith('./')) {
+            // 如果 URL 以 ../ 或 ./ 开头，使用 baseUrl 的路径进行拼接
+            const basePath = base.pathname.endsWith('/') ? base.pathname : base.pathname + '/';
+            const newUrl = new URL(url, base.origin + basePath);
+            return newUrl.href;
+        }
+
+        // 如果以上条件都不满足，直接在 baseUrl 后面拼接 URL
+        return `${base.href.replace(/\/+$/, '')}/${url}`;
+    } catch (e){
+        console.error("formatUrl", url, e);
+    }
+    return ''
+}
