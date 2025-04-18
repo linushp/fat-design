@@ -1,9 +1,9 @@
 import React from 'react'
-import {datejs} from "../../util";
+import {datejs, constants} from "../../util";
 import {isNil} from "../../util/object";
-import {constants} from "../../util/constants";
 import {logger} from "../../util/log";
 import ConfigProvider from "../../config-provider";
+import {parseJsonObject} from "../../util/func";
 
 
 
@@ -44,29 +44,45 @@ function renderString(value: any) {
     return JSON.stringify(value)
 }
 
-function renderTime(value: any) {
+const getDateTimeString = (value:any, formatter: string): string => {
+
     if (isNil(value)) {
         return constants.EMPTY_PLACEHOLDER;
     }
+
+    if (typeof value === 'string') {
+        const valueTrim = value.trim();
+        // 可能是数组。
+        if (valueTrim.startsWith('[') || valueTrim.endsWith(']')) {
+            const arr = parseJsonObject(valueTrim) || [];
+            return arr.map((v) => {
+                try {
+                    return datejs(v).format(formatter);
+                } catch (e) {
+                    return 'FORMAT ERROR'
+                }
+            }).join(' ~ ');
+        }
+    }
     try {
-        return datejs(value).format('YYYY-MM-DD HH:mm:ss');
+        return datejs(value).format(formatter);
     } catch (e) {
         return 'FORMAT ERROR'
     }
+}
 
+const RenderDateTimeImpl = React.memo((props: any)=>{
+    const {value, formatter} = props;
+    return (<span>{getDateTimeString(value, formatter)}</span>)
+})
+
+function renderTime(value: any) {
+    return <RenderDateTimeImpl value={value} formatter={'YYYY-MM-DD HH:mm:ss'}/>
 }
 
 function renderDay(value: any) {
-    if (isNil(value)) {
-        return constants.EMPTY_PLACEHOLDER;
-    }
-    try {
-        return datejs(value).format('YYYY-MM-DD');
-    } catch (e) {
-        return 'FORMAT ERROR'
-    }
+    return <RenderDateTimeImpl value={value} formatter={'YYYY-MM-DD'}/>
 }
-
 
 function renderBoolean(value: any) {
     if (value === true || value === 'N' || value === 0) {
