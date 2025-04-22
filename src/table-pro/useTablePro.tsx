@@ -167,8 +167,8 @@ function useTablePro(params: IUseTableProParams) {
 
 
 
-        if (!isEnableCrossPageRowSelection) {
-            // 未开启跨页行选择, 每次查询都清空选框
+        // 未开启跨页行选择, 查询按钮点击、重制按钮点击 ==>清空选框
+        if (!isEnableCrossPageRowSelection || queryTrigger===QUERY_TRIGGER.FORM_ON_SUBMIT || queryTrigger===QUERY_TRIGGER.FORM_ON_SUBMIT) {
             updateRowSelection({selectedRowKeys: []});
         }
 
