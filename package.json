@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development vite",
+    "build": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
+    "build:prod": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs -p && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
     "build:demo": "tsc && TARGET_ENV=demo vite build",
-    "build:npmbeta": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
-    "build:npmprod": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs -p && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
     "preview": "vite preview"
   },
   "dependencies": {
