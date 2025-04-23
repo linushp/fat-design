@@ -15,18 +15,27 @@ function HeaderTips(props) {
     );
 
     if (typeof tips === 'object' && (tips.title || tips.content)) {
-        const {content, title, style, triggerType = 'hover', align = 't'} = tips;
+        const {content, component, triggerType = 'hover', align = 't', title, style, ...otherTipsProps} = tips;
+        const Comp = component === 'Balloon.Tooltip' ? Balloon.Tooltip : Balloon;
         return (
-            <Balloon
-                     trigger={trigger}
-                     align={align}
-                     triggerType={triggerType}
-                     title={title}
-                     style={style}>
+            <Comp
+                {...otherTipsProps}
+                trigger={trigger}
+                align={align}
+                triggerType={triggerType}
+                title={title}
+                style={style}
+            >
                 {content}
-            </Balloon>
+            </Comp>
         )
     }
+
+    if (typeof tips === 'function') {
+        return tips()
+    }
+
+
     return (
         <Balloon
                  trigger={trigger}
