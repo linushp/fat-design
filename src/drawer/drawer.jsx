@@ -217,7 +217,6 @@ export default class Drawer extends Component {
     };
 
     mapcloseableToConfig = closeable => {
-        debugger
         return ['esc', 'close', 'mask'].reduce((ret, option) => {
             const key = option.charAt(0).toUpperCase() + option.substr(1);
             const value = typeof closeable === 'boolean' ? closeable : closeable.split(',').indexOf(option) > -1;
