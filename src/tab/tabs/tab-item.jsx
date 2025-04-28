@@ -24,11 +24,13 @@ class TabItem extends React.Component {
         lazyLoad: PropTypes.bool,
         unmountInactiveTabs: PropTypes.bool,
         children: PropTypes.any,
+        displayMode: PropTypes.bool,
     };
 
     static defaultProps = {
         prefix: ConfigProvider.defaultPrefix,
         closeable: false,
+        displayMode: false,
     };
 
     render() {
@@ -38,6 +40,7 @@ class TabItem extends React.Component {
             lazyLoad,
             unmountInactiveTabs,
             children,
+            displayMode,
         } = this.props;
 
         this._actived = this._actived || active;
@@ -49,7 +52,10 @@ class TabItem extends React.Component {
             return null;
         }
 
-        const cls = classnames({
+        const cls = displayMode ? classnames({
+            [`${prefix}tabs-tabpane-displaymode`]: true,
+            [`${active ? 'active' : 'hidden'}`]: true,
+        }) : classnames({
             [`${prefix}tabs-tabpane`]: true,
             [`${active ? 'active' : 'hidden'}`]: true,
         });

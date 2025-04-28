@@ -120,6 +120,18 @@
         }
     }
 
+    &-tabpane-displaymode {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+
     /* Nav Button */
     /* ----------------- */
     &-btn-down,
