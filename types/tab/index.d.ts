@@ -83,7 +83,7 @@ export interface TabProps extends HTMLAttributesWeak, CommonProps {
     unmountInactiveTabs?: boolean;
 
     /**
-     * 切换选项卡时，使用display：none/block控制是否显示
+     * 切换选项卡时，使用display：none/block控制是否显示。 避免因为高度变化引起页面闪烁
      */
     displayMode?: boolean;
 
