@@ -56,9 +56,9 @@ root.render(
         {/*<DemoTablePro />*/}
         {/*<DemoFormTable />*/}
         {/*<DemoButtons/>*/}
-        <DemoDialogShow/>
+        {/*<DemoDialogShow/>*/}
         {/*<DemoUpload/>*/}
-        {/*<DemoDrawerShow/>*/}
+        <DemoDrawerShow/>
         {/*<DemoMenuButton/>*/}
         {/*<DemoFilter/>*/}
         {/*<DemoFormLayout />*/}

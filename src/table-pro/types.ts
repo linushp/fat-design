@@ -24,6 +24,7 @@ export interface TableProProps {
     actions?: any
     styleMode: StyleModeEnum;
     stickyLock?: boolean;
+    styleConfig?: any;
 }
 
 

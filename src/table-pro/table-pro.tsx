@@ -1,11 +1,11 @@
 import React from "react";
+import get from "lodash.get";
 import classNames from 'classnames';
 import {IUseTableProParams, TableProProps} from "./types";
 import Table from "../table";
 import Pagination from "../pagination";
 import QueryForm from "../query-form";
 import ConfigProvider from "../config-provider";
-import get from "lodash.get";
 import Button from "../button";
 import tableUtils from "./widget/index";
 import {logger} from "../util/log";
@@ -13,6 +13,8 @@ import {logger} from "../util/log";
 interface TableProState {
     columns: any[] | null,
 }
+
+const EMPTY_STYLE = {};
 
 
 function getTableComp(components: any, stickyLock: boolean) {
@@ -101,6 +103,7 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
             settingName,
             className,
             stickyLock = true,
+            styleConfig
         } = this.props;
 
         const {columns} = this.state;
@@ -139,11 +142,17 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
 
         const compCls = classNames({[cls('com')]: true, [`${className}`]: !!className});
 
+        const contentStyle = get(styleConfig, 'contentStyle', EMPTY_STYLE) ;
+        const queryFormStyle = get(styleConfig, 'queryFormStyle', EMPTY_STYLE) ;
+        const rootStyle = get(styleConfig, 'rootStyle', EMPTY_STYLE) ;
+        const tableStyle = get(styleConfig, 'tableStyle', EMPTY_STYLE) ;
+        const bottomStyle = get(styleConfig, 'bottomStyle', EMPTY_STYLE) ;
+
         return (
-            <div className={compCls}>
+            <div className={compCls} style={rootStyle}>
 
                 {initialParams.initFormProps ? (
-                    <div className={cls('query-form')}>
+                    <div className={cls('query-form')} style={queryFormStyle}>
                         <QueryFormComp {...formProps} />
                     </div>
                 ) : null}
@@ -155,7 +164,7 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
                         : null
                 }
 
-                <div className={cls('content')}>
+                <div className={cls('content')} style={contentStyle} >
 
                     {
                         (initialParams.initFilterProps || initialParams.initOperationProps) ?
@@ -170,11 +179,11 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
                             }) : null
                     }
 
-                    <div className={cls('table')}>
+                    <div className={cls('table')} style={tableStyle}>
                         <TableComp {...otherTableProps} columns={columns}/>
                     </div>
 
-                    <div className={cls('table-bottom')}>
+                    <div className={cls('table-bottom')} style={bottomStyle}>
                         <div className={cls('row-selected')}>
                             {this.rowSelectedMsgRender(tableProps)}
                         </div>

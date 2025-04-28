@@ -19,6 +19,7 @@ export interface TableProProps {
     actions?: any;
     styleMode: StyleModeEnum;
     stickyLock?: boolean;
+    styleConfig?: any;
 }
 export type FnOnQuery = (formValues: any, otherValue: any) => any;
 export interface IUseTableProParams {
