@@ -16,6 +16,7 @@ class TabContent extends PureComponent {
             activeKey,
             lazyLoad,
             unmountInactiveTabs,
+            displayMode,
             children,
             className,
             ...others
@@ -30,6 +31,7 @@ class TabContent extends PureComponent {
                     active,
                     lazyLoad,
                     unmountInactiveTabs,
+                    displayMode,
                 })
             );
         });

@@ -23,8 +23,8 @@ class TabItem extends React.Component {
         active: PropTypes.bool,
         lazyLoad: PropTypes.bool,
         unmountInactiveTabs: PropTypes.bool,
-        children: PropTypes.any,
         displayMode: PropTypes.bool,
+        children: PropTypes.any,
     };
 
     static defaultProps = {
