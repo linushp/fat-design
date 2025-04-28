@@ -115,13 +115,26 @@ function renderDay(value: any) {
 }
 
 function renderBoolean(value: any) {
-    if (value === true || value === 'N' || value === 0) {
+
+    if (value === true || value === 'Y' || value === 1 ) {
         return '是'
     }
-    if (value === false || value === 'Y' || value === 1) {
+
+    if (value === false || value === 'N' || value === 0) {
         return '否'
     }
-    return constants.EMPTY_PLACEHOLDER;
+
+    if (typeof value === 'string') {
+        const str = value.toUpperCase();
+        if (str === 'YES' || str === 'TRUE') {
+            return '是'
+        }
+        if (str === 'NO' || str === 'FALSE') {
+            return '是'
+        }
+    }
+
+    return value || constants.EMPTY_PLACEHOLDER;
 }
 
 
