@@ -83,6 +83,11 @@ export interface TabProps extends HTMLAttributesWeak, CommonProps {
     unmountInactiveTabs?: boolean;
 
     /**
+     * 切换选项卡时，使用display：none/block控制是否显示
+     */
+    displayMode?: boolean;
+
+    /**
      * 导航条的自定义样式
      */
     navStyle?: React.CSSProperties;

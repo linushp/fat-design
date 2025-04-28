@@ -56,6 +56,7 @@ class Tab extends Component {
          * 是否自动卸载未处于激活状态的选项卡
          */
         unmountInactiveTabs: PropTypes.bool,
+        displayMode: PropTypes.bool,
         /**
          * 导航条的自定义样式
          */
@@ -140,6 +141,7 @@ class Tab extends Component {
         triggerType: 'click',
         lazyLoad: true,
         unmountInactiveTabs: false,
+        displayMode: false,
         disableKeyboard: false,
         onClick: noop,
         onChange: noop,
@@ -302,6 +304,7 @@ class Tab extends Component {
             triggerType,
             lazyLoad,
             unmountInactiveTabs,
+            displayMode,
             popupProps,
             navStyle,
             navClassName,
@@ -367,6 +370,7 @@ class Tab extends Component {
             activeKey,
             lazyLoad,
             unmountInactiveTabs,
+            displayMode,
             style: contentStyle,
             className: contentClassName,
         };

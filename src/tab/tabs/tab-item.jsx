@@ -29,8 +29,7 @@ class TabItem extends React.Component {
 
     static defaultProps = {
         prefix: ConfigProvider.defaultPrefix,
-        closeable: false,
-        displayMode: false,
+        closeable: false
     };
 
     render() {
