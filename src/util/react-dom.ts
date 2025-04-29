@@ -133,7 +133,7 @@ function createReactDOMProxy18(ReactDOM: any, ReactDOMClient: any): IReactDOM {
             if (s) {
                 return s;
             }
-            console.log('findDOMNode 2 ', e, e.fatNodeInstance)
+            // console.log('findDOMNode 2 ', e, e.fatNodeInstance)
             return ReactDOM.findDOMNode(e);
         }
     };
