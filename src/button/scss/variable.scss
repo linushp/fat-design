@@ -253,11 +253,11 @@ $btn-pure-primary-bg: $color-brand1-6;
 /// background
 /// @supportGradient
 /// @namespace statement/hover
-$btn-pure-primary-bg-hover: #4253b2;
+$btn-pure-primary-bg-hover: var(--color-brand1-9, #4253b2);
 /// background
 /// @supportGradient
 /// @namespace statement/active
-$btn-pure-primary-bg-active: #4253b2;
+$btn-pure-primary-bg-active:  var(--color-brand1-9, #4253b2);
 /// border color
 /// @namespace statement/normal
 $btn-pure-primary-border-color: transparent;
@@ -512,7 +512,7 @@ $btn-text-primary-color: $color-brand1-6;
 
 /// text
 /// @namespace statement/hover
-$btn-text-primary-color-hover: #4253b2;
+$btn-text-primary-color-hover:  var(--color-brand1-9, #4253b2);
 
 /// text
 /// @namespace statement/disabled
