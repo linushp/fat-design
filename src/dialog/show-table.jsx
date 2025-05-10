@@ -1,5 +1,5 @@
 import {ComponentsStore} from "../util/comp";
-import _get from "lodash.get";
+import _get from "../util/lodash-get.js";
 import _set from "lodash.set";
 import classNames from 'classnames';
 import {defaultPrefix} from "../config-provider";

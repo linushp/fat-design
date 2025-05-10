@@ -1,8 +1,8 @@
 import {useCallback, useContext, useEffect, useMemo, useRef, useState} from 'react';
-import _get from "lodash.get";
 import _set from "lodash.set";
 import {CompareFn, isStateEquals} from "../util/isStateEquals";
 import {logger} from "../util/log";
+import _get from "../util/lodash-get";
 
 export type AnyType = any;
 

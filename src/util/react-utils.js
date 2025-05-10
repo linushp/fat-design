@@ -1,4 +1,4 @@
-import _get from "lodash.get";
+import _get from './lodash-get.js';
 
 function getElementTextDeep(obj, buf ,deep) {
 

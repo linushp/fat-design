@@ -5,7 +5,7 @@ import {ComponentsStore} from "../util/comp";
 import {usePersistFn} from "../hooks/usePersistFn";
 import formatQueryRes from './utils/formatQueryRes'
 import {logger} from "../util/log";
-import _get from "lodash.get";
+import _get from "../util/lodash-get.js";
 import {pickErrorMessage} from "../util/pick-res-data";
 import {toMap} from "../util/toMap";
 import {IUseTableProParams} from "./types";

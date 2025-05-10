@@ -1,6 +1,5 @@
-import {ComponentsStore} from "../util";
+import {ComponentsStore, get} from "../util";
 import {useEffect, useMemo, useState} from "react";
-import get from "lodash.get";
 import {usePersistFn} from "../hooks/usePersistFn";
 import ConfigProvider, {defaultPrefix} from "../config-provider";
 import {TinyEmitter} from "../util/tiny-emitter.js";

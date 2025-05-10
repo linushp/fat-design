@@ -1,4 +1,4 @@
-import _get from "lodash.get";
+import _get from "../../util/lodash-get";
 import {ComponentsStore} from "../../util/comp";
 
 function getDep(name: string): any {

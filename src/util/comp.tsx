@@ -1,7 +1,7 @@
 import {isNil} from "./object";
 import {isStartUpper} from "./func";
 import React from "react";
-import get from 'lodash.get';
+import get from './lodash-get';
 import {shallowEqual} from "./shallowEqual";
 
 

@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import _get from "lodash.get";
+import _get from "../util/lodash-get";
 import _set from "lodash.set";
 import {useSize} from "../hooks/useSize";
 import {logger} from "../util/log";

@@ -106,8 +106,8 @@ function buildConfig() {
         // baseObj.build.rollupOptions.external = Object.keys(packageJson.npmPackageDependencies)
         baseObj.build.rollupOptions.external = [
             'react',
-            'react/jsx-runtime',
-            'react/jsx-dev-runtime'
+            // 'react/jsx-runtime',
+            // 'react/jsx-dev-runtime'
         ]
         baseObj.build.rollupOptions.output.globals = packageJson.npmPackageDependenciesUMD;
     }

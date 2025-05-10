@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce'
 import cx from 'classnames';
-import get from 'lodash.get';
-import { func, obj, KEYCODE ,findDOMNode, ReactComponent} from '../../util';
+import { func, obj, KEYCODE ,findDOMNode, ReactComponent, get} from '../../util';
 
 const { bindCtx } = func;
 const { pickOthers } = obj;

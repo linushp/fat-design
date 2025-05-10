@@ -1,4 +1,4 @@
-import get from "lodash.get";
+import { get } from "./lodash-get";
 import {isPromise} from './object';
 import datejs from './date';
 

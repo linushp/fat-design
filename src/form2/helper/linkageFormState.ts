@@ -1,6 +1,6 @@
 import {PreciseStore} from "../../hooks/usePreciseStore";
 import {FormItemProps, FormStoreExtData1} from "../form-types";
-import _get from 'lodash.get';
+import _get from '../../util/lodash-get';
 import {FormActions} from "../form-actions";
 import {deepEqual} from "../../util/shallowEqual";
 

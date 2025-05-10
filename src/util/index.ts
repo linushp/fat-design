@@ -8,6 +8,7 @@ import * as _string from './string';
 import * as _support from './support';
 import * as _focus from './focus';
 import * as _htmlId from './htmlId';
+import {get} from './lodash-get';
 import {logger} from './log';
 import _guid from './guid';
 import _KEYCODE from './keycode';
@@ -39,6 +40,7 @@ const KEYCODE = _KEYCODE;
 const htmlId = _htmlId;
 
 export {
+    get,
     support,
     str,
     obj,

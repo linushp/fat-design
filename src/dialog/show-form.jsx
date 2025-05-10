@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {ComponentsStore} from "../util/comp";
-import _get from "lodash.get";
+import {get} from "../util";
 import classNames from 'classnames';
 import {defaultPrefix} from "../config-provider";
 import Message from '../message';
 import {MESSAGE_TYPE} from "./constants.jsx";
 
 function getDep(name) {
-    return _get(ComponentsStore.buildInComponents, name);
+    return get(ComponentsStore.buildInComponents, name);
 }
 
 function DialogFormWrapper(props) {

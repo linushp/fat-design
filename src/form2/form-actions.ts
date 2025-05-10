@@ -3,7 +3,7 @@ import {FormItemProps, FormStoreExtData1, IItemState} from "./form-types";
 import {buildValidateRules} from "./form-rules";
 import SchemaValidate from '../validate'
 import {uniqueId} from "../util/guid";
-import get from "lodash.get";
+import { get } from '../util'
 import {fixItemPropsByState} from "./helper/fixItemProps";
 
 const DEF_EXT_DATA1: FormStoreExtData1 = {propsMap: {}};

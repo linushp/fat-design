@@ -1,5 +1,5 @@
 import React from "react";
-import get from "lodash.get";
+import get from "../util/lodash-get";
 import classNames from 'classnames';
 import {IUseTableProParams, TableProProps} from "./types";
 import Table from "../table";
