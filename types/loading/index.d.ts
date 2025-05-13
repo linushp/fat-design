@@ -70,6 +70,13 @@ export interface LoadingProps extends React.HTMLAttributes<HTMLElement>, CommonP
 
     safeNode?: any;
 
+
+    /**
+     * 在Loading组件外包一个div，一般用于loading时的占位
+     * demo: <Loading wrapper={true} />
+     */
+    wrapper?: any;
+
     /**
      * 全屏模式下，loading弹层请求关闭时触发的回调函数
      * @en The callback function triggered when the loading layer request is closed in full screen mode

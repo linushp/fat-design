@@ -209,4 +209,32 @@ class Loading extends React.Component {
     }
 }
 
-export default ConfigProvider.config(Loading);
+
+
+
+function LoadingExt(props) {
+    const {wrapper, ...otherProps} = props;
+    if (wrapper) {
+        let style = {
+            height: '400px',
+            width: '100%',
+            boxSizing: 'border-box',
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }
+        if (typeof wrapper === 'object') {
+            style = Object.assign(style, wrapper)
+        }
+        return (
+            <div style={style}>
+                <Loading {...otherProps} />
+            </div>
+        )
+    }
+    return <Loading {...otherProps} />
+}
+
+export default ConfigProvider.config(LoadingExt);
