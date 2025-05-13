@@ -154,6 +154,7 @@ class Switch extends React.Component {
             isPreview,
             renderPreview,
             locale,
+            isBoolSwitch,
             ...others
         } = this.props;
         const { checked } = this.state;
@@ -167,6 +168,7 @@ class Switch extends React.Component {
 
         const classes = classNames({
             [`${prefix}switch`]: true,
+            [`${prefix}switch-boolean`]: !!isBoolSwitch,
             [`${prefix}switch-loading`]: loading,
             [`${prefix}switch-${status}`]: true,
             [`${prefix}switch-${_size}`]: true,
@@ -232,7 +234,9 @@ class Switch extends React.Component {
 const SwitchConfigured = ConfigProvider.config(polyfill(Switch), {displayName: 'Switch'});
 
 // 解决在Form表单情况下标准value，onChange协议的问题
-SwitchConfigured.BoolSwitch = ConfigProvider.createBoolComponent(SwitchConfigured, 'BoolSwitch');
+SwitchConfigured.BoolSwitch = ConfigProvider.createBoolComponent((props)=>{
+    return <SwitchConfigured {...props} isBoolSwitch={true}/>
+}, 'BoolSwitch');
 
 
 export default SwitchConfigured;
