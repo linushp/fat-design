@@ -12,7 +12,8 @@ const initialValues = {
     name2: '222',
     name3: '333',
     name4: '444',
-    Select1: 'AAA'
+    Select1: 'AAA',
+    time1: '2025-06-02T05:43:35.000Z'
 };
 
 
@@ -31,6 +32,14 @@ for (let i = 0; i < 3; i++) {
 }
 
 const Option = Select.Option;
+
+
+
+
+const datetimeFormat = "YYYY-MM-DD HH:mm:ss";
+const dateFormat = "YYYY-MM-DD";
+
+
 
 export function DemoForm3() {
 
@@ -94,8 +103,21 @@ export function DemoForm3() {
                               required
                     />
 
+                    <FormItem label={'时间'}
+                              name={'time1'}
+                              component={'DatePicker'}
+                              required
+                              isPreview
+                              xProps={{
+                                  showTime: true,
+                                  format: datetimeFormat,
+                              }}
+                    />
+
+
                     <FormItem label={'名字2'}
                               name={'name2'}
+                              isPreview
                               component={'Input'}
                     />
 

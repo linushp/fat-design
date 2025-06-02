@@ -49,7 +49,7 @@ root.render(
     // <React.StrictMode>
     <div>
         {/*<DemoBatchInput />*/}
-        {/*<DemoForm3 />*/}
+        <DemoForm3 />
         {/*<DemoLoading />*/}
         {/*<DemoSortableTable />*/}
         {/*<DemoQueryFormSimple />*/}
@@ -58,7 +58,7 @@ root.render(
         {/*<DemoButtons/>*/}
         {/*<DemoDialogShow/>*/}
         {/*<DemoUpload/>*/}
-        <DemoDrawerShow/>
+        {/*<DemoDrawerShow/>*/}
         {/*<DemoMenuButton/>*/}
         {/*<DemoFilter/>*/}
         {/*<DemoFormLayout />*/}

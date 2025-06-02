@@ -89,12 +89,16 @@ function SaveButton(props) {
 
         try {
             setLoading(true)
-            await onClick(actionParams);
+            const res = await onClick(actionParams);
             setLoading(false);
             closeMessageObj();
-            if (typeof successMessage === "string"){
-                Message.success(successMessage)
+
+            if (res!==false) {
+                if (typeof successMessage === "string"){
+                    Message.success(successMessage)
+                }
             }
+
         } catch (e) {
             closeMessageObj();
             Message.error(pickErrorMessage(e));

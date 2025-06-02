@@ -1,5 +1,6 @@
 import React from "react";
-import {FormItemProps, FormItemState, WrapFormItemProps} from "./form-types";
+import classnames from 'classnames';
+import {FormItemProps, WrapFormItemProps} from "./form-types";
 import {FormActions} from "./form-actions";
 import debounce from 'lodash.debounce'
 import {renderWrapPreview} from "./form-item-preview";
@@ -61,10 +62,16 @@ function renderComponentTag(ComponentTag: any, childProps: any, formItemProps: F
     if (!ComponentTag) {
         return null;
     }
-    const supportPreview = ComponentTag._supportPreview;
-    if (childProps.isPreview && !supportPreview) {
-        return renderWrapPreview(childProps, formItemProps);
+
+    // 预览模式
+    if (childProps.isPreview) {
+        if (!ComponentTag._supportPreview) {
+            return renderWrapPreview(childProps, formItemProps);
+        }
+        const className = classnames(childProps.className, `${formItemProps.prefix}form-preview`)
+        return <ComponentTag {...childProps} className={className} />
     }
+
     return <ComponentTag {...childProps} />
 }
 

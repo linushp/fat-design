@@ -1,16 +1,10 @@
 import React from 'react';
 import ConfigProvider from '../config-provider';
 import Picker from './picker';
-import {DATE_PICKER_MODE} from './constant';
+import {DATE_PICKER_MODE, MODE2FORMAT} from './constant';
+import DatePickerPreview from './preview';
 
 const {DATE, WEEK, MONTH, QUARTER, YEAR} = DATE_PICKER_MODE;
-const MODE2FORMAT = {
-    [DATE]: 'YYYY-MM-DD',
-    [WEEK]: 'YYYY-wo',
-    [MONTH]: 'YYYY-MM',
-    [QUARTER]: 'YYYY-[Q]Q',
-    [YEAR]: 'YYYY',
-};
 
 /* istanbul ignore next */
 const transform = (props, deprecated) => {
@@ -56,11 +50,17 @@ const ConfigPicker = ConfigProvider.config(Picker, {
     componentName: 'DatePicker',
     transform,
 });
+
 const generatePicker = (mode, displayName, type = 'date') => {
     const PickerComponent = React.forwardRef((props, ref) => {
-        return <ConfigPicker ref={ref} mode={mode} type={type} {...props}/>
+        const { isPreview, ...otherProps } = props;
+        if (isPreview === true) {
+            return <DatePickerPreview mode={mode} type={type}  {...otherProps} />
+        }
+        return <ConfigPicker ref={ref} mode={mode} type={type} {...otherProps}/>
     });
     PickerComponent.displayName = displayName;
+    PickerComponent._supportPreview = true;
     return PickerComponent;
 };
 
