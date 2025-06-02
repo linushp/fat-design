@@ -112,3 +112,42 @@ export function formatUrl(url: any, baseUrl?: string): string {
     }
     return ''
 }
+
+
+const imageExtensions = [
+    'apng', 'avif', 'bmp', 'gif', 'ico', 'jpeg',
+    'jpg', 'png', 'svg', 'tif', 'tiff', 'webp'
+];
+
+export function isImageURL(url: string | any): boolean {
+    if (typeof url!== "string") {
+        return false
+    }
+    try {
+        try {
+            // 尝试解析完整URL
+            const parsedUrl = new URL(url, window.location.href);
+            const path = parsedUrl.pathname;
+            const lastSegment = path.split('/').pop();
+            if (typeof lastSegment === 'string') {
+                // @ts-ignore
+                const extension = lastSegment.split('.').pop().toLowerCase();
+                return imageExtensions.includes(extension);
+            }
+            return false;
+        } catch {
+            // 处理相对路径或无协议URL
+            const path = url.split('?')[0];
+            const lastSegment = path.split('/').pop();
+            if (typeof lastSegment === 'string') {
+                // @ts-ignore
+                const extension = lastSegment.split('.').pop().toLowerCase();
+                return imageExtensions.includes(extension);
+            }
+            return false;
+        }
+    } catch (e){
+        return false;
+    }
+}
+

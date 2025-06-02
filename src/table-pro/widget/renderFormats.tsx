@@ -4,24 +4,15 @@ import {isNil} from "../../util/object";
 import {logger} from "../../util/log";
 import ConfigProvider from "../../config-provider";
 import {parseJsonObject} from "../../util/func";
-import {formatUrl} from "../../util/string";
 import {getDep} from "./deps";
+import {
+    IRenderCfg,
+    renderFileDownload,
+    renderFileImage
+} from "../../previews/renderFileImage";
 
 const now = Date.now();
 
-interface IRenderCfg {
-    deep: number;
-    prefix: string;
-}
-
-interface IRenderLinkFnProps {
-    downloadURL: string,
-    imgURL?: string,
-    url?: string,
-    name?: string,
-}
-
-type IRenderLinkFn = (props: IRenderLinkFnProps) => any;
 
 function objValueToString(value: any) {
     if (isNil(value)) {
@@ -248,106 +239,6 @@ function renderRelativeTime(value: any): string {
 }
 
 
-function renderCommonFileCell(value: any, cfg: IRenderCfg, renderLinkFn: IRenderLinkFn) {
-    const deep = cfg.deep || 0;
-    if (!value || deep > 5) {
-        return null;
-    }
-
-    if (Array.isArray(value)) {
-        return value.map((aa) => {
-            return renderCommonFileCell(aa, {...cfg, deep: deep + 1}, renderLinkFn);
-        })
-    }
-
-    if (typeof value === 'string') {
-        const strTrim = value.trim();
-        if (strTrim.startsWith('[') && strTrim.endsWith(']')) {
-            const arr = parseJsonObject(strTrim) || []; // 可能是个数组
-            if (Array.isArray(arr)) {
-                return arr.map((aa) => {
-                    return renderCommonFileCell(aa, {...cfg, deep: deep + 1}, renderLinkFn);
-                })
-            }
-        } else {
-            return renderLinkFn({downloadURL: strTrim})
-        }
-    }
-
-
-    if (typeof value === 'object' && value.downloadURL) {
-        return renderLinkFn(value)
-    }
-
-    return null;
-}
-
-
-function renderFileDownload(value: any, cfg: IRenderCfg) {
-    const className = `${cfg.prefix}render-formats-filedownload`;
-    return renderCommonFileCell(value, cfg, (props: IRenderLinkFnProps) => {
-        const name = props.name;
-        const downloadURL = formatUrl(props.downloadURL)
-        if (downloadURL && downloadURL.length > 0) {
-            if (name) {
-                return (
-                    <a href={downloadURL}
-                       className={className}
-                       download={name}
-                       target={'_blank'}> 📎 下载（{name}）</a>
-                )
-            }
-            return (
-                <a href={downloadURL} className={className} target={'_blank'}> 📎 下载文件 </a>
-            )
-        }
-        return null;
-    })
-}
-
-function renderFileImage(value: any, cfg: IRenderCfg) {
-    const className = `${cfg.prefix}render-formats-image`;
-    const Image = getDep('Image');
-
-    const renderOssImage = (url: string) => {
-        //OSS 文件图片文件
-        if (url && url.includes('.aliyuncs.com/') && url.includes('.oss-')) {
-            const src = url + "?x-oss-process=image/resize,w_200,p_10/quality,q_60";
-            return (
-                <Image src={src} preview={{icons: {}, src: url,}} width={60} style={{paddingRight: 5}}
-                       className={className}/>
-            )
-        }
-        return null;
-    }
-
-    return renderCommonFileCell(value, cfg, (props: IRenderLinkFnProps) => {
-        const downloadURL = formatUrl(props.downloadURL)
-        const imgURL = formatUrl(props.imgURL)
-        const url = formatUrl(props.url)
-        const previewSrc = url || downloadURL || imgURL;
-
-        let ossImage = renderOssImage(url);
-        if (ossImage) {
-            return ossImage;
-        }
-
-        ossImage = renderOssImage(imgURL);
-        if (ossImage) {
-            return ossImage;
-        }
-
-        ossImage = renderOssImage(downloadURL);
-        if (ossImage) {
-            return ossImage;
-        }
-
-        return (
-            <Image src={imgURL} preview={{icons: {}, src: previewSrc,}} width={60} style={{paddingRight: 5}}
-                   className={className}/>
-        )
-    })
-}
 
 
 /**

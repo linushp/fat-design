@@ -1,6 +1,11 @@
-import {useMemo} from "react";
+import React, {useMemo} from "react";
 import Upload from './upload';
 import {getByAny, parseJsonObject} from "../util/func";
+import classnames from "classnames";
+import ConfigProvider from "../config-provider";
+import {RenderFileAutoBySuffix} from "../previews/renderFileImage";
+
+
 
 
 
@@ -35,8 +40,27 @@ const formatItem = (item) => {
     }
 }
 
+
+const SimpleJSONUploadPreview = React.memo( (props)=> {
+    const {value} = props;
+    if (!value || typeof value !== "string") {
+        return (<span />)
+    }
+    return <RenderFileAutoBySuffix value={value} />
+});
+
+
 function SimpleJSONUpload(props) {
-    const {value, onChange, uploadComponent, ...otherProps} = props;
+    const {
+        isPreview,
+        isAutoStylePreview,
+        prefix,
+        value,
+        onChange,
+        className,
+        uploadComponent,
+        ...otherProps
+    } = props;
 
     const newValue = useMemo(() => {
         if (typeof value === "string") {
@@ -68,10 +92,32 @@ function SimpleJSONUpload(props) {
         console.error("SimpleJSONUpload unknown nextValue type ", nextValue)
     }
 
+    if (isPreview) {
+        const cls = classnames(`${prefix}simple-json-upload-preview`, className);
+        if (!isAutoStylePreview) {
+            return (<div className={cls}>{value}</div>)
+        }
+        return (
+            <SimpleJSONUploadPreview className={cls} value={value} />
+        );
+    }
+
 
     const UploadImpl = uploadComponent || Upload;
-    return <UploadImpl {...otherProps} value={newValue} onChange={handleOnChange}/>
+    return (
+        <UploadImpl {...otherProps}
+                    className={className}
+                    prefix={prefix}
+                    value={newValue}
+                    onChange={handleOnChange}/>
+    );
 }
+
+SimpleJSONUpload._supportPreview = true;
+SimpleJSONUpload.displayName = 'SimpleJSONUpload';
+SimpleJSONUpload.defaultProps = {
+    prefix: ConfigProvider.defaultPrefix
+};
 
 export {
     SimpleJSONUpload

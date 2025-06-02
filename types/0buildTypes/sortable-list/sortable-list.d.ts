@@ -141,7 +141,7 @@ declare const SortableList: <TTag extends keyof JSX.IntrinsicElements = "div">({
     onBlurCapture?: React.FocusEventHandler<TTag>;
     onChange?: React.FormEventHandler<TTag>;
     onChangeCapture?: React.FormEventHandler<TTag>;
-    onBeforeInput?: React.FormEventHandler<TTag>;
+    onBeforeInput?: React.InputEventHandler<TTag>;
     onBeforeInputCapture?: React.FormEventHandler<TTag>;
     onInput?: React.FormEventHandler<TTag>;
     onInputCapture?: React.FormEventHandler<TTag>;
@@ -191,8 +191,6 @@ declare const SortableList: <TTag extends keyof JSX.IntrinsicElements = "div">({
     onProgressCapture?: React.ReactEventHandler<TTag>;
     onRateChange?: React.ReactEventHandler<TTag>;
     onRateChangeCapture?: React.ReactEventHandler<TTag>;
-    onResize?: React.ReactEventHandler<TTag>;
-    onResizeCapture?: React.ReactEventHandler<TTag>;
     onSeeked?: React.ReactEventHandler<TTag>;
     onSeekedCapture?: React.ReactEventHandler<TTag>;
     onSeeking?: React.ReactEventHandler<TTag>;
@@ -410,7 +408,7 @@ declare const SortableList: <TTag extends keyof JSX.IntrinsicElements = "div">({
     onBlurCapture?: React.FocusEventHandler<TTag>;
     onChange?: React.FormEventHandler<TTag>;
     onChangeCapture?: React.FormEventHandler<TTag>;
-    onBeforeInput?: React.FormEventHandler<TTag>;
+    onBeforeInput?: React.InputEventHandler<TTag>;
     onBeforeInputCapture?: React.FormEventHandler<TTag>;
     onInput?: React.FormEventHandler<TTag>;
     onInputCapture?: React.FormEventHandler<TTag>;
@@ -460,8 +458,6 @@ declare const SortableList: <TTag extends keyof JSX.IntrinsicElements = "div">({
     onProgressCapture?: React.ReactEventHandler<TTag>;
     onRateChange?: React.ReactEventHandler<TTag>;
     onRateChangeCapture?: React.ReactEventHandler<TTag>;
-    onResize?: React.ReactEventHandler<TTag>;
-    onResizeCapture?: React.ReactEventHandler<TTag>;
     onSeeked?: React.ReactEventHandler<TTag>;
     onSeekedCapture?: React.ReactEventHandler<TTag>;
     onSeeking?: React.ReactEventHandler<TTag>;

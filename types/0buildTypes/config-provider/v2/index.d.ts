@@ -1,4 +1,3 @@
-/// <reference types="prop-types" />
 import React from "react";
 import { IConfigProviderProps, IGetContextProps } from "./types";
 declare class ConfigProvider extends React.Component<IConfigProviderProps, any> {
