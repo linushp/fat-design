@@ -25,6 +25,7 @@ import {DemoDrawerShow} from "./demo-drawer-show";
 import {DemoSortableTable} from "./demo-sortable-table";
 import {CurdApiDetail} from "./demo-crud-api/curd-api-detail";
 import DemoMessage from "./demo-message";
+import DemoSimpleUpload from "./demo-simple-upload.jsx";
 // import DemoSetters from "./demo-setters";
 import DemoIcons from "./demo-icons";
 import {utils} from '../src/index'
@@ -48,8 +49,9 @@ const root = pReactDOM.createRoot(document.getElementById('root') as HTMLElement
 root.render(
     // <React.StrictMode>
     <div>
+        <DemoSimpleUpload />
         {/*<DemoBatchInput />*/}
-        <DemoForm3 />
+        {/*<DemoForm3 />*/}
         {/*<DemoLoading />*/}
         {/*<DemoSortableTable />*/}
         {/*<DemoQueryFormSimple />*/}

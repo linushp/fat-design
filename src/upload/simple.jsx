@@ -5,7 +5,7 @@ import classnames from "classnames";
 import ConfigProvider from "../config-provider";
 import {RenderFileAutoBySuffix} from "../previews/renderFileImage";
 
-
+const defaultPrefix = ConfigProvider.defaultPrefix;
 
 
 
@@ -51,7 +51,7 @@ const SimpleJSONUploadPreview = React.memo( (props)=> {
 
 
 function SimpleJSONUpload(props) {
-    const {
+    let {
         isPreview,
         isAutoStylePreview,
         prefix,
@@ -61,6 +61,10 @@ function SimpleJSONUpload(props) {
         uploadComponent,
         ...otherProps
     } = props;
+
+    if (!prefix) {
+        prefix =  defaultPrefix;
+    }
 
     const newValue = useMemo(() => {
         if (typeof value === "string") {
@@ -115,9 +119,6 @@ function SimpleJSONUpload(props) {
 
 SimpleJSONUpload._supportPreview = true;
 SimpleJSONUpload.displayName = 'SimpleJSONUpload';
-SimpleJSONUpload.defaultProps = {
-    prefix: ConfigProvider.defaultPrefix
-};
 
 export {
     SimpleJSONUpload

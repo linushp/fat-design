@@ -21,23 +21,14 @@ declare function renderFileAutoBySuffix(value: any, cfg: IRenderCfg): any;
 declare const RenderFileDownload: React.MemoExoticComponent<{
     (props: IRenderProps): any;
     displayName: string;
-    defaultProps: {
-        prefix: string;
-    };
 }>;
 declare const RenderFileImage: React.MemoExoticComponent<{
     (props: IRenderProps): any;
     displayName: string;
-    defaultProps: {
-        prefix: string;
-    };
 }>;
 declare const RenderFileAutoBySuffix: React.MemoExoticComponent<{
     (props: IRenderProps): any;
     displayName: string;
-    defaultProps: {
-        prefix: string;
-    };
 }>;
 export { RenderFileImage, renderFileImage, renderFileDownload, RenderFileDownload, renderFileAutoBySuffix, RenderFileAutoBySuffix, };
 export type { IRenderProps, IRenderCfg, IRenderLinkFnProps, IRenderLinkFn };

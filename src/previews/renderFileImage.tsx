@@ -94,20 +94,20 @@ function innerRenderLinkFnPropsImage(props: IRenderLinkFnProps){
     const className = `${props.prefix}render-formats-image`;
     const Image = getDep('Image');
 
-    const renderOssImage = (url: string) => {
-        if (!url) {
+    const renderOssImage = (theUrl: string) => {
+        if (!theUrl) {
             return  null;
         }
-        if (!isImageURL(url)) {
+        if (!isImageURL(theUrl)) {
             return null;
         }
         //OSS 文件图片文件
-        if (url.includes('.aliyuncs.com/') && url.includes('.oss-')) {
-            const src = url + "?x-oss-process=image/resize,w_200,p_10/quality,q_60";
+        if (theUrl.includes('.aliyuncs.com/') && theUrl.includes('.oss-')) {
+            const src = theUrl + "?x-oss-process=image/resize,w_200,p_10/quality,q_60";
             return (
                 <Image src={src}
                        key={`img_${props.deep}_${props.index}`}
-                       preview={{icons: {}, src: url,}}
+                       preview={{icons: {}, src: theUrl,}}
                        width={60}
                        style={{paddingRight: 5}}
                        className={className}/>
@@ -116,39 +116,49 @@ function innerRenderLinkFnPropsImage(props: IRenderLinkFnProps){
         return null;
     }
 
-    const downloadURL = formatUrl(props.downloadURL)
-    const imgURL = formatUrl(props.imgURL)
-    const url = formatUrl(props.url)
-    const previewSrc = url || downloadURL || imgURL;
-
-    let ossImage = renderOssImage(url);
-    if (ossImage) {
-        return ossImage;
-    }
-
-    ossImage = renderOssImage(imgURL);
-    if (ossImage) {
-        return ossImage;
-    }
-
-    ossImage = renderOssImage(downloadURL);
-    if (ossImage) {
-        return ossImage;
-    }
-
-    if (isImageURL(imgURL)) {
+    const renderImage = (theUrl: string, thePreviewUrl: string) => {
+        if (!theUrl) {
+            return  null;
+        }
+        if (!isImageURL(theUrl)) {
+            return null;
+        }
         return (
-            <Image src={imgURL}
+            <Image src={theUrl}
                    key={`img_${props.deep}_${props.index}`}
-                   preview={{icons: {}, src: previewSrc,}}
+                   preview={{icons: {}, src: thePreviewUrl,}}
                    width={60}
                    style={{paddingRight: 5}}
                    className={className}/>
         )
     }
+
+
+    const downloadURL = formatUrl(props.downloadURL)
+    const imgURL = formatUrl(props.imgURL)
+    const url = formatUrl(props.url)
+    const previewSrc = url || downloadURL || imgURL;
+
+    const byOssList = [url,imgURL,downloadURL];
+    for (let i = 0; i < byOssList.length; i++) {
+        const byOssUrl = byOssList[i];
+        let ossImage = renderOssImage(byOssUrl);
+        if (ossImage) {
+            return ossImage;
+        }
+    }
+
+    const imtUrlList = [imgURL, url, downloadURL];
+    for (let i = 0; i < imtUrlList.length; i++) {
+        const imtUrl = imtUrlList[i];
+        const img = renderImage(imtUrl, previewSrc);
+        if (img) {
+            return img;
+        }
+    }
+
     return null;
 }
-
 
 
 
@@ -181,13 +191,8 @@ function createComponent(render: any, displayName:string) {
         return render(value,{deep: 0, prefix : prefix});
     };
     RenderFileDownloadImpl.displayName = displayName;
-    RenderFileDownloadImpl.defaultProps = {
-        prefix: ConfigProvider.defaultPrefix
-    };
     return React.memo(RenderFileDownloadImpl)
 }
-
-
 
 
 
