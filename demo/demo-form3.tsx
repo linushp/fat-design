@@ -55,28 +55,36 @@ export function DemoForm3() {
     const onCreated = (values, {formStore, formActions}: any) => {
         window.xx_formStore = formStore;
         window.xx_formActions = formActions;
+
+        setTimeout(()=>{
+            formActions.setState('name2', {xProps: {dataSource: [
+                        {value:"222",label:"222"},
+                    ]}});
+            formActions.forceUpdate('name2')
+
+        },1000)
     }
 
 
     const onChange = (values: any, {stateMap, formActions}: FnFormOnChangeParams) => {
-        if (values.name1 === 'z') {
-            formActions.setValue('name2','zzzzz')
-            // formActions.setValue('name3','zzzzz')
-            formActions.setState('name4',{display:false})
-            formActions.setState('name5',{disabled:false})
-            // values.name2 === 'zzzzz';
-            // values.name3 === 'zzzzz';
-            // stateMap.name4.display = false;
-            // stateMap.name5.disabled = false;
-        } else {
-            // formActions.setValue('name2','aaaaa')
-            // formActions.setValue('name3','aaaaa')
-            formActions.setState('name4',{display:true})
-            formActions.setState('name5',{disabled:true})
-            // stateMap.name4.display = true;
-            // stateMap.name5.disabled = true;
-        }
-        console.info('stateMap.name4', stateMap.name4)
+        // if (values.name1 === 'z') {
+        //     formActions.setValue('name2','zzzzz')
+        //     // formActions.setValue('name3','zzzzz')
+        //     formActions.setState('name4',{display:false})
+        //     formActions.setState('name5',{disabled:false})
+        //     // values.name2 === 'zzzzz';
+        //     // values.name3 === 'zzzzz';
+        //     // stateMap.name4.display = false;
+        //     // stateMap.name5.disabled = false;
+        // } else {
+        //     // formActions.setValue('name2','aaaaa')
+        //     // formActions.setValue('name3','aaaaa')
+        //     formActions.setState('name4',{display:true})
+        //     formActions.setState('name5',{disabled:true})
+        //     // stateMap.name4.display = true;
+        //     // stateMap.name5.disabled = true;
+        // }
+        // console.info('stateMap.name4', stateMap.name4)
     }
 
 
@@ -91,34 +99,34 @@ export function DemoForm3() {
                       onCreated={onCreated}
                       onChange={onChange}
                       autoValidate={true}
-                      submitter={true}
+                      submitter={false}
                       {...formItemLayout}
                       autoValidateOnCreated={true}
                 >
 
-                    <FormItem label={'名字1'}
-                              name={'name1'}
-                              component={'Input'}
-                              length={7}
-                              required
-                    />
+                    {/*<FormItem label={'名字1'}*/}
+                    {/*          name={'name1'}*/}
+                    {/*          component={'Input'}*/}
+                    {/*          length={7}*/}
+                    {/*          required*/}
+                    {/*/>*/}
 
-                    <FormItem label={'时间'}
-                              name={'time1'}
-                              component={'DatePicker'}
-                              required
-                              isPreview
-                              xProps={{
-                                  showTime: true,
-                                  format: datetimeFormat,
-                              }}
-                    />
+                    {/*<FormItem label={'时间'}*/}
+                    {/*          name={'time1'}*/}
+                    {/*          component={'DatePicker'}*/}
+                    {/*          required*/}
+                    {/*          isPreview*/}
+                    {/*          xProps={{*/}
+                    {/*              showTime: true,*/}
+                    {/*              format: datetimeFormat,*/}
+                    {/*          }}*/}
+                    {/*/>*/}
 
 
                     <FormItem label={'名字2'}
                               name={'name2'}
-                              isPreview
-                              component={'Input'}
+                              isPreview={false}
+                              component={'Select'}
                     />
 
 

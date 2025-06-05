@@ -3,21 +3,24 @@ import {buildFnFormOnChangeParams} from "./buildParams";
 import {FormActions} from "../form-actions";
 
 
-function getXprops(formItemProps: FormItemProps, formItemState: FormItemState) {
+function getPropsByFormItemProps(formItemProps: FormItemProps){
     const xProps = formItemProps.xProps;
-    if (!xProps) {
-        return {};
+    if (typeof xProps === "function") {
+        return xProps();
     }
+    return xProps;
+}
 
-    if (typeof xProps === "object") {
-        return xProps;
+function getXprops(formItemProps: FormItemProps, formItemState: FormItemState) {
+    let xProps = getPropsByFormItemProps(formItemProps)
+    if (!xProps || typeof xProps !== "object") {
+         xProps = {};
     }
-
-    if (typeof xProps === "function" && formItemState.xProps) {
-        return formItemState.xProps || {};
+    const xProps2 = formItemState.xProps;
+    if (xProps2 && typeof xProps2 === "object") {
+        Object.assign(xProps, xProps2);
     }
-
-    return {};
+    return xProps;
 }
 
 

@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import {useEffect} from "react";
 import {useCurrentState} from "../../hooks/useCurrentState";
 import {FnGetEnums, IFormContext} from "../form-types";
 import {buildFnFormOnChangeParams} from "./buildParams";
@@ -26,17 +26,22 @@ function isNotEmptyArray(arr: any): boolean {
 function useDataSource(enums: any, childProps: any, xProps: any, formContext: IFormContext, forceUpdateTick: number = 0) {
     const [_, setDataSource, getDataSource] = useCurrentState([]);
 
-    // xProps.dataSource字段存在; 利用此方法可实现下拉选项的联动。
-    if (xProps && isNotEmptyArray(xProps.dataSource)) {
-        return xProps.dataSource;
-    }
-
-    //1.  enums 是一个数组
-    if (enums && isNotEmptyArray(enums)) {
-        return enums;
-    }
 
     const getAsyncEnum = usePersistFn( (enums: any) => {
+
+        //1.  xProps.dataSource字段存在; 利用此方法可实现下拉选项的联动。
+        if (xProps && isNotEmptyArray(xProps.dataSource)) {
+            setDataSource(xProps.dataSource);
+            return;
+        }
+
+        //2. enums 是一个数组
+        if (enums && isNotEmptyArray(enums)) {
+            setDataSource(enums);
+            return;
+        }
+
+        // 3. enum是个函数
         if (typeof enums !== "function") {
             return;
         }
@@ -51,13 +56,13 @@ function useDataSource(enums: any, childProps: any, xProps: any, formContext: IF
             return;
         }
 
-        // enums 是一个同步函数
+        // 3.1 enum是个同步函数
         if (Array.isArray(enumsRes)) {
             setDataSource(enumsRes);
             return;
         }
 
-        // enums 是一个异步函数
+        // 3.2 enums 是一个异步函数
         if (typeof enumsRes.then == "function") {
             enumsRes.then((asyncEnumsResult: any) => {
                 const enumArray = pickResArray(asyncEnumsResult);
@@ -78,9 +83,10 @@ function useDataSource(enums: any, childProps: any, xProps: any, formContext: IF
      * 当filterLocal === false && showSearch === true，
      * 自动添加onSearch函数，通过forceUpdateTick变更自动调用getAsyncEnum
      */
-    useMemo(() => {
+    useEffect(() => {
         getAsyncEnum(enums);
     }, [forceUpdateTick]);
+
 
 
     // 为什么使用useCurrentState？因为enums可以是一个同步函数，同步函数的数据可以立即返回。避免二次渲染。

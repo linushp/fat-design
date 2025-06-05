@@ -49,9 +49,9 @@ const root = pReactDOM.createRoot(document.getElementById('root') as HTMLElement
 root.render(
     // <React.StrictMode>
     <div>
-        <DemoSimpleUpload />
+        {/*<DemoSimpleUpload />*/}
         {/*<DemoBatchInput />*/}
-        {/*<DemoForm3 />*/}
+        <DemoForm3 />
         {/*<DemoLoading />*/}
         {/*<DemoSortableTable />*/}
         {/*<DemoQueryFormSimple />*/}

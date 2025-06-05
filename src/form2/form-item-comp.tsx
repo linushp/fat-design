@@ -187,6 +187,9 @@ function FormItemComp(props: WrapFormItemProps) {
         childProps.dataSource = dataSource;
     }
 
+    // debugger;
+    console.log("comp==> ",xProps, dataSource)
+
 
     // 三种方式渲染。
     const renders = [
