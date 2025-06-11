@@ -10,5 +10,5 @@ import { IFormContext } from "../form-types";
  * @param formContext
  * @param forceUpdateTick
  */
-declare function useDataSource(enums: any, childProps: any, xProps: any, formContext: IFormContext, forceUpdateTick?: number): any;
+declare function useDataSource(enums: any, childProps: any, xProps: any, formContext: IFormContext, forceUpdateTick?: number): any[];
 export { useDataSource };
