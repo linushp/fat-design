@@ -382,5 +382,6 @@ export interface IFormItemCardProps {
     title?: string;
     children?: any;
     prefix?: string;
+    cardProps?: any;
 }
 export {};
