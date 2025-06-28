@@ -26,6 +26,10 @@
         font-size: $fontSize;
         padding: 0 $paddingLr;
         min-width: $minWidth;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
     &.#{$css-prefix}tag-closable > .#{$css-prefix}tag-body {

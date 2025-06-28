@@ -33,6 +33,7 @@ function buildShowInput(show) {
             type,
             prefix = defaultPrefix,
             formProps: formPropsConfig,
+            contentStyle = {},
             ...others
         } = config;
 
@@ -96,7 +97,7 @@ function buildShowInput(show) {
         }
 
 
-        const contentStyle = {
+        const contentStyle0 = {
             width: '430px',
             boxSizing: 'border-box'
         }
@@ -104,11 +105,11 @@ function buildShowInput(show) {
 
         if (mode === SHOW_INPUT_MODE.inputMode) {
             if ( formProps.labelAlign === 'top'){
-                contentStyle.padding = '10px 40px';
-                contentStyle.paddingBottom = '0';
-                contentStyle.minHeight = '115px';
+                contentStyle0.padding = '10px 40px';
+                contentStyle0.paddingBottom = '0';
+                contentStyle0.minHeight = '115px';
             } else {
-                contentStyle.paddingTop = '20px';
+                contentStyle0.paddingTop = '20px';
             }
         }
 
@@ -117,9 +118,9 @@ function buildShowInput(show) {
             formProps.labelAlign = 'top'
             delete formProps.labelCol;
             delete formProps.wrapperCol;
-            contentStyle.minHeight = '165px';
-            contentStyle.padding = '10px 30px';
-            contentStyle.paddingBottom = '0';
+            contentStyle0.minHeight = '165px';
+            contentStyle0.padding = '10px 30px';
+            contentStyle0.paddingBottom = '0';
         }
 
 
@@ -131,7 +132,10 @@ function buildShowInput(show) {
             title,
             onOk: newOnOk,
             formProps,
-            contentStyle: contentStyle,
+            contentStyle: {
+                ...contentStyle0,
+                ...contentStyle,
+            },
             className: classNames(classObj),
         });
     }
