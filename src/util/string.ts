@@ -156,16 +156,23 @@ export function isImageURL(url: string | any): boolean {
  * 判断一个字符串，是否只包含数字
  * @param str
  */
-export function isNumeric(str: string) : boolean {
+export function isNumeric(str: any) : boolean {
     if (!str) {
         return false;
     }
-    const len = str.length;
-    for (let i = 0; i < len; i++) {
-        const code = str.charCodeAt(i);
-        if (code < 48 || code > 57) {
-            return false; // 非0-9字符码
+    if (typeof str === 'number') {
+        return true;
+    }
+
+    if (typeof str === 'string') {
+        const len = str.length;
+        for (let i = 0; i < len; i++) {
+            const code = str.charCodeAt(i);
+            if (code < 48 || code > 57) {
+                return false; // 非0-9字符码
+            }
         }
     }
+
     return true;
 }

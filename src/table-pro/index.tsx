@@ -31,7 +31,9 @@ class TablePro extends React.Component<TableProProps, any> {
     static renderJSON: ICellRenderFunc = tableUtils.renderJSON;
     static renderString: ICellRenderFunc = tableUtils.renderString;
     static renderDay: ICellRenderFunc = tableUtils.renderDay;
+    static renderDayAuto: ICellRenderFunc = tableUtils.renderDayAuto;
     static renderTime: ICellRenderFunc = tableUtils.renderTime;
+    static renderTimeAuto: ICellRenderFunc = tableUtils.renderTimeAuto;
     static renderThousands: ICellRenderFunc = tableUtils.renderThousands;
     static renderHTML: ICellRenderFunc = tableUtils.renderHTML;
     static renderBoolean: ICellRenderFunc = tableUtils.renderBoolean;

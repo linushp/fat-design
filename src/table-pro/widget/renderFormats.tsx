@@ -53,16 +53,38 @@ function renderString(value: any) {
 }
 
 
-const renderDateTimeString = (value: any, formatter: string): string => {
 
-    const tryFormat = (v): string => {
+const maxSecond = new Date('2100-01-01').getTime() / 1000;
+function isSecondTimestamp(value: number): boolean {
+    return value > 0 && value < maxSecond;
+}
+
+
+/**
+ *
+ * @param value
+ * @param formatter
+ * @param isAutoSecond 自动识别以秒为单位的时间戳
+ */
+const renderDateTimeString = (value: any, formatter: string, isAutoSecond: boolean): string => {
+
+    const tryFormat = (v: any): string => {
         if (!v) {
             return ''
         }
+        // 以秒为单位的时间戳
+        if (isAutoSecond && typeof v === 'number' && isSecondTimestamp(value)) {
+            try {
+                return datejs(v * 1000).format(formatter);
+            } catch (e) {
+                return 'AUTO FORMAT ERROR : ' + v;
+            }
+        }
+
         try {
             return datejs(v).format(formatter);
         } catch (e) {
-            return 'FORMAT ERROR : ' + v;
+            return 'AUTO FORMAT ERROR : ' + v;
         }
     }
     const tryFormatArray = (value:any[]): string => {
@@ -72,7 +94,14 @@ const renderDateTimeString = (value: any, formatter: string): string => {
         if (filtered.length === 0) {
             return '';
         }
-        return value.map(tryFormat).join(' ~ ');
+        return value.map((v)=>{
+
+            if (isNumeric(v)) {  // 纯数字的字符串类型
+                return tryFormat(Number(v));
+            }
+
+            return tryFormat(v)
+        }).join(' ~ ');
     }
 
     if (isNil(value)) {
@@ -105,11 +134,19 @@ const renderDateTimeString = (value: any, formatter: string): string => {
 
 
 function renderTime(value: any) {
-    return renderDateTimeString(value, 'YYYY-MM-DD HH:mm:ss')
+    return renderDateTimeString(value, 'YYYY-MM-DD HH:mm:ss', false)
 }
 
 function renderDay(value: any) {
-    return renderDateTimeString(value, 'YYYY-MM-DD')
+    return renderDateTimeString(value, 'YYYY-MM-DD', false)
+}
+
+function renderTimeAuto(value: any) {
+    return renderDateTimeString(value, 'YYYY-MM-DD HH:mm:ss',true)
+}
+
+function renderDayAuto(value: any) {
+    return renderDateTimeString(value, 'YYYY-MM-DD',true)
 }
 
 function renderBoolean(value: any) {
@@ -313,7 +350,9 @@ const renderFormats = {
     renderString: buildRender(renderString),
     renderJSON: buildRender(renderJSON),
     renderDay: buildRender(renderDay), // 支持单个、多个、JSON字符串
+    renderDayAuto: buildRender(renderDayAuto), // 支持单个、多个、JSON字符串
     renderTime: buildRender(renderTime), // 支持单个、多个、JSON字符串
+    renderTimeAuto: buildRender(renderTimeAuto), // 支持单个、多个、JSON字符串
     renderThousands: buildRender(renderThousands),
     renderHTML: buildRender(renderHTML),
     renderBoolean: buildRender(renderBoolean),
