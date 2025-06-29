@@ -3,7 +3,9 @@ declare const renderFormats: {
     renderString: (value: any) => React.JSX.Element;
     renderJSON: (value: any) => React.JSX.Element;
     renderDay: (value: any) => React.JSX.Element;
+    renderDayAuto: (value: any) => React.JSX.Element;
     renderTime: (value: any) => React.JSX.Element;
+    renderTimeAuto: (value: any) => React.JSX.Element;
     renderThousands: (value: any) => React.JSX.Element;
     renderHTML: (value: any) => React.JSX.Element;
     renderBoolean: (value: any) => React.JSX.Element;

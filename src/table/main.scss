@@ -310,7 +310,7 @@
         &.hidden {
             display: none;
         }
-        &.hovered {
+        &.hovered, &:hover {
             background: $table-row-hover-bg;
             color: $table-row-hover-color;
         }

@@ -153,7 +153,7 @@ $table-row-hover-color: $color-text1-3;
 /// background
 /// @namespace statement/selected/body
 //$table-row-selected-bg: transparent;
-$table-row-selected-bg: #fff;
+$table-row-selected-bg: $color-bg1-2;
 /// text
 /// @namespace statement/selected/body
 $table-row-selected-color: $color-text1-3;

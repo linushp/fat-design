@@ -11,7 +11,9 @@ declare const tableUtils: {
     renderJSON: (value: any) => import("react").JSX.Element;
     renderString: (value: any) => import("react").JSX.Element;
     renderDay: (value: any) => import("react").JSX.Element;
+    renderDayAuto: (value: any) => import("react").JSX.Element;
     renderTime: (value: any) => import("react").JSX.Element;
+    renderTimeAuto: (value: any) => import("react").JSX.Element;
     renderThousands: (value: any) => import("react").JSX.Element;
     renderHTML: (value: any) => import("react").JSX.Element;
     renderBoolean: (value: any) => import("react").JSX.Element;

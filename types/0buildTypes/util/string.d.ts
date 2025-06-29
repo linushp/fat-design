@@ -29,4 +29,4 @@ export declare function isImageURL(url: string | any): boolean;
  * 判断一个字符串，是否只包含数字
  * @param str
  */
-export declare function isNumeric(str: string): boolean;
+export declare function isNumeric(str: any): boolean;

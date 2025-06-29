@@ -11,7 +11,9 @@ declare class TablePro extends React.Component<TableProProps, any> {
     static renderJSON: ICellRenderFunc;
     static renderString: ICellRenderFunc;
     static renderDay: ICellRenderFunc;
+    static renderDayAuto: ICellRenderFunc;
     static renderTime: ICellRenderFunc;
+    static renderTimeAuto: ICellRenderFunc;
     static renderThousands: ICellRenderFunc;
     static renderHTML: ICellRenderFunc;
     static renderBoolean: ICellRenderFunc;
