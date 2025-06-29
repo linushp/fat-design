@@ -10,6 +10,7 @@ import {
     renderFileDownload,
     renderFileImage
 } from "../../previews/renderFileImage";
+import {isNumeric} from "../../util/string";
 
 const now = Date.now();
 
@@ -91,6 +92,12 @@ const renderDateTimeString = (value: any, formatter: string): string => {
                 return tryFormatArray(arr)
             }
         }
+
+        // 纯数字的字符串类型
+        if (isNumeric(value)) {
+            return tryFormat(Number(value));
+        }
+
     }
 
     return tryFormat(value);
