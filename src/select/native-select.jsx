@@ -22,7 +22,8 @@ const NativeSelect = ({
                           dataSource,
                           className = '',
                           placeholder = '请选择',
-                          disabled = false
+                          disabled = false,
+                          style
                       }) => {
 
     const handleChange = (event) => {
@@ -47,6 +48,7 @@ const NativeSelect = ({
                 `${prefix}${size}`,
                 `${prefix}native-select`,
                 className)}
+            style={style}
             disabled={disabled}
         >
 
