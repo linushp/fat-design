@@ -1,0 +1,30 @@
+@charset "UTF-8";
+@import "../core/index-noreset.scss";
+
+.#{$css-prefix}native-select {
+  position: relative;
+  background-color: white;
+  min-width: 100px;
+  width: 100%;
+  color: var(--color-text1-4, #333);
+  font-size: 12px;
+  outline: none;
+  box-sizing: border-box;
+  text-indent: 4px;
+
+  &:focus {
+    border-color: var(--color-brand1-6, #5263ff);
+  }
+}
+
+.#{$css-prefix}native-select-small {
+
+}
+
+.#{$css-prefix}native-select-medium {
+
+}
+
+.#{$css-prefix}native-select-large {
+
+}

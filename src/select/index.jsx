@@ -1,6 +1,7 @@
 import ConfigProvider from '../config-provider';
 import Select from './select';
 import AutoComplete from './auto-complete';
+import { NativeSelect } from './native-select';
 import Option from './option';
 import OptionGroup from './option-group';
 
@@ -11,6 +12,7 @@ Select.AutoComplete = ConfigProvider.config(AutoComplete, {
 
 Select.Option = Option;
 Select.OptionGroup = OptionGroup;
+Select.NativeSelect = NativeSelect;
 
 // compatible with 0.x version
 /* istanbul ignore next */

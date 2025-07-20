@@ -469,8 +469,11 @@ export interface SelectProps extends Omit<HTMLAttributesWeak, 'renderPreview'>, 
     popupAutoFocus?: boolean;
 }
 
+export class NativeSelect extends React.Component<SelectProps, any> { }
+
 export default class Select extends React.Component<SelectProps, any> {
     static AutoComplete: typeof AutoComplete;
     static OptionGroup: typeof OptionGroup;
     static Option: typeof Option;
+    static NativeSelect: typeof NativeSelect;
 }

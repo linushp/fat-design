@@ -67,6 +67,7 @@ export function DemoForm3() {
 
 
     const onChange = (values: any, {stateMap, formActions}: FnFormOnChangeParams) => {
+        console.log('onChange', values);
         // if (values.name1 === 'z') {
         //     formActions.setValue('name2','zzzzz')
         //     // formActions.setValue('name3','zzzzz')
@@ -127,6 +128,17 @@ export function DemoForm3() {
                               name={'name2'}
                               isPreview={false}
                               component={'Select'}
+                    />
+
+                    <FormItem label={'NativeSelect'}
+                              name={'NativeSelect'}
+                              isPreview={false}
+                              enums={[
+                                  {label: '111', value: '111'},
+                                  {label: '222', value: '222'},
+                                  {label: '333', value: '333'},
+                              ]}
+                              component={'Select.NativeSelect'}
                     />
 
 
