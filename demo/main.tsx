@@ -51,7 +51,7 @@ root.render(
     <div>
         {/*<DemoSimpleUpload />*/}
         {/*<DemoBatchInput />*/}
-        <DemoForm3 />
+        {/*<DemoForm3 />*/}
         {/*<DemoLoading />*/}
         {/*<DemoSortableTable />*/}
         {/*<DemoQueryFormSimple />*/}
@@ -67,7 +67,7 @@ root.render(
         {/*<DemoForm1/>*/}
         {/*<DemoForm2/>*/}
         {/*<DemoDetailPage/>*/}
-        {/*<DemoQueryForm/>*/}
+        <DemoQueryForm/>
         {/*<DemoTmp/>*/}
         {/*<CurdApiDetail />*/}
         {/*<DemoImage />*/}

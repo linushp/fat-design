@@ -1,15 +1,25 @@
+type ListenerType = (...args: any[]) => any
+
+interface IListenerObject {
+    eventName: string,
+    listener: ListenerType
+}
+
+
 class TinyEmitter {
+    private listenerObjects: IListenerObject[];
+
     constructor() {
         this.listenerObjects = [];
     }
 
-    on = (eventName, listener) => {
+    on = (eventName: string, listener: ListenerType) => {
         this.listenerObjects.push({
             eventName: eventName,
             listener: listener
         })
     }
-    off = (eventName, listener) => {
+    off = (eventName: string, listener: ListenerType) => {
         if (!eventName) {
             return;
         }
@@ -28,14 +38,14 @@ class TinyEmitter {
         this.listenerObjects = [];
     }
 
-    emit = (eventName, ...args) => {
+    emit = (eventName: string, ...args: any[]): any[] => {
         const listenerObjects = this.listenerObjects;
-        const resultArray = [];
+        const resultArray: any[] = [];
         for (let i = 0; i < listenerObjects.length; i++) {
             const listenerObject = listenerObjects[i];
             if (listenerObject.eventName === eventName) {
                 const func = listenerObject.listener;
-                let res;
+                let res: any;
                 if (typeof func === "function") {
                     res = func(...args);
                 }

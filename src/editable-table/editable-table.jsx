@@ -2,7 +2,7 @@ import {ComponentsStore, get} from "../util";
 import {useEffect, useMemo, useState} from "react";
 import {usePersistFn} from "../hooks/usePersistFn";
 import ConfigProvider, {defaultPrefix} from "../config-provider";
-import {TinyEmitter} from "../util/tiny-emitter.js";
+import {TinyEmitter} from "../util/tiny-emitter.ts";
 
 const nextTick = () => {
     nextTick.valueIndex = nextTick.valueIndex || 1;

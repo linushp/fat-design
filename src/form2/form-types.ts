@@ -1,3 +1,5 @@
+import {TinyEmitter} from "../util/tiny-emitter";
+
 export interface ResponsiveGridProps {
     prefix?: string,
     className?: any,
@@ -424,6 +426,7 @@ export interface IFormContext {
     formActions: any; // FormActions
     formComponents: any; //所有可用的组件
     formOnChange: any; // 参数是：formStore
+    formEventBus: TinyEmitter; //TinyEmitter
 }
 
 export interface WrapFormItemProps {
@@ -454,6 +457,7 @@ export interface BaseBtnProps {
     bizCallback?: any;
     localKey: string;
     xProps?: any
+    htmlType?: string
 }
 
 export interface ResetProps extends BaseBtnProps {
