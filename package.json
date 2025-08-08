@@ -4,18 +4,16 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development vite",
-    "build": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
-    "build:prod": "tsc && TARGET_ENV=npm vite build && node script/make-build.cjs -p && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
-    "build:demo": "tsc && TARGET_ENV=demo vite build",
+    "dev": "cross-env NODE_ENV=development vite",
+    "build": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
+    "build:prod": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs -p && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
+    "build:demo": "tsc && cross-env TARGET_ENV=demo vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "bc-vote": "^1.0.0",
     "big.js": "^6.2.1",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
-    "eosfans": "^1.0.8",
     "hoist-non-react-statics": "^3.3.2",
     "localforage": "^1.10.0",
     "lodash.clonedeep": "^4.5.0",
@@ -33,6 +31,7 @@
     "react": "React"
   },
   "devDependencies": {
+    "cross-env": "^6.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/lodash.clonedeep": "^4.5.9",
     "@types/lodash.debounce": "^4.0.7",
