@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
-    "build": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
-    "build:prod": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs -p && cp -r distTmp/0buildTypes types/ && cp -r types dist/ && cp -r libs dist/",
+    "build": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs",
+    "build:prod": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs -p",
     "build:demo": "tsc && cross-env TARGET_ENV=demo vite build",
     "preview": "vite preview"
   },

@@ -1,3 +1,4 @@
+import { TinyEmitter } from "../util/tiny-emitter";
 export interface ResponsiveGridProps {
     prefix?: string;
     className?: any;
@@ -336,6 +337,7 @@ export interface IFormContext {
     formActions: any;
     formComponents: any;
     formOnChange: any;
+    formEventBus: TinyEmitter;
 }
 export interface WrapFormItemProps {
     formItemProps: FormItemProps;
@@ -360,6 +362,7 @@ export interface BaseBtnProps {
     bizCallback?: any;
     localKey: string;
     xProps?: any;
+    htmlType?: string;
 }
 export interface ResetProps extends BaseBtnProps {
     toDefault?: boolean;

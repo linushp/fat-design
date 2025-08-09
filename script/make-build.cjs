@@ -1,5 +1,6 @@
 
 var fs = require('fs');
+var fs2 = require('fs/promises');
 var path = require('path');
 var packageTmp = require('./package-tmp.json');
 var packageJson = require('../package.json');
@@ -46,7 +47,50 @@ function getDateTimeString() {
 }
 
 
-function main(){
+
+
+// 方法1：使用原生fs模块实现
+async function copyFolder(src, dest) {
+    try {
+        // 检查源文件夹是否存在
+        await fs2.access(src);
+
+        // 创建目标文件夹（如果不存在）
+        await fs2.mkdir(dest, { recursive: true });
+
+        // 读取源文件夹内容
+        const entries = await fs2.readdir(src, { withFileTypes: true });
+
+        for (const entry of entries) {
+            const srcPath = path.join(src, entry.name);
+            const destPath = path.join(dest, entry.name);
+
+            if (entry.isDirectory()) {
+                // 如果是文件夹，递归复制
+                await copyFolder(srcPath, destPath);
+            } else {
+                // 如果是文件，直接复制
+                await fs2.copyFile(srcPath, destPath);
+                // console.log(`复制文件: ${srcPath} -> ${destPath}`);
+            }
+        }
+
+        // console.log(`文件夹复制完成: ${src} -> ${dest}`);
+        return true;
+    } catch (err) {
+        console.error('复制文件夹时出错:', err);
+        return false;
+    }
+}
+
+async function copyFolderEntry(src, dest){
+    const srcPath = path.join(__dirname, src);
+    const destPath = path.join(__dirname, dest);
+    await copyFolder(srcPath, destPath);
+    console.log(`文件夹复制完成: ${src} -> ${dest}`);
+}
+
+async function main(){
     const args = process.argv.slice(2);
 
     console.log('[make-build.js]  args   ' +  JSON.stringify(args), typeof args, Array.isArray(args))
@@ -75,6 +119,15 @@ function main(){
 
     copyFile('../dist/index.umd.cjs', '../dist/index.umd.js');
     copyFile('./README.md', '../dist/README.md');
+
+
+    // distTmp/0buildTypes types/
+    await copyFolderEntry('../distTmp/0buildTypes', '../types/0buildTypes')
+    //cp -r types dist/
+    await copyFolderEntry('../types','../dist/types')
+    // cp -r libs dist/
+    await copyFolderEntry('../libs','../dist/libs')
+
 }
 
 
