@@ -81,6 +81,8 @@ export type onClickOperateCellItem = (btnItem: OperateCellItemProps) => void;
 
 export interface OperateCellItemProps extends Record<string, any> {
     title: string;
+    disabled?: boolean; // 按钮是否禁用
+    tooltip?: string; // 提示
     operationCode?: string; // 操作码，根据此过滤。。
     onClick?: onClickOperateCellItem; //点击函数
 }
