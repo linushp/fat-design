@@ -70,17 +70,31 @@ function wrapOnClick(fn: any, btnItem: any) {
 }
 
 
+const noop = () => { };
+
 function ButtonWithTooltip(props: any) {
     const Button = getDep('Button');
     const Balloon = getDep('Balloon');
     const Tooltip = Balloon?.Tooltip;
-    const { tooltip, ...otherProps } = props;
+    const { tooltip, disabled, ...otherProps } = props;
 
-    const buttonElement = (<Button {...otherProps} />)
+
+    const buttonElement = disabled ? (
+        <Button {...otherProps}
+            disabled={false}
+            onClick={noop}
+            className={'TableProButtonWithTooltipDisabled'} />
+    ) : (<Button {...otherProps} />);
+
 
     if (tooltip && Tooltip) {
         return (
-            <Tooltip v2 trigger={buttonElement} align="l" arrowPointToCenter>
+            <Tooltip
+                v2 trigger={buttonElement}
+                align="l"
+                className={'TableProButtonWithTooltip'}
+                arrowPointToCenter
+                triggerType="click" >
                 {tooltip}
             </Tooltip>
         );

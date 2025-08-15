@@ -6,9 +6,7 @@
   top: 0;
 }
 
-.#{$css-prefix}query-form-table-operations-menu-popup {
-
-}
+.#{$css-prefix}query-form-table-operations-menu-popup {}
 
 .#{$css-prefix}query-form-table-operations-menu-icon {
   &:before {
@@ -25,8 +23,33 @@
   display: inline-block;
   margin-right: 6px;
 }
-.#{$css-prefix}query-form-table-operation-text {
+
+.#{$css-prefix}query-form-table-operation-text {}
+
+
+
+
+.TableProButtonWithTooltip {
+  background: #000;
+  color: #FFF;
+
+  &.fatd-balloon-tooltip .fatd-balloon-arrow .fatd-balloon-arrow-content {
+    background-color: #000;
+    border: 1px solid #000
+  }
 }
 
+.TableProButtonWithTooltipDisabled {
+  // color: #c4c7cc;
+  // cursor: not-allowed;
+  // font-size: 12px;
+  // border: 1px solid transparent;
 
-
+  &.fatd-btn-text.fatd-btn-primary,
+  &.fatd-btn-text.fatd-btn-primary:link,
+  &.fatd-btn-text.fatd-btn-primary:visited,
+  &.fatd-btn-text.fatd-btn-primary.visited {
+    color: #c4c7cc;
+    cursor: not-allowed;
+  }
+}

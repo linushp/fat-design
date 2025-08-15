@@ -55,7 +55,7 @@ root.render(
         {/*<DemoLoading />*/}
         {/*<DemoSortableTable />*/}
         {/*<DemoQueryFormSimple />*/}
-        {/*<DemoTablePro />*/}
+        <DemoTablePro />
         {/*<DemoFormTable />*/}
         {/*<DemoButtons/>*/}
         {/*<DemoDialogShow/>*/}

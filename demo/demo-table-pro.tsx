@@ -244,12 +244,17 @@ function DemoTablePro() {
                                 },
                             },
                             {
-                                title: '查看', onClick: () => {
+                                title: '查看', 
+                                disabled: true,
+                                tooltip:'123',
+                                onClick: () => {
                                     propsRef.current.actions.doQuery();
                                 },
                             },
                             {
-                                title: '编辑', onClick: () => {},
+                                title: '编辑',
+                                disabled: true,
+                                onClick: () => {},
                             },
                             {
                                 title: '删除', onClick: () => {},
