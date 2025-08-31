@@ -3,16 +3,16 @@ import { IConfigProviderProps, IGetContextProps } from "./types";
 declare class ConfigProvider extends React.Component<IConfigProviderProps, any> {
     static defaultPrefix: string;
     static propTypes: {
-        prefix: any;
-        locale: any;
-        defaultPropsConfig: any;
-        errorBoundary: any;
-        pure: any;
-        warning: any;
-        rtl: any;
-        device: any;
-        children: any;
-        popupContainer: any;
+        prefix: import("prop-types").Requireable<string>;
+        locale: import("prop-types").Requireable<object>;
+        defaultPropsConfig: import("prop-types").Requireable<object>;
+        errorBoundary: import("prop-types").Requireable<NonNullable<boolean | object>>;
+        pure: import("prop-types").Requireable<boolean>;
+        warning: import("prop-types").Requireable<boolean>;
+        rtl: import("prop-types").Requireable<boolean>;
+        device: import("prop-types").Requireable<string>;
+        children: import("prop-types").Requireable<any>;
+        popupContainer: import("prop-types").Requireable<any>;
     };
     static config<T>(Component: any, options?: any): T;
     static configFn<T>(Component: any, options?: any): T;

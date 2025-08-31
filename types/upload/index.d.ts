@@ -259,7 +259,7 @@ export interface CardProps extends HTMLAttributesWeak, CommonProps {
     /**
      * 改变时候的回调
      */
-    onChange?: (value: File[]) => void;
+    onChange?: (value: File[], param2?: any) => void;
 
     /**
      * 可选参数, 用于校验文件,afterSelect仅在 autoUpload=false 的时候生效,autoUpload=true时,可以使用beforeUpload完全可以替代该功能.
@@ -325,7 +325,7 @@ export interface SimpleJSONUploadProps extends UploadProps, CardProps {
     /**
      * 上传文件改变时的状态。两个参数的OnChange函数，可以接收最原始的返回值。
      */
-    onChange2?: (value: File[], originNextValue: any) => void;
+    onChange2?: (value: File[], param2?: any) => void;
 }
 
 export class SimpleJSONUpload extends React.Component<SimpleJSONUploadProps, any> {} {

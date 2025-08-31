@@ -1,4 +1,5 @@
 import { IConfigValues, IGetContextProps } from "./types";
+import PropTypes from "prop-types";
 declare function getContext(): IConfigValues;
 declare function setContext(updates: IConfigValues, justSetValue?: boolean): void;
 declare function getLocale(): any;
@@ -37,16 +38,16 @@ declare const commonPropNames: string[];
 declare const setMomentLocale: (locale: any) => void;
 declare const setDateLocale: (locale: any) => void;
 declare const getCommonPropTypes: () => {
-    prefix: any;
-    locale: any;
-    defaultPropsConfig: any;
-    errorBoundary: any;
-    pure: any;
-    warning: any;
-    rtl: any;
-    device: any;
-    children: any;
-    popupContainer: any;
+    prefix: PropTypes.Requireable<string>;
+    locale: PropTypes.Requireable<object>;
+    defaultPropsConfig: PropTypes.Requireable<object>;
+    errorBoundary: PropTypes.Requireable<NonNullable<boolean | object>>;
+    pure: PropTypes.Requireable<boolean>;
+    warning: PropTypes.Requireable<boolean>;
+    rtl: PropTypes.Requireable<boolean>;
+    device: PropTypes.Requireable<string>;
+    children: PropTypes.Requireable<any>;
+    popupContainer: PropTypes.Requireable<any>;
 };
 declare const providerFunctions: {
     getContextProps: typeof getContextProps;

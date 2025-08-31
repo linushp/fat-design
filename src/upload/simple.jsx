@@ -79,7 +79,7 @@ function SimpleJSONUpload(props) {
         if (typeof onChange === "function") {
             onChange(value, uploadFiles)
         }
-        if (typeof onChange2 === "string") {
+        if (typeof onChange2 === "function") {
             onChange2(value, { uploadFiles, originNextValue } )
         }
     }

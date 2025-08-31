@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import type { SubNavProps } from './types';
 /**
  * Nav.SubNav
@@ -7,22 +8,22 @@ import type { SubNavProps } from './types';
 declare class SubNav extends Component<SubNavProps> {
     static menuChildType: string;
     static propTypes: {
-        className: any;
-        icon: any;
-        label: any;
-        selectable: any;
-        children: any;
-        noIcon: any;
+        className: PropTypes.Requireable<string>;
+        icon: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
+        label: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        selectable: PropTypes.Requireable<boolean>;
+        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        noIcon: PropTypes.Requireable<boolean>;
     };
     static defaultProps: {
         selectable: boolean;
     };
     static contextTypes: {
-        prefix: any;
-        mode: any;
-        iconOnly: any;
-        iconOnlyWidth: any;
-        hasArrow: any;
+        prefix: PropTypes.Requireable<string>;
+        mode: PropTypes.Requireable<string>;
+        iconOnly: PropTypes.Requireable<boolean>;
+        iconOnlyWidth: PropTypes.Requireable<NonNullable<string | number>>;
+        hasArrow: PropTypes.Requireable<boolean>;
     };
     render(): React.JSX.Element;
 }
