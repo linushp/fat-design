@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {formContextDef} from "./form-context";
 import {
     BaseBtnProps,
@@ -14,6 +14,7 @@ import {PreciseStore} from "../hooks/usePreciseStore";
 import {pickErrorMessage} from "../util/pick-res-data";
 import {log} from "../util";
 import {FORM_BUTTON_TYPE_MARK, FORM_RESET_TYPE_MARK, FORM_SUBMIT_TYPE_MARK} from "./helper/constants";
+import {usePersistFn} from "../hooks/usePersistFn";
 
 
 function getLocale(formContext: IFormContext, key: string): string {
@@ -42,7 +43,6 @@ function getButtonChildren(props: BaseBtnProps, formContext: any, localKey: stri
 }
 
 
-
 function FormButton(props: BaseBtnProps) {
     const {Button, Message} = getDeps();
 
@@ -60,6 +60,7 @@ function FormButton(props: BaseBtnProps) {
         exclude,
         names,
 
+        htmlType,
         xProps,
 
         ...otherProps
@@ -69,9 +70,10 @@ function FormButton(props: BaseBtnProps) {
 
     const formActions = formContext.formActions as FormActions;
     const formStore = formContext.formStore;
+    const formEventBus = formContext.formEventBus;
 
 
-    const handleClick = async (e: any, b: any, c: any) => {
+    const handleClick = usePersistFn(async (e: any, b: any, c: any) => {
         const innerFn = async (e: any, b: any, c: any) => {
             if (typeof onClick === "function") {
                 const params = buildFnFormOnChangeParams(formStore, formActions);
@@ -89,7 +91,30 @@ function FormButton(props: BaseBtnProps) {
             Message.error(pickErrorMessage(err));
         }
         setLoading(false);
-    }
+    });
+
+
+    useEffect(() => {
+
+        if (!formEventBus) {
+            return;
+        }
+
+        const listener = () => {
+            if (htmlType === 'submit') {
+                handleClick()
+            }
+        }
+
+        // 自动触发的提交时间。
+        formEventBus.on('FORM_IMPL_ON_SUBMIT', listener);
+
+        return () => {
+            formEventBus.off('FORM_IMPL_ON_SUBMIT', listener);
+        }
+
+    }, [formEventBus, htmlType])
+
 
     if (xProps && typeof xProps === "object") {
         Object.assign(otherProps, xProps);
@@ -99,6 +124,7 @@ function FormButton(props: BaseBtnProps) {
     return (
         <Button {...otherProps}
                 type={type}
+                htmlType={htmlType}
                 loading={loading}
                 onClick={handleClick}>
             {getButtonChildren(props, formContext, localKey)}
@@ -137,7 +163,7 @@ function Submit(props: SubmitProps) {
     }
 
     return (
-        <FormButton type={'primary'} {...others} localKey={'buttonSubmit'} bizCallback={bizCallback}/>
+        <FormButton type={'primary'} {...others} localKey={'buttonSubmit'} bizCallback={bizCallback} htmlType="submit"/>
     );
 }
 
@@ -172,7 +198,7 @@ function Reset(props: ResetProps) {
     }
 
     return (
-        <FormButton {...others} localKey={'buttonReset'} bizCallback={bizCallback}/>
+        <FormButton {...others} localKey={'buttonReset'} bizCallback={bizCallback} htmlType="button"/>
     );
 }
 
@@ -183,8 +209,7 @@ Reset.defaultProps = {
 };
 
 
-
-function FormButtonGroup(props: FormButtonGroupProps) : React.JSX.Element {
+function FormButtonGroup(props: FormButtonGroupProps): React.JSX.Element {
     const buttons = props.buttons || [];
     const className = props.className || '';
     const formContext = useContext(formContextDef) as IFormContext;

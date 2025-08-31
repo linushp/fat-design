@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import type { PopupItemProps } from './types';
 /**
  * Nav.PopupItem
@@ -8,16 +7,16 @@ import type { PopupItemProps } from './types';
 declare class PopupItem extends Component<PopupItemProps> {
     static menuChildType: string;
     static propTypes: {
-        className: PropTypes.Requireable<string>;
-        icon: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
-        label: PropTypes.Requireable<PropTypes.ReactNodeLike>;
-        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
+        className: any;
+        icon: any;
+        label: any;
+        children: any;
     };
     static contextTypes: {
-        prefix: PropTypes.Requireable<string>;
-        iconOnly: PropTypes.Requireable<boolean>;
-        iconOnlyWidth: PropTypes.Requireable<NonNullable<string | number>>;
-        hasArrow: PropTypes.Requireable<boolean>;
+        prefix: any;
+        iconOnly: any;
+        iconOnlyWidth: any;
+        hasArrow: any;
     };
     render(): React.JSX.Element;
 }

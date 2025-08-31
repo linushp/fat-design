@@ -63,6 +63,8 @@ export interface OperateCellProps {
 export type onClickOperateCellItem = (btnItem: OperateCellItemProps) => void;
 export interface OperateCellItemProps extends Record<string, any> {
     title: string;
+    disabled?: boolean;
+    tooltip?: string;
     operationCode?: string;
     onClick?: onClickOperateCellItem;
 }

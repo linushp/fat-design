@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useRef} from "react";
 import classNames from 'classnames';
 import FormItem from './form-item';
+import {TinyEmitter} from "../util/tiny-emitter";
 import {FormProps, FormStoreExtData1, IFormContext, LayoutEnum} from "./form-types";
 import {formContextDef} from "./form-context";
 import {PreciseStore, useCreatePreciseStore} from "../hooks/usePreciseStore";
@@ -17,7 +18,8 @@ import {logger} from "../util/log";
 import {formDefaultProps} from "./helper/constants";
 
 interface FormImplProps extends FormProps {
-    formStore: PreciseStore
+    formStore: PreciseStore,
+    formEventBus: TinyEmitter;
 }
 
 function FormImpl(props: FormImplProps) {
@@ -34,6 +36,7 @@ function FormImpl(props: FormImplProps) {
         isPreview,
         layout,
         formStore,
+        formEventBus,
     } = props;
 
     // 每次render，必须重新设置。保证这里的propsMap所见即所得。
@@ -64,6 +67,8 @@ function FormImpl(props: FormImplProps) {
                 if (e && typeof e.stopPropagation === "function") {
                     e.stopPropagation();
                 }
+
+                formEventBus.emit("FORM_IMPL_ON_SUBMIT");
                 return false;
             }}>
             <FormLayout {...props} children={children}/>
@@ -104,6 +109,10 @@ function Form(formProps: FormProps) {
     });
 
 
+    const formEventBus = useMemo(() => {
+        return new TinyEmitter();
+    }, []);
+
 
     const formActions = useMemo(() => {
         const locale = formProps.locale || {};
@@ -123,11 +132,12 @@ function Form(formProps: FormProps) {
             formProps: formProps,
             formActions: formActions,
             formComponents: formComponents,
-            formOnChange: formOnChange
+            formOnChange: formOnChange,
+            formEventBus: formEventBus
         };
         return ss;
 
-    }, [formProps, formStore, formActions, formOnChange]) as IFormContext;
+    }, [formProps, formStore, formActions, formOnChange, formEventBus]) as IFormContext;
 
 
     useEffect(() => {
@@ -146,7 +156,7 @@ function Form(formProps: FormProps) {
 
     return (
         <FormProvider value={formContext}>
-            <FormImpl {...formProps} formStore={formStore}/>
+            <FormImpl {...formProps} formStore={formStore} formEventBus={formEventBus} />
         </FormProvider>
     );
 }
