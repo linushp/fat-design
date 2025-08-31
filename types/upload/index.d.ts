@@ -322,6 +322,10 @@ export class Card extends React.Component<CardProps, any> {}
 
 export interface SimpleJSONUploadProps extends UploadProps, CardProps {
     uploadComponent?: any; // 可以指定上传组件
+    /**
+     * 上传文件改变时的状态。两个参数的OnChange函数，可以接收最原始的返回值。
+     */
+    onChange2?: (value: File[], originNextValue: any) => void;
 }
 
 export class SimpleJSONUpload extends React.Component<SimpleJSONUploadProps, any> {} {

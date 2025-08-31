@@ -36,7 +36,7 @@ const formatItem = (item) => {
         size,
         downloadURL,
         imgURL,
-        url,
+        url
     }
 }
 
@@ -57,6 +57,7 @@ function SimpleJSONUpload(props) {
         prefix,
         value,
         onChange,
+        onChange2,
         className,
         uploadComponent,
         ...otherProps
@@ -73,27 +74,37 @@ function SimpleJSONUpload(props) {
         return value;
     }, [value])
 
-    const handleOnChange = (nextValue) => {
-        if (!nextValue) {
-            onChange([])
+
+    const handleOnChange2 = (value, uploadFiles, originNextValue) => {
+        if (typeof onChange === "function") {
+            onChange(value, uploadFiles)
+        }
+        if (typeof onChange2 === "string") {
+            onChange2(value, { uploadFiles, originNextValue } )
+        }
+    }
+
+    const handleOnChange = (originNextValue, uploadFiles) => {
+        if (!originNextValue) {
+            handleOnChange2([], uploadFiles, originNextValue)
             return;
         }
 
-        if (Array.isArray(nextValue)) {
-            const nextValueArray = nextValue.map((item) => {
+        if (Array.isArray(originNextValue)) {
+            const nextValueArray = originNextValue.map((item) => {
                 return formatItem(item)
             })
-            onChange(nextValueArray);
+            handleOnChange2(nextValueArray, uploadFiles, originNextValue);
             return;
         }
 
-        if (typeof nextValue === "object" && nextValue.name && nextValue.size) {
-            const newObj = formatItem(nextValue);
-            onChange(newObj);
+        if (typeof originNextValue === "object" && originNextValue.name && originNextValue.size) {
+            const newObj = formatItem(originNextValue);
+            handleOnChange2(newObj, uploadFiles, originNextValue);
             return;
         }
 
-        console.error("SimpleJSONUpload unknown nextValue type ", nextValue)
+        console.error("SimpleJSONUpload unknown originNextValue type ", originNextValue)
     }
 
     if (isPreview) {
@@ -113,7 +124,7 @@ function SimpleJSONUpload(props) {
                     className={className}
                     prefix={prefix}
                     value={newValue}
-                    onChange={handleOnChange}/>
+                    onChange={handleOnChange} />
     );
 }
 
