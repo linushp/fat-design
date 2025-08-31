@@ -269,7 +269,7 @@ export function parseJsonObject(str: any) : any{
         return str;
     }
 
-    if (typeof str === 'string') {
+    if (typeof str === 'string' && str.length > 0) {
         str = str.trim();
         if (str.startsWith('{') || str.startsWith('[')) {
             try {
