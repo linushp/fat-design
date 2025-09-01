@@ -1,20 +1,20 @@
-import React, {useContext, useState, useEffect} from "react";
-import {formContextDef} from "./form-context";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { formContextDef } from "./form-context";
 import {
     BaseBtnProps,
     FormButtonGroupBtn,
     FormButtonGroupProps,
     IFormContext, ResetProps, SubmitProps
 } from "./form-types";
-import {FormActions} from "./form-actions";
+import { FormActions } from "./form-actions";
 import zhCn from "../locale/zh-cn";
-import {buildFnFormOnChangeParams} from "./helper/buildParams";
-import {getDeps} from "./deps";
-import {PreciseStore} from "../hooks/usePreciseStore";
-import {pickErrorMessage} from "../util/pick-res-data";
-import {log} from "../util";
-import {FORM_BUTTON_TYPE_MARK, FORM_RESET_TYPE_MARK, FORM_SUBMIT_TYPE_MARK} from "./helper/constants";
-import {usePersistFn} from "../hooks/usePersistFn";
+import { buildFnFormOnChangeParams } from "./helper/buildParams";
+import { getDeps } from "./deps";
+import { PreciseStore } from "../hooks/usePreciseStore";
+import { pickErrorMessage } from "../util/pick-res-data";
+import { log } from "../util";
+import { FORM_BUTTON_TYPE_MARK, FORM_RESET_TYPE_MARK, FORM_SUBMIT_TYPE_MARK } from "./helper/constants";
+import { usePersistFn } from "../hooks/usePersistFn";
 
 
 function getLocale(formContext: IFormContext, key: string): string {
@@ -28,7 +28,7 @@ function getLocale(formContext: IFormContext, key: string): string {
 
 
 function getButtonChildren(props: BaseBtnProps, formContext: any, localKey: string) {
-    const {children, text} = props;
+    const { children, text } = props;
     if (children) {
         return children;
     }
@@ -44,7 +44,7 @@ function getButtonChildren(props: BaseBtnProps, formContext: any, localKey: stri
 
 
 function FormButton(props: BaseBtnProps) {
-    const {Button, Message} = getDeps();
+    const { Button, Message } = getDeps();
 
     const formContext = useContext(formContextDef) as IFormContext;
     const {
@@ -67,7 +67,9 @@ function FormButton(props: BaseBtnProps) {
     } = props as any;
 
     const [loading, setLoading] = useState(false);
+    const loadingRef = useRef(false);
 
+    
     const formActions = formContext.formActions as FormActions;
     const formStore = formContext.formStore;
     const formEventBus = formContext.formEventBus;
@@ -83,13 +85,21 @@ function FormButton(props: BaseBtnProps) {
             await bizCallback(formStore, formActions, formContext);
         }
 
+        if(loadingRef.current) {
+            return;
+        }
+
         setLoading(true);
+        loadingRef.current = true;
+
         try {
             await innerFn(e, b, c);
         } catch (err: any) {
             log.error('[FormButton] handleClick error ', err);
             Message.error(pickErrorMessage(err));
         }
+
+        loadingRef.current = false;
         setLoading(false);
     });
 
@@ -123,10 +133,10 @@ function FormButton(props: BaseBtnProps) {
 
     return (
         <Button {...otherProps}
-                type={type}
-                htmlType={htmlType}
-                loading={loading}
-                onClick={handleClick}>
+            type={type}
+            htmlType={htmlType}
+            loading={loading}
+            onClick={handleClick}>
             {getButtonChildren(props, formContext, localKey)}
         </Button>
     );
@@ -137,9 +147,9 @@ FormButton._supportPreview = true;
 
 
 function Submit(props: SubmitProps) {
-    const {Message} = getDeps();
+    const { Message } = getDeps();
 
-    const {validate, showToast, ...others} = props;
+    const { validate, showToast, ...others } = props;
 
     const bizCallback = async (formStore: PreciseStore, formActions: FormActions, formContext: IFormContext) => {
         if (validate) {
@@ -163,7 +173,7 @@ function Submit(props: SubmitProps) {
     }
 
     return (
-        <FormButton type={'primary'} {...others} localKey={'buttonSubmit'} bizCallback={bizCallback} htmlType="submit"/>
+        <FormButton type={'primary'} {...others} localKey={'buttonSubmit'} bizCallback={bizCallback} htmlType="submit" />
     );
 }
 
@@ -198,7 +208,7 @@ function Reset(props: ResetProps) {
     }
 
     return (
-        <FormButton {...others} localKey={'buttonReset'} bizCallback={bizCallback} htmlType="button"/>
+        <FormButton {...others} localKey={'buttonReset'} bizCallback={bizCallback} htmlType="button" />
     );
 }
 
@@ -231,7 +241,7 @@ function FormButtonGroup(props: FormButtonGroupProps): React.JSX.Element {
                 }
 
                 return (
-                    <Tag key={index} {...otherProps}/>
+                    <Tag key={index} {...otherProps} />
                 );
 
             })}
