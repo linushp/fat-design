@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import type { ItemProps } from './types';
 /**
  * Nav.Item
@@ -11,19 +10,19 @@ declare class Item extends Component<ItemProps> {
         /**
          * 自定义图标，可以使用 Icon 的 type，也可以使用组件 `<Icon type="icon type" />`
          */
-        icon: PropTypes.Requireable<NonNullable<PropTypes.ReactNodeLike>>;
+        icon: any;
         /**
          * 导航内容
          */
-        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
-        parentMode: PropTypes.Requireable<string>;
+        children: any;
+        parentMode: any;
     };
     static contextTypes: {
-        prefix: PropTypes.Requireable<string>;
-        iconOnly: PropTypes.Requireable<boolean>;
-        iconOnlyWidth: PropTypes.Requireable<NonNullable<string | number>>;
-        iconTextOnly: PropTypes.Requireable<boolean>;
-        hasTooltip: PropTypes.Requireable<boolean>;
+        prefix: any;
+        iconOnly: any;
+        iconOnlyWidth: any;
+        iconTextOnly: any;
+        hasTooltip: any;
     };
     render(): React.JSX.Element;
 }

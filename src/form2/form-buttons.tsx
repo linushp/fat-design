@@ -112,7 +112,7 @@ function FormButton(props: BaseBtnProps) {
 
         const listener = () => {
             if (htmlType === 'submit') {
-                handleClick()
+                // handleClick()
             }
         }
 
