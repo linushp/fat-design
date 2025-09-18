@@ -9,6 +9,7 @@ import ConfigProvider from "../config-provider";
 import Button from "../button";
 import tableUtils from "./widget/index";
 import {logger} from "../util/log";
+import { isSettingNameValid } from './widget/column-setting'
 
 interface TableProState {
     columns: any[] | null,
@@ -106,7 +107,7 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
             styleConfig
         } = this.props;
 
-        const {columns} = this.state;
+        let columns = (isSettingNameValid(settingName) ?  this.state.columns : tableProps?.columns) || [];
 
         actions.getSettingName = () => {
             return settingName;

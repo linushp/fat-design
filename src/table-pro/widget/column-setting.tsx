@@ -304,6 +304,7 @@ async function getTableColumnsBySetting(tableProProps: TableProProps): Promise<a
 
 
 export {
+    isSettingNameValid,
     showColumnSettingDialog,
     getTableColumnsBySetting
 }
