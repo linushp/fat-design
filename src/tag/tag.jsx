@@ -36,6 +36,13 @@ class Tag extends Component {
          * 标签颜色, 目前支持：blue、 green、 orange、red、 turquoise、 yellow 和 hex 颜色值 （`color keywords`作为 Tag 组件的保留字，请勿直接使用 ）, `1.19.0` 以上版本生效
          */
         color: PropTypes.string,
+
+        style: PropTypes.any,
+
+        bodyColor: PropTypes.string,
+
+        bodyStyle: PropTypes.any,
+
         /**
          * 是否开启动效
          */
@@ -206,6 +213,18 @@ class Tag extends Component {
         return PRESET_COLOR_REG.test(color);
     }
 
+    getTagBodyStyle() {
+        const { bodyColor, bodyStyle } = this.props;
+        const style = {};
+        if (bodyColor) {
+            style.color = bodyColor;
+        }
+        if (bodyStyle) {
+            Object.assign(style, bodyStyle);
+        }
+        return style;
+    }
+
     getTagStyle() {
         const { color = '', style } = this.props;
         const isPresetColor = this.isPresetColor();
@@ -271,7 +290,7 @@ class Tag extends Component {
                 style={this.getTagStyle()}
                 {...otherTagProps}
             >
-                <span className={`${prefix}tag-body`}>{children}</span>
+                <span className={`${prefix}tag-body`} style={this.getTagBodyStyle()}>{children}</span>
                 {tailNode}
             </div>
         );

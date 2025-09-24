@@ -102,6 +102,24 @@ export interface TagProps extends HTMLAttributesWeak, CommonProps {
     color?: string;
 
     /**
+     * 标签颜色
+     */
+    style?: React.CSSProperties;
+
+
+
+    /**
+     * 标签文字颜色
+     */
+    bodyColor?: string;
+
+    /**
+     * 标签文字颜色
+     */
+    bodyStyle?: React.CSSProperties;
+
+
+    /**
      * 是否开启动效
      */
     animation?: boolean;
