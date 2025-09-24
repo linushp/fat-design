@@ -67,7 +67,7 @@ root.render(
         {/*<DemoForm1/>*/}
         {/*<DemoForm2/>*/}
         {/*<DemoDetailPage/>*/}
-        <DemoQueryForm/>
+        {/* <DemoQueryForm/> */}
         {/*<DemoTmp/>*/}
         {/*<CurdApiDetail />*/}
         {/*<DemoImage />*/}
