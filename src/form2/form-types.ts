@@ -89,11 +89,15 @@ export interface FormItemState extends FormItemStateSaved{
     stateMessage?: string;
 }
 
+
+/**
+ * 校验规则
+ */
 export interface FormItemValidateRule {
     message?: string; // 校验错误时的提示信息
     trigger?: string;
     validator?: FnValidator; // 自定义函数
-    pattern?: RegExp; // 正则表达式
+    pattern?: RegExp | string; // 正则表达式 或 字符串形式的正则表达式
     minLength?: number; // 字符串 最小长度
     maxLength?: number; // 字符串 最大长度
     min?: number, // 数字 最小值
@@ -178,10 +182,10 @@ export interface FormItemSchema {
     renderExtra?: (value: any, wrapFormItemProps: any) => any;
 
     previewPlaceholder?: string;
-    // 状态相关
-    isPreview?: boolean | FnGetStateBool;
-    display?: boolean | FnGetStateBool;
-    disabled?: boolean | FnGetStateBool;
+
+    isPreview?: boolean | FnGetStateBool;  // 状态相关：是否只用来显示，不可编辑
+    display?: boolean | FnGetStateBool;  // 状态相关：是否显示
+    disabled?: boolean | FnGetStateBool;  // 状态相关：是否不可编辑
 
     deps?: string[], // 依赖其他values，当其他values变化时，此组件强制render
 
@@ -191,19 +195,19 @@ export interface FormItemSchema {
 
     // 校验相关的参数
     autoValidate?: boolean;
-    max?: number;
-    min?: number;
-    format?: TypeFormItemSchemaFormat;
-    pattern?: string;
-    required?: boolean | FnGetStateBool;
-    requiredMessage?: string;
-    length?: number;
-    maxLength?: number;
-    minLength?: number;
-    validator?: FnValidator;
+    max?: number; // 用于校验：校验数字类型的最大值
+    min?: number; // 用于校验：校验数字类型的最小值
+    format?: TypeFormItemSchemaFormat; // 用于校验：一些常见的固定格式
+    pattern?: RegExp | string; // 用于校验：正则表达式 或 字符串形式的正则表达式
+    required?: boolean | FnGetStateBool; // 用于校验：是否必填
+    requiredMessage?: string; // 用于校验：必填条件不满足时的错误信息
+    length?: number; // 用于校验：校验字符串长度只能是这个值
+    maxLength?: number;  // 用于校验：校验字符串类型的最小长度
+    minLength?: number; // 用于校验：校验字符串类型的最大长度
+    validator?: FnValidator; // 用于校验：自定义的校验函数
     errorMessageName?: string;
     useLabelForErrorMessage?: boolean;
-    rules?: FormItemValidateRule[];
+    rules?: FormItemValidateRule[]; // 用于校验：【高级用法】多个校验规则可以组合使用。
     helpPos?: TypeHelpPos; // 错误提示显示位置： tip，bottom（default）
     onChange?: FnFormItemOnChange,
     description?: string;
