@@ -118,7 +118,7 @@ async function main(){
     toBrowserJS('../dist/index.umd.cjs', '../dist/index.browser.js', packageTmp.version);
 
     copyFile('../dist/index.umd.cjs', '../dist/index.umd.js');
-    copyFile('./README.md', '../dist/README.md');
+    copyFile('../README.md', '../dist/README.md');
 
 
     // distTmp/0buildTypes types/
