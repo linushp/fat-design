@@ -1,5 +1,5 @@
 import {PreciseStore} from "../hooks/usePreciseStore";
-import {FormItemProps, FormStoreExtData1, IItemState} from "./form-types";
+import {FormItemProps, FormItemStateSaved, FormStoreExtData1, IItemState} from "./form-types";
 import {buildValidateRules} from "./form-rules";
 import SchemaValidate from '../validate'
 import {uniqueId} from "../util/guid";
@@ -85,7 +85,7 @@ class FormActions {
         });
     }
 
-    setState(name: string, updates: any) {
+    setState(name: string, updates: Partial<FormItemStateSaved>) {
         const itemState = this.getState(name);
         this.formStore.setValue('stateMap.' + name, {
             ...itemState,
