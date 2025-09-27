@@ -139,6 +139,8 @@ export type FnFormOnSubmit = (values: any, params: FnFormOnChangeParams) => any;
 export type TypeHelpPos  = "tip" | 'always' | 'bottom'
 
 
+export type TypeFormItemSchemaFormat = 'number' | 'tel' | 'url'  | 'email';
+
 
 export interface FormItemSchema {
     id?: string;
@@ -190,7 +192,7 @@ export interface FormItemSchema {
     autoValidate?: boolean;
     max?: number;
     min?: number;
-    format?: string;
+    format?: TypeFormItemSchemaFormat;
     pattern?: string;
     required?: boolean | FnGetStateBool;
     requiredMessage?: string;
