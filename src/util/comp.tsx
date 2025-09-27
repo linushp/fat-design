@@ -27,7 +27,7 @@ function flatComponents(components: any) {
             }
         }
     }
-    result.TextArea = result.Input.TextArea
+
     return result;
 }
 
@@ -45,6 +45,11 @@ interface ComponentsStoreProps {
     components: any;
 }
 
+
+const SPECIAL_COMPONENTS = {
+    TextArea: 'Input.TextArea',
+    Password: 'Input.Password',
+}
 
 class ComponentsStore {
 
@@ -97,6 +102,15 @@ class ComponentsStore {
         let comp = get(components, component);
         if (comp) {
             return comp;
+        }
+
+        // 尝试从一些特殊配置中获取 别名
+        const compName2 = SPECIAL_COMPONENTS[component];
+        if(compName2) {
+            let comp2 = get(components, compName2);
+            if (comp2) {
+                return comp2;
+            }
         }
 
         return buildEmptyComponent(component);
