@@ -23,7 +23,7 @@ class Message extends Component {
         /**
          * 反馈类型
          */
-        type: PropTypes.oneOf(['success', 'warning', 'error', 'notice', 'help', 'loading']),
+        type: PropTypes.oneOf(['success', 'warning', 'error', 'notice', 'help', 'loading', 'info']),
         /**
          * 反馈外观
          */

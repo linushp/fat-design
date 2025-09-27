@@ -27,6 +27,7 @@ function flatComponents(components: any) {
             }
         }
     }
+    result.TextArea = result.Input.TextArea
     return result;
 }
 

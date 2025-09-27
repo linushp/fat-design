@@ -11,7 +11,7 @@ export interface MessageProps extends HTMLAttributesWeak, CommonProps {
     /**
      * 反馈类型
      */
-    type?: 'success' | 'warning' | 'error' | 'notice' | 'help' | 'loading';
+    type?: 'success' | 'warning' | 'error' | 'notice' | 'help' | 'loading' | 'info';
 
     /**
      * 反馈外观
@@ -158,6 +158,7 @@ export default class Message extends React.Component<MessageProps, any> {
     static help(props: OpenProps): QuickMsgShowRet;
     static loading(props: OpenProps): QuickMsgShowRet;
     static notice(props: OpenProps): QuickMsgShowRet;
+    static info(props: OpenProps): QuickMsgShowRet;
     static config(props: MessageConfigV2): void;
     static useV1(): void;
     static useV2(): void;

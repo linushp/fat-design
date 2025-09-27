@@ -3,11 +3,6 @@
 <div align="center">
   <h1>🎨 Fat Design</h1>
   <p>一套功能强大、体积轻量的 React 组件库</p>
-
-  <p>
-  项目网站：
-  https://uifaas.com/ns/app/fat-design-doc/index
-  </p>
   
   <p>
     <img src="https://img.shields.io/badge/React-16%2B-blue" alt="React 版本" />
@@ -36,7 +31,7 @@
 | React 版本支持 | 16/17/18 | 16/17/18 | 17/18 |
 | TypeScript | ✅ 完整支持 | ✅ 完整支持 | ✅ 完整支持 |
 | 主题系统 | 11 套预设主题 | 默认主题 | 多套主题 |
-| 高级组件 | Form、TablePro、QueryForm | 基础组件 | 基础组件 |
+| 高级组件 | Form2、TablePro、QueryForm | 基础组件 | 基础组件 |
 
 ## 📦 安装
 
@@ -573,4 +568,29 @@ function UserTable() {
 }
 ```
 
+## 🤝 社区支持
 
+- **GitHub**：[fat-design](https://github.com/your-org/fat-design)
+- **文档**：查看详细的组件文档和 API 说明
+- **示例**：`demo/` 目录包含丰富的使用示例
+- **问题反馈**：通过 GitHub Issues 提交问题和建议
+
+## 📝 更新日志
+
+### v0.0.1
+
+- 🎉 首次发布
+- ✨ 提供 60+ 高质量组件
+- 🎨 内置 11 套精美主题
+- 📦 支持按需加载和 Tree Shaking
+- 🛡️ 完整的 TypeScript 支持
+
+## 📄 许可证
+
+[MIT License](LICENSE)
+
+---
+
+<div align="center">
+  <p>用 ❤️ 打造，为了更好的 React 开发体验</p>
+</div>
