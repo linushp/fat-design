@@ -69,7 +69,7 @@ function serializeRules(source, rules) {
 
 class SchemaValidate {
     constructor(rules, options = {}) {
-        this._rules = rules;
+        this._rules = rules; // FormItemValidateRule[]
 
         const messages = {};
         deepMerge(messages, defaultMessages);

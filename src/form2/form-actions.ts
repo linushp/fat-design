@@ -1,5 +1,5 @@
 import {PreciseStore} from "../hooks/usePreciseStore";
-import {FormItemProps, FormItemStateSaved, FormStoreExtData1, IItemState} from "./form-types";
+import {FormItemProps, FormItemStateSaved, FormItemValidateRule, FormStoreExtData1, IItemState} from "./form-types";
 import {buildValidateRules} from "./form-rules";
 import SchemaValidate from '../validate'
 import {uniqueId} from "../util/guid";
@@ -62,7 +62,7 @@ class FormActions {
     async validateFromItem(name: string) {
         const value = this.getValue(name);
         const itemProps = this.getFormItemPropsFixedByState(name);
-        const rules = buildValidateRules(itemProps);
+        const rules: FormItemValidateRule[] = buildValidateRules(itemProps);
         const ruleObject = {[name]: rules};
         const schema = new SchemaValidate(ruleObject, this.schemaValidateOptions);
         const results = await schema.validatePromise({

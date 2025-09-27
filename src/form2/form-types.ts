@@ -70,13 +70,13 @@ export interface IItemState {
  * 存储在Store中的
  */
 export interface FormItemStateSaved {
-    errors?: any[],
-    required: boolean;
-    display: boolean;
-    disabled: boolean;
-    isPreview: boolean;
-    label: string;
-    xProps?: any;
+    errors?: any[], // 错误信息
+    required: boolean; // 是否必填
+    display: boolean; // 是否显示
+    disabled: boolean; // 是否禁用状态
+    isPreview: boolean; // 是否只读
+    label: string; // 前面显示的标签名
+    xProps?: any; // 使用的表单组件属性
     forceUpdateTick?: number
 }
 
@@ -90,13 +90,14 @@ export interface FormItemState extends FormItemStateSaved{
 }
 
 export interface FormItemValidateRule {
-    message?: string;
+    message?: string; // 校验错误时的提示信息
     trigger?: string;
-    validator?: FnValidator;
-    minLength?: number;
-    maxLength?: number;
-    min?: number,
-    max?: number,
+    validator?: FnValidator; // 自定义函数
+    pattern?: RegExp; // 正则表达式
+    minLength?: number; // 字符串 最小长度
+    maxLength?: number; // 字符串 最大长度
+    min?: number, // 数字 最小值
+    max?: number, // 数字 最大值
 }
 
 export interface CustomLayoutProps {

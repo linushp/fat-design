@@ -1,4 +1,4 @@
-import {FormItemProps} from "./form-types";
+import {FormItemProps, FormItemValidateRule} from "./form-types";
 
 function getCfgFromProps(props: any, type: string) {
     if (type in props) {
@@ -7,7 +7,7 @@ function getCfgFromProps(props: any, type: string) {
     return undefined;
 }
 
-function getRule(ruleName: string, props: any) {
+function getRule(ruleName: string, props: any): FormItemValidateRule {
     return {
         [ruleName]: props[ruleName],
         message: getCfgFromProps(props, `${ruleName}Message`),
@@ -37,8 +37,8 @@ function getLabelForErrorMessage(props: FormItemProps) {
 }
 
 
-function buildValidateRules(props: FormItemProps): any[] {
-    const result: any = [];
+function buildValidateRules(props: FormItemProps): FormItemValidateRule[] {
+    const result: FormItemValidateRule[] = [];
 
     // required
     if (props.required) {
