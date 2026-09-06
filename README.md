@@ -8,12 +8,25 @@ A React component library built for data-intensive admin dashboards. Focused on 
 
 | React | 支持状态 | 业务入口配置 |
 |-------|----------|--------------|
+| **&lt; 16.8**（含 16.4） | ❌ **不支持** | — |
 | **16.8** | ✅ 正式支持 | `configReactDOM(ReactDOM)` |
 | **17** | ✅ 正式支持 | `configReactDOM(ReactDOM)` |
 | **18** | ✅ 正式支持（推荐） | `configReactDOM18(ReactDOM, ReactDOMClient)` |
 | **19** | ❌ **不支持** | 勿调用 `configReactDOM19`（会抛错） |
 
 **peerDependencies：** `react` / `react-dom` 均为 `>=16.8.0 <19.0.0`。
+
+### 为什么不能支持 React 16.4？
+
+React **Hooks**（`useState` / `useEffect` / `useContext` 等）从 **16.8.0** 才提供。fat-design 核心路径大量使用 Hooks，例如：
+
+- `ConfigProvider` v2（`useContext`）
+- `Form` / `QueryForm` / `TablePro`（`useTablePro` 等）
+- Overlay v2、Image、SortableList、Dialog v2 等
+
+在 16.4 上运行会直接报 `Invalid hook call` / `useXxx is not a function`，**无法通过适配层或业务入口补丁解决**。若要兼容 16.4，等于把上述模块全部改回 class 组件，成本接近重写，本库不做。
+
+宿主请至少升级到 **React 16.8+**（更推荐直接 17/18）。
 
 fat-design **不打包** React / ReactDOM。Message、Notification、Dialog 等独立根节点依赖宿主在应用入口注入 ReactDOM。请按下方「按 React 版本快速开始」配置；组件用法本身在 16.8～18 之间一致。
 

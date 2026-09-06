@@ -1,13 +1,23 @@
 # fat-design React 16 / 17 / 18 兼容方案
 
 > 目标：正式兼容 **React 16.8 / 17 / 18**（浏览器端）。  
-> **不承诺 React 19**；19 相关改造见 `react-multi-version-compat.md`（归档参考，不作为当前排期）。  
+> **不承诺 React 16.4 及更早**（缺 Hooks）；**不承诺 React 19**（见 `react-multi-version-compat.md`）。  
 > 方案日期：2026-09-06
 
 ## 一、结论先说
 
-**只保 16/17/18 时，库组件源码几乎不用为「API 被删」而改。**  
-React 19 才移除的 legacy context、`findDOMNode`、函数组件 `defaultProps`、`element.ref`，在 16～18 上均仍可用（18 上多为弃用警告）。
+**最低版本是 16.8.0，不能降到 16.4。**
+
+| 版本 | 结论 | 原因 |
+|------|------|------|
+| **&lt; 16.8**（含 **16.4**） | ❌ 不支持 | 无 Hooks；Form2 / TablePro / ConfigProvider v2 / Overlay v2 等核心路径依赖 `useState`/`useEffect`/`useContext`，无法用注入或 polyfill 补齐 |
+| **16.8 / 17 / 18** | ✅ 正式支持 | 见下文改造项 |
+| **19** | ❌ 不支持（当前） | legacy context / findDOMNode / 函数组件 defaultProps 等，见归档文档 |
+
+**只保 16.8/17/18 时，库组件源码几乎不用为「API 被删」而改。**  
+React 19 才移除的 legacy context、`findDOMNode`、函数组件 `defaultProps`、`element.ref`，在 16.8～18 上均仍可用（18 上多为弃用警告）。
+
+若强行把 peer 写成 `>=16.4`，属于虚假承诺：16.4 宿主装得上，一用 Form/TablePro 就会崩。
 
 当前真正还要做的，集中在三块：
 
@@ -15,25 +25,37 @@ React 19 才移除的 legacy context、`findDOMNode`、函数组件 `defaultProp
 |--------|------|------------|
 | P0 | **npm 构建不要内联 React 18 的 `jsx-runtime`** | 宿主用 React 16/17 时，元素由产物内嵌的 React 18 runtime 创建，与宿主 React **双实例/内部字段不一致** → hooks / context 异常或直接崩 |
 | P0 | **业务显式注入 ReactDOM**（`configReactDOM` / `configReactDOM18`） | Message / Notification / Dialog 等独立根节点无法 `createRoot`/`render` |
-| P1 | **peer / 依赖声明收紧到 16.8～18** | 安装与文档承诺不一致；误装 19 时失败形态不清晰 |
+| P1 | **peer / 依赖声明收紧到 16.8～18** | 安装与文档承诺不一致；误装 16.4 或 19 时失败形态不清晰 |
 
 其余（Table context 迁移、fiber `findDOMNode`、defaultProps 改造等）**当前排期可不做**。
 
+### 为何 16.4 → 16.8 不能「适配一下」？
+
+Hooks 是 React 运行时能力，不是 DOM API：
+
+- 没有等价的 `configHooks` / polyfill 可注入到 16.4  
+- 把 Form2、`useTablePro`、ConfigProvider consumer、Overlay v2、Image、SortableList 等全部改回 class，工作量接近重写  
+- 业务侧升级到 16.8 通常远小于库侧回退 Hooks  
+
+**建议卡在 16.4 的宿主：升级 React 到 ≥16.8（推荐 17/18），而不是要求库兼容 16.4。**
+
 ---
 
-## 二、16 / 17 / 18 分别差在哪
+## 二、16.8 / 17 / 18 分别差在哪
 
-| 能力 | 16.8 | 17 | 18 |
-|------|------|-----|-----|
-| Hooks | ✔ | ✔ | ✔ |
-| `createContext` / `contextType` | ✔ | ✔ | ✔ |
-| Legacy `getChildContext` | ✔ | ✔ | ✔（弃用警告） |
-| `findDOMNode` | ✔ | ✔ | ✔（弃用警告） |
-| 函数组件 `defaultProps` | ✔ | ✔ | ✔ |
-| `element.ref` | ✔ | ✔ | ✔（18.3 起可能警告） |
-| `ReactDOM.render` / `unmountComponentAtNode` | ✔ | ✔ | 仍可用，推荐迁 `createRoot` |
-| `react-dom/client` + `createRoot` | ✘ | ✘ | ✔ |
-| `react/jsx-runtime`（automatic JSX） | **≥16.14** | ✔ | ✔ |
+| 能力 | 16.4 | 16.8 | 17 | 18 |
+|------|------|------|-----|-----|
+| Hooks | ✘ | ✔ | ✔ | ✔ |
+| `createContext`（16.3+） | ✔ | ✔ | ✔ | ✔ |
+| `forwardRef` / `createRef`（16.3+） | ✔ | ✔ | ✔ | ✔ |
+| `contextType`（16.6+） | ✘ | ✔ | ✔ | ✔ |
+| Legacy `getChildContext` | ✔ | ✔ | ✔ | ✔（弃用警告） |
+| `findDOMNode` | ✔ | ✔ | ✔ | ✔（弃用警告） |
+| 函数组件 `defaultProps` | ✔ | ✔ | ✔ | ✔ |
+| `element.ref` | ✔ | ✔ | ✔ | ✔（18.3 起可能警告） |
+| `ReactDOM.render` / `unmountComponentAtNode` | ✔ | ✔ | ✔ | 仍可用，推荐迁 `createRoot` |
+| `react-dom/client` + `createRoot` | ✘ | ✘ | ✘ | ✔ |
+| `react/jsx-runtime`（automatic JSX） | ✘ | **≥16.14** | ✔ | ✔ |
 
 库侧已有 `pReactDOM`：
 
