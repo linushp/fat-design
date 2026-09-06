@@ -13,7 +13,7 @@ export interface EmptyProps extends Record<string, any> {
     prefix?: string;
 }
 declare const Empty: {
-    (props: EmptyProps): React.JSX.Element;
+    (props: EmptyProps): import("react/jsx-runtime").JSX.Element;
     defaultProps: {
         prefix: string;
         locale: any;

@@ -1,6 +1,10 @@
 import { useCreatePreciseStore, useGetPreciseStore, usePreciseValue, usePreciseTick, PreciseStore } from './usePreciseStore';
 import { useCurrentState, useCurrentState2 } from './useCurrentState';
 import { useOnKeyPressCtrl, useOnKeyPressSave } from "./useOnKeyPressSave";
+import { usePersistFn } from "./usePersistFn";
+import { useSize } from "./useSize";
+import { useValueOnChange } from "./useValueOnChange";
+import { useComparedState } from "./useComparedState";
 declare const _default: {
     PreciseStore: typeof PreciseStore;
     useCreatePreciseStore: typeof useCreatePreciseStore;
@@ -12,5 +16,10 @@ declare const _default: {
     useCurrentState2: typeof useCurrentState2;
     useOnKeyPressCtrl: typeof useOnKeyPressCtrl;
     useOnKeyPressSave: typeof useOnKeyPressSave;
+    usePersistFn: typeof usePersistFn;
+    useMemoizedFn: typeof usePersistFn;
+    useSize: typeof useSize;
+    useValueOnChange: typeof useValueOnChange;
+    useComparedState: typeof useComparedState;
 };
 export default _default;

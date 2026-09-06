@@ -1,3 +1,2 @@
-import React from "react";
-declare function FromFloatLayout(props: any): React.JSX.Element;
+declare function FromFloatLayout(props: any): import("react/jsx-runtime").JSX.Element;
 export { FromFloatLayout };

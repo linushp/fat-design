@@ -86,19 +86,6 @@
     }
 }
 
-/* IE9 pack */
-@media all and (min-width: 0\0) and (min-resolution: .001dpcm) {
-    .#{$css-prefix}row {
-        display: table;
-        width: 100%;
-    }
-
-    .#{$css-prefix}col {
-        display: table-cell;
-        vertical-align: top;
-    }
-}
-
 @include make-columns();
 @include make-5columns();
 @include make-columns-fixed();

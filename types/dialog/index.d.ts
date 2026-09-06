@@ -162,6 +162,27 @@ export interface DialogProps extends Omit<HTMLAttributesWeak, 'content'>, Common
      * 对话框的高度样式属性
      */
     height?: string | number;
+
+    /**
+     * 对话框头部区域（dialog-header）的样式
+     */
+    headerStyle?: React.CSSProperties;
+
+    /**
+     * 对话框头部区域（dialog-header）的类名
+     */
+    headerClassName?: string;
+
+    /**
+     * 对话框内容区域（dialog-body）的样式
+     */
+    bodyStyle?: React.CSSProperties;
+
+    /**
+     * 对话框内容区域（dialog-body）的类名
+     */
+    bodyClassName?: string;
+
     popupContainer?: string | HTMLElement | ((target: HTMLElement) => HTMLElement);
     /**
      * 开启 v2 版本弹窗
@@ -225,10 +246,24 @@ export interface QuickShowRet {
     hide: () => void;
 }
 
+export interface IUseTableProProps {
+    formProps: any,
+    tableProps: any,
+    paginationProps: any,
+    filterProps: any,
+    operationProps: any,
+    actions: any,
+}
+
+export interface ShowTableCfgQuickShowConfigOnOKEvent extends React.MouseEvent  {
+    tableProProps: IUseTableProProps
+}
+
 export interface IShowTableCfg extends QuickShowConfig {
     tableProProps: IUseTableProParams;
     contentStyle?: any;
     className?: string;
+    onOk?: (event: ShowTableCfgQuickShowConfigOnOKEvent) => any;
 }
 
 export interface IShowBatchInputCfg extends QuickShowConfig {
@@ -263,6 +298,84 @@ export interface IShowBatchInputCfg extends QuickShowConfig {
     topTips?: any;
 }
 
+
+export interface IShowImportFieldMapping {
+    source: string, // Excel字段名
+    target: string, // 映射成json的字段名
+    type: 'string'| 'date' | 'origin', // 数据类型
+}
+
+
+export interface IBatchProcessElementResultList {
+    element: any;
+    index: number;
+    result?: any;
+    errorMsg?: string;
+}
+
+// onBatchProcessDone({errorCount, successCount, elementResultList }
+
+export interface ITypeOnBatchProcessDoneParam {
+    errorCount?: number;
+    successCount?: number;
+    elementResultList: IBatchProcessElementResultList[]
+}
+
+export interface IHandleProcessElementResult {
+    success: boolean;
+    message?: string; // 错误时的错误信息。
+}
+
+/**
+ * 函数：批量导入完成事件
+ */
+export type TypeOnBatchProcessDone = (param: ITypeOnBatchProcessDoneParam)=> Promise<void>;
+
+/**
+ * 函数：执行单个导入
+ */
+export type TypeHandleProcessElement = (elementObj: any)=> Promise<IHandleProcessElementResult>;
+
+
+/**
+ * Excel导入对话框的配置
+ */
+export interface IShowBatchByExcelCfg extends QuickShowConfig {
+    excelTemplateName: string, //字符串：excel导入模板的模板名称。 不能为空
+    excelTemplateUrl: string, //字符串：excel导入模板的模板的下载地址URL。 不能为空
+    fieldMappingList: IShowImportFieldMapping[], // 字段映射：表格中的表头和我们需要的结构化字段的映射关系
+
+    loadExcelScript: ()=> Promise<void>, //函数：加载window.XLSX使用的脚本文件, 不能为空
+    preprocessTableData: (tableData: any[])=> Promise<void>, //函数：导入前校验数据完整性，也可以对数据设置一些字段
+
+    onBatchProcessDone?: TypeOnBatchProcessDone, // 函数：批量处理完成事件
+    handleProcessElement: TypeHandleProcessElement, // 函数：执行单个数据处理
+    notifyOnError?: boolean, // 出现错误时，是否使用Notification.error直接显示出来。默认为false
+    elementDisplayKey?: string, // 出现错误时，用于标识某一条数据的key
+}
+
+/**
+ * 批处理的一些文案
+ */
+export interface IShowBatchProcessMsgCfg  {
+    confirmMsg?: string; // 确认提示文案。
+    processMsg?: string; // 处理中的提示文案
+}
+
+/**
+ * 批量数据数对话框的配置
+ */
+export interface IShowBatchProcessCfg extends QuickShowConfig {
+    elementList: any[], // 需要被处理的元素列表
+    msgCfg?: IShowBatchProcessMsgCfg,
+
+    onBatchProcessDone?: TypeOnBatchProcessDone, // 函数：批量导入完成事件
+    handleProcessElement: TypeHandleProcessElement, // 函数：执行单个导入
+    notifyOnError?: boolean, // 出现错误时，是否使用Notification.error直接显示出来。默认为false
+    elementDisplayKey?: string, // 出现错误时，用于标识某一条数据的key
+}
+
+
 export interface IShowCompCfg extends QuickShowConfig {
     component: any,
     xProps: any,
@@ -277,7 +390,7 @@ export interface TypeShowFormCfgOnOKParams {
 export type TypeShowFormCfgOnOK = (p: TypeShowFormCfgOnOKParams, ...args: any) => any;
 
 export interface IShowFormCfg extends QuickShowConfig {
-    formProps: FormProps;
+    formProps?: FormProps;
     bottomTips?: any;
     topTips?: any;
     validate?: boolean;
@@ -290,6 +403,11 @@ export interface IShowFormCfg extends QuickShowConfig {
 
 export interface TypeShowInputCfgOnOKParams extends TypeShowFormCfgOnOKParams {
     formInputValue: string
+}
+
+interface IEnumItem {
+    label: string;
+    value: any;
 }
 
 export type TypeShowInputCfgOnOK = (p:TypeShowInputCfgOnOKParams, ...args: any)=>any;
@@ -305,17 +423,74 @@ export interface IShowInputCfg extends IShowFormCfg {
     defaultValue?: string;
     mode?: IShowInputCfgMode;
     specialReg?: RegExp;
-    onOk?: TypeShowInputCfgOnOK
+    onOk?: TypeShowInputCfgOnOK,
+    enums? : IEnumItem[], // showAudit有用到
 }
 
+export interface IShowTabItem {
+    /**
+     * Tab key，可不传；未传时自动为 index0、index1…
+     */
+    key?: string | number;
+    title: React.ReactNode;
+    content?: React.ReactNode;
+    disabled?: boolean;
+}
 
+export interface TypeShowTabCfgOnOKParams extends QuickShowConfigOnOKEvent {
+    activeKey: string;
+    /** 已补齐 key 的 items */
+    items: Array<IShowTabItem & {key: string}>;
+}
+
+export type TypeShowTabCfgOnOK = (p: TypeShowTabCfgOnOKParams, ...args: any) => any;
+
+export interface IShowTabCfg extends Omit<QuickShowConfig, 'onOk' | 'title' | 'content' | 'onChange'> {
+    /**
+     * Tab 项列表；item.key 可不传（自动 index0、index1…）
+     */
+    items: IShowTabItem[];
+    /**
+     * 默认激活的 Tab key，可不传（默认第一个未禁用项）
+     */
+    defaultActiveKey?: string | number;
+    /**
+     * Tab 切换回调
+     */
+    onChange?: (key: string) => void;
+    /**
+     * 透传给 Tab 组件的属性
+     */
+    tabProps?: Record<string, any>;
+    /**
+     * 是否保留未激活 Tab 的内容（隐藏而非卸载），默认 true
+     */
+    keepAlive?: boolean;
+    /**
+     * dialog-body 样式，默认 { padding: 0 }
+     */
+    bodyStyle?: React.CSSProperties;
+    /**
+     * 内容区域样式
+     */
+    contentStyle?: React.CSSProperties;
+    /**
+     * 内容区域类名
+     */
+    contentClassName?: string;
+    onOk?: TypeShowTabCfgOnOK;
+}
 
 export default class Dialog extends React.Component<DialogProps, any> {
     static showComp(config: IShowCompCfg): QuickShowRet;
     static showForm(config: IShowFormCfg): QuickShowRet;
     static showInput(config: IShowInputCfg): QuickShowRet;
+    static showAudit(config: IShowInputCfg): QuickShowRet;
     static showTable(config: IShowTableCfg): QuickShowRet;
     static showBatchInput(config: IShowBatchInputCfg): QuickShowRet;
+    static showBatchByExcel(config: IShowBatchByExcelCfg): QuickShowRet;
+    static showBatchProcess(config: IShowBatchProcessCfg): QuickShowRet;
+    static showTab(config: IShowTabCfg): QuickShowRet;
     static confirmPromise(config: QuickShowConfig): Promise<boolean>;
     static show(config: QuickShowConfig): QuickShowRet;
     static alert(config: QuickShowConfig): QuickShowRet;

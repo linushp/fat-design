@@ -8,6 +8,10 @@ import { fmtValue } from '../../date-picker/util';
 
 import Input from '../../input';
 import Icon from '../../icon';
+import nextLocale from "../../locale/zh-cn.js";
+
+const timePickerLocale = nextLocale.TimePicker;
+const defaultPlaceHolder = timePickerLocale?.placeholder;
 
 class DateInput extends React.Component {
     static propTypes = {
@@ -97,7 +101,7 @@ class DateInput extends React.Component {
 
     getPlaceholder = () => {
         const { isRange } = this.props;
-        let holder = this.props.placeholder;
+        let holder = this.props.placeholder || defaultPlaceHolder;
 
         if (isRange && !Array.isArray(holder)) {
             holder = Array(2).fill(holder);

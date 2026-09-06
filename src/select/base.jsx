@@ -11,6 +11,7 @@ import DataStore from './data-store';
 import VirtualList from '../virtual-list';
 import { isSingle, filter, isNull, valueToSelectKey, getValueDataSource } from './util';
 import ConfigProvider from "../config-provider";
+import {isNil} from "../util/object.js";
 
 const { Popup } = Overlay;
 const { Item: MenuItem, Group: MenuGroup } = Menu;
@@ -19,6 +20,20 @@ const { noop, bindCtx, makeChain } = func;
 function preventDefault(e) {
     e.preventDefault();
 }
+
+function isEmptyValue(value){
+    if (isNil(value)) {
+        return true;
+    }
+    if (Array.isArray(value) && value.length === 0) {
+        return true;
+    }
+    if (typeof value === 'string' && value.length === 0) {
+        return true;
+    }
+    return false;
+}
+
 
 export default class Base extends React.Component {
     static propTypes = {
@@ -153,6 +168,8 @@ export default class Base extends React.Component {
          */
         renderPreview: PropTypes.func,
         showDataSourceChildren: PropTypes.bool,
+
+        previewPlaceholder: PropTypes.string,
     };
 
     static defaultProps = {
@@ -631,6 +648,7 @@ export default class Base extends React.Component {
             popupComponent,
             isPreview,
             renderPreview,
+            previewPlaceholder,
             style,
             className,
             valueRender,
@@ -645,6 +663,21 @@ export default class Base extends React.Component {
         );
 
         if (isPreview) {
+
+            const previewCls = classNames({
+                [`${prefix}form-preview`]: true,
+                [className]: !!className,
+            });
+
+            if (isEmptyValue(this.state.value)) {
+                return (
+                    <div style={style} className={previewCls}>
+                        { previewPlaceholder || ''}
+                    </div>
+                );
+            }
+
+
             if (this.isAutoComplete) {
                 return (
                     <Input
@@ -669,10 +702,6 @@ export default class Base extends React.Component {
                 }
 
                 if (typeof renderPreview === 'function') {
-                    const previewCls = classNames({
-                        [`${prefix}form-preview`]: true,
-                        [className]: !!className,
-                    });
                     return (
                         <div style={style} className={previewCls}>
                             {renderPreview(valueDS, this.props)}

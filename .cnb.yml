@@ -1,0 +1,13 @@
+main: # 触发分支
+  push: # 触发事件
+    - docker:
+        image: node:22 # 流水线执行环境，可以指定任意docker镜像
+      stages:
+        - name: install
+          script: npm install
+        - name: build
+          script: npm run build
+        - name: cdxxx
+          script: cd dist
+        - name: publish
+          script: npm publish

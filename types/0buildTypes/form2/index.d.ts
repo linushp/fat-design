@@ -12,9 +12,9 @@ declare class Form extends React.Component<FormProps, any> {
     static Reset: typeof Reset;
     static Button: typeof FormButton;
     static ButtonGroup: typeof FormButtonGroup;
-    static schemaToFormItems: (schema: any) => React.JSX.Element[];
+    static schemaToFormItems: (schema: any) => import("react/jsx-runtime").JSX.Element[];
     static useFormChildren: (props: FormProps) => any[];
-    render(): React.JSX.Element;
+    render(): import("react/jsx-runtime").JSX.Element;
 }
 declare const _default: typeof Form;
 export default _default;

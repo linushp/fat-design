@@ -13,7 +13,11 @@ const initialValues = {
     name3: '333',
     name4: '444',
     Select1: 'AAA',
-    time1: '2025-06-02T05:43:35.000Z'
+    time1: '2025-06-02T05:43:35.000Z',
+    ColorPicker111: "#ce6969",
+    Select999: ['111'],
+    Input111:'111',
+    NativeSelect:'111',
 };
 
 
@@ -68,24 +72,6 @@ export function DemoForm3() {
 
     const onChange = (values: any, {stateMap, formActions}: FnFormOnChangeParams) => {
         console.log('onChange', values);
-        // if (values.name1 === 'z') {
-        //     formActions.setValue('name2','zzzzz')
-        //     // formActions.setValue('name3','zzzzz')
-        //     formActions.setState('name4',{display:false})
-        //     formActions.setState('name5',{disabled:false})
-        //     // values.name2 === 'zzzzz';
-        //     // values.name3 === 'zzzzz';
-        //     // stateMap.name4.display = false;
-        //     // stateMap.name5.disabled = false;
-        // } else {
-        //     // formActions.setValue('name2','aaaaa')
-        //     // formActions.setValue('name3','aaaaa')
-        //     formActions.setState('name4',{display:true})
-        //     formActions.setState('name5',{disabled:true})
-        //     // stateMap.name4.display = true;
-        //     // stateMap.name5.disabled = true;
-        // }
-        // console.info('stateMap.name4', stateMap.name4)
     }
 
 
@@ -101,38 +87,59 @@ export function DemoForm3() {
                       onChange={onChange}
                       autoValidate={true}
                       submitter={false}
+                      isPreview={true}
                       {...formItemLayout}
                       autoValidateOnCreated={true}
                 >
 
-                    {/*<FormItem label={'名字1'}*/}
-                    {/*          name={'name1'}*/}
-                    {/*          component={'Input'}*/}
-                    {/*          length={7}*/}
-                    {/*          required*/}
-                    {/*/>*/}
+                    <FormItem label={'名字1'}
+                              name={'name1'}
+                              component={'Input'}
+                              length={7}
+                    />
 
-                    {/*<FormItem label={'时间'}*/}
-                    {/*          name={'time1'}*/}
-                    {/*          component={'DatePicker'}*/}
-                    {/*          required*/}
-                    {/*          isPreview*/}
-                    {/*          xProps={{*/}
-                    {/*              showTime: true,*/}
-                    {/*              format: datetimeFormat,*/}
-                    {/*          }}*/}
-                    {/*/>*/}
+                    <FormItem label={'时间'}
+                              name={'time1'}
+                              component={'DatePicker'}
+                              isPreview
+                              xProps={{
+                                  showTime: true,
+                                  format: datetimeFormat,
+                              }}
+                    />
 
 
                     <FormItem label={'名字2'}
                               name={'name2'}
-                              isPreview={false}
+                              isPreview={true}
                               component={'Select'}
                     />
 
+                    <FormItem label={'TimePicker'}
+                              name={'TimePicker'}
+                              component={'TimePicker'}
+                              xProps={{
+                                  showHour: true,
+                              }}
+                    />
+
+                    <FormItem label={'TimePicker.RangePicker'}
+                              name={'TimePicker2222'}
+                              component={'TimePicker.RangePicker'}
+                    />
+
+                    <FormItem label={'Input.ColorPicker'}
+                              name={'ColorPicker111'}
+                              component={'Input.ColorPicker'}
+                              xProps={{
+                                  placeholder:'请选择颜色'
+                              }}
+                    />
+
+
+
                     <FormItem label={'NativeSelect'}
                               name={'NativeSelect'}
-                              isPreview={false}
                               enums={[
                                   {label: '111', value: '111'},
                                   {label: '222', value: '222'},
@@ -140,6 +147,25 @@ export function DemoForm3() {
                               ]}
                               component={'Select.NativeSelect'}
                     />
+
+                    <FormItem label={'Input111'}
+                              name={'Input111'}
+                              component={'Input'}
+                    />
+
+                    <FormItem label={'Select999'}
+                              name={'Select999'}
+                              enums={[
+                                  {label: '111', value: '111'},
+                                  {label: '222', value: '222'},
+                                  {label: '333', value: '333'},
+                              ]}
+                              xProps={{
+                                  mode:'multiple',
+                              }}
+                              component={'Select'}
+                    />
+
 
 
                 </Form>

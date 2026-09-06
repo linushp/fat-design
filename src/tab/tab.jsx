@@ -10,6 +10,14 @@ import ConfigProvider from "../config-provider";
 
 const noop = () => {};
 
+
+/**
+ * 纵向布局支持的形状
+ * @type {string[]}
+ */
+const verticalShapeList = ['wrapped', 'shape_line']
+
+
 /** Tab */
 class Tab extends Component {
     static propTypes = {
@@ -27,7 +35,7 @@ class Tab extends Component {
         /**
          * 外观形态
          */
-        shape: PropTypes.oneOf(['pure', 'wrapped', 'text', 'capsule']),
+        shape: PropTypes.oneOf(['pure', 'text', 'capsule', ...verticalShapeList]),
         /**
          * 是否开启动效
          */
@@ -326,16 +334,18 @@ class Tab extends Component {
 
         const tabs = toArray(children);
         let newPosition = tabPosition;
+
         if (rtl && ['left', 'right'].indexOf(tabPosition) >= 0) {
             newPosition = tabPosition === 'left' ? 'right' : 'left';
         }
+
         const classNames = classnames(
             {
                 [`${prefix}tabs`]: true,
                 [`${prefix}tabs-${shape}`]: shape,
-                [`${prefix}tabs-vertical`]: shape === 'wrapped' && ['left', 'right'].indexOf(tabPosition) >= 0,
+                [`${prefix}tabs-vertical`]: verticalShapeList.includes(shape) && ['left', 'right'].indexOf(tabPosition) >= 0,
                 [`${prefix}tabs-scrollable`]: true,
-                [`${prefix}tabs-${newPosition}`]: shape === 'wrapped',
+                [`${prefix}tabs-${newPosition}`]: verticalShapeList.includes(shape),
                 [`${prefix + size}`]: size,
             },
             className

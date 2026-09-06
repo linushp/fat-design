@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {Upload, Button, Icon,Dialog} from '../src/index';
-import get from 'lodash.get';
 import './index.css'
 
 
@@ -48,7 +47,7 @@ class FileUploader extends React.Component {
             let finishedCount = 0;
             for (let i = 0; i < infoList.length; i++) {
                 const infoElement = infoList[i];
-                const isSuccess = get(infoElement, 'response.success');
+                const isSuccess = infoElement?.response?.success;
                 if (infoElement.percent === 100 && isSuccess === true) {
                     finishedCount++;
                 }
@@ -67,19 +66,14 @@ class FileUploader extends React.Component {
             <div style={{width: '600px'}}>
                 <Upload.Dragger
                     action={action}
-                    // autoUpload={false}
                     ref={this.saveUploaderRef}
                     listType="image"
-                    // accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
                     beforeUpload={this.beforeUpload}
                     onProgress={this.onProgress}
                     onSuccess={this.onSuccess}
                     onError={this.onError}
                     multiple
                     useDataURL
-                    // thumbnailRender={()=>{
-                    //     return "PPT"
-                    // }}
                     onChange={(v)=>{}}
                     {...uploadProps}
                 >

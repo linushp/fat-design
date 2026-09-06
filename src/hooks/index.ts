@@ -14,6 +14,10 @@ import {
 } from './useCurrentState'
 
 import {useOnKeyPressCtrl, useOnKeyPressSave} from "./useOnKeyPressSave";
+import {usePersistFn, useMemoizedFn} from "./usePersistFn";
+import {useSize} from "./useSize";
+import {useValueOnChange} from "./useValueOnChange";
+import {useComparedState} from "./useComparedState";
 
 export default {
     PreciseStore,
@@ -25,5 +29,10 @@ export default {
     useCurrentState,
     useCurrentState2,
     useOnKeyPressCtrl,
-    useOnKeyPressSave
+    useOnKeyPressSave,
+    usePersistFn,
+    useMemoizedFn,
+    useSize,
+    useValueOnChange,
+    useComparedState
 }

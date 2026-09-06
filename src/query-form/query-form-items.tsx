@@ -1,5 +1,7 @@
-import {QueryFormProps} from "./types";
+import { QueryFormProps } from "./types";
 import Form from '../form2'
+import { TinyEmitter } from "../util/tiny-emitter";
+import { showFormSettingDialog } from "./form-setting";
 
 const {
     useFormChildren,
@@ -7,8 +9,8 @@ const {
 } = Form;
 
 
-function createButtonGroup(props: QueryFormProps) {
-    const {prefix} = props;
+function createButtonGroup(props: QueryFormProps, queryFormEventBus: TinyEmitter, originalSchema?: any, originalDefaultValues?: any) {
+    const { prefix } = props;
 
     const formButtonGroupProps = {
         label: ' ',
@@ -30,6 +32,48 @@ function createButtonGroup(props: QueryFormProps) {
                     text: '重置',
                     toDefault: true
                 },
+                {
+                    component: 'FormButton',
+                    text: '展开更多',
+                    xProps: {
+                        text: true,
+                        type: 'primary',
+                        className: `${prefix}query-form-button-expand-more1`,
+                        onClick: () => {
+                            console.log('展开更多');
+                            queryFormEventBus.emit('toggleExpand');
+                        }
+                    }
+                },
+                {
+                    component: 'FormButton',
+                    text: '收起',
+                    xProps: {
+                        text: true,
+                        type: 'primary',
+                        className: `${prefix}query-form-button-expand-more2`,
+                        onClick: () => {
+                            console.log('收起');
+                            queryFormEventBus.emit('toggleExpand');
+                        }
+                    }
+                },
+                ...(props.settings ? [{
+                    component: 'FormButton',
+                    text: '设置',
+                    xProps: {
+                        text: true,
+                        type: 'primary',
+                        onClick: () => {
+                            showFormSettingDialog({
+                                schema: originalSchema || props.schema,
+                                defaultValues: originalDefaultValues || props.defaultValues,
+                                settingName: props.settingName,
+                                queryFormEventBus,
+                            });
+                        }
+                    }
+                }] : []),
             ]
         }
     };
@@ -40,9 +84,9 @@ function createButtonGroup(props: QueryFormProps) {
 }
 
 
-function useQueryFormItems(props: QueryFormProps) {
+function useQueryFormItems(props: QueryFormProps, queryFormEventBus: TinyEmitter, originalSchema?: any, originalDefaultValues?: any) {
     const items = useFormChildren(props);
-    const btnGroup = createButtonGroup(props);
+    const btnGroup = createButtonGroup(props, queryFormEventBus, originalSchema, originalDefaultValues);
 
     return [...items, btnGroup];
 }

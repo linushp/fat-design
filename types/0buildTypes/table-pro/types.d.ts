@@ -1,17 +1,22 @@
 import React from "react";
+import type { TableProps as TableComponentProps } from '../table/types';
 export declare enum StyleModeEnum {
     simple = "simple"
 }
 export interface QueryFormTableSlots {
     renderAfterQueryForm: any;
 }
+export type TableProTableProps = TableComponentProps & {
+    title?: React.ReactNode;
+    showTotal?: boolean;
+};
 export interface TableProProps {
     className?: string;
     settingName: string;
     prefix: string;
     components: any;
     formProps: any;
-    tableProps: any;
+    tableProps: TableProTableProps;
     paginationProps: any;
     filterProps: any;
     operationProps: OperationsProps;
@@ -30,7 +35,7 @@ export interface IUseTableProParams {
     isEnableCrossPageRowSelection?: boolean;
     isEnableFrontendPagination?: boolean;
     initFormProps?: any;
-    initTableProps?: any;
+    initTableProps?: TableProTableProps;
     initPaginationProps?: any;
     initFilterProps?: any;
     initOperationProps?: any;
@@ -43,6 +48,7 @@ export interface OperationBtnItem {
     tooltip?: any;
     onClick?: any | string;
     children?: OperationBtnItem[];
+    disabled?: boolean;
 }
 export interface OperationsProps {
     prefix: string;
@@ -89,7 +95,7 @@ export interface MultiFieldCellProps {
 }
 export type IGetTableColumnsBySettingFunc = (tableProProps: TableProProps) => Promise<any[]>;
 export type IUseTableProFunc = (params: IUseTableProParams) => any;
-export type ICellRenderFunc = (value: any) => React.JSX.Element;
+export type ICellRenderFunc = (value: any, others?: any) => React.JSX.Element;
 export type IRenderTableToolbar = (props: TableToolbarProps) => any;
 export type IRenderOperationCell = (operationItems: OperateCellItemProps[], others?: OperateCellProps) => any;
 export type IRenderMultiFieldCell = (itemList: MultiFieldCellItem2[]) => any;

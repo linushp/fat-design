@@ -358,10 +358,101 @@ export interface PasswordProps extends InputProps {
 }
 export class Password extends React.Component<PasswordProps, any> {}
 
+export interface ColorPickerProps extends HTMLAttributesWeak, CommonProps {
+    /**
+     * 颜色值，支持十六进制格式
+     */
+    value?: string;
+
+    /**
+     * 默认颜色值
+     */
+    defaultValue?: string;
+
+    /**
+     * 颜色变化回调
+     */
+    onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
+
+    /**
+     * 是否显示颜色文本
+     */
+    showColorText?: boolean;
+
+    /**
+     * 颜色文本位置
+     */
+    colorTextPosition?: 'left' | 'right';
+
+    /**
+     * 禁用状态
+     */
+    disabled?: boolean;
+
+    /**
+     * 只读
+     */
+    readOnly?: boolean;
+
+    /**
+     * 输入提示
+     */
+    placeholder?: string;
+
+    /**
+     * 获取焦点时候触发的回调
+     */
+    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+
+    /**
+     * 失去焦点时候触发的回调
+     */
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+
+    /**
+     * 自定义class
+     */
+    className?: string;
+
+    /**
+     * 自定义内联样式
+     */
+    style?: React.CSSProperties;
+
+    /**
+     * name
+     */
+    name?: string;
+
+    /**
+     * 状态
+     */
+    state?: 'error' | 'loading' | 'success' | 'warning';
+
+    /**
+     * 是否有边框
+     */
+    hasBorder?: boolean;
+
+    /**
+     * 尺寸
+     */
+    size?: 'small' | 'medium' | 'large';
+
+    /**
+     * 是否为预览态
+     */
+    isPreview?: boolean;
+
+    renderPreview?: (value: string) => React.ReactNode;
+}
+export class ColorPicker extends React.Component<ColorPickerProps, any> {}
+
 export default class Input extends React.Component<InputProps, any> {
     static TextArea: typeof TextArea;
     static Group: typeof Group;
     static Password: typeof Password;
+    static ColorPicker: typeof ColorPicker;
     getInputNode: () => HTMLInputElement;
 }
 

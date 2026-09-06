@@ -93,9 +93,35 @@ const schema = {
             component: 'DatePickerRangePicker'
         },
 
+        username8: {
+            label: '名字8',
+            component: 'DatePickerRangePicker'
+        },
+
 
         username9: {label: '名字9'},
         username10: {label: '名字10'},
+        username11: {label: '名字11'},
+        username12: {label: '名字12'},
+        username13: {label: '名字13'},
+        username14: {label: '名字14'},
+        username15: {label: '名字15'},
+        username16: {label: '名字16'},
+        username17: {label: '名字17'},
+        username18: {label: '名字18'},
+        username19: {label: '名字19'},
+        username20: {label: '名字20'},
+        username21: {label: '名字21'},
+        username22: {label: '名字22'},
+        username23: {label: '名字23'},
+        username24: {label: '名字24'},
+        username25: {label: '名字25'},
+        username26: {label: '名字26'},
+        username27: {label: '名字27'},
+        username28: {label: '名字28'},
+        username29: {label: '名字29'},
+        username30: {label: '名字30'},
+        username31: {label: '名字31'},
     },
 };
 

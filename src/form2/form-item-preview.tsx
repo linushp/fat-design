@@ -12,6 +12,10 @@ function toPreviewStr(childProps: any, previewPlaceholder: string): string {
 
     const valueArr = Array.isArray(value) ? value : [value];
 
+    if (valueArr.length === 0) {
+        return previewPlaceholder;
+    }
+
     if (dataSource && dataSource.length > 0) {
         const map = valueListToMap(dataSource);
         return valueArr.map((a: any) => {
@@ -50,7 +54,7 @@ function renderWrapPreview(childProps: any, formItemProps: FormItemProps) {
         ele = renderPreview(valueStr, childProps);
     } else {
         ele = (
-            <span className={`${prefix}form-preview-value`}>{valueStr}</span>
+            <span className={`${prefix}form-preview-value`} >{valueStr}</span>
         )
     }
 

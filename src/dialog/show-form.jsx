@@ -52,8 +52,11 @@ function DialogFormWrapper(props) {
         Object.assign(styleObject, contentStyle);
     }
 
+
+    const classNameMerge = classNames(`${prefix}dialog-show-form-content`, contentClass)
+
     return (
-        <div className={`${prefix}dialog-show-form-content`} style={styleObject}>
+        <div className={classNameMerge} style={styleObject}>
             {topTips}
 
             {
@@ -101,6 +104,9 @@ function buildShowForm(show) {
         const onCreated = (values, {formStore, formActions}) => {
             config.currentFormStore = formStore;
             config.currentFormActions = formActions;
+            if(typeof config.onCreated === "function") {
+                config.onCreated(values, {formStore, formActions});
+            }
         }
 
         let newTitle = title;

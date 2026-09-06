@@ -136,9 +136,10 @@ const FormItemImpl = React.memo((props: WrapFormItemProps) => {
         size,
         fullWidth,
         helpPos,
+        extItemClassName,
     } = formItemProps;
 
-    const {state, isPreview, display } = formItemState;
+    const { state, isPreview, display } = formItemState;
 
     if (display === false) {
         return null;
@@ -154,9 +155,11 @@ const FormItemImpl = React.memo((props: WrapFormItemProps) => {
         [`use-tip-help`]: helpPos === 'tip',
         [`${prefix}${size}`]: !!size,
         [`${prefix}form-item-fullwidth`]: fullWidth,
+        [`${extItemClassName}`]: !!extItemClassName,
         [`${className}`]: !!className,
         [`${prefix}form-preview`]: isPreview,
     });
+
 
 
     return (

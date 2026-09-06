@@ -258,6 +258,7 @@ class List extends Component {
 
     getImageListThumbnail = (imgURL, file, alt)=> {
         const {thumbnailRender} = this.props;
+
         let img;
         if (file.state === 'error') {
             img = <Icon type="cry"/>;

@@ -9,6 +9,8 @@ import ConfigProvider from "../config-provider";
 
 const { noop } = func;
 
+const defaultLocale = nextLocale.TimePicker;
+
 class TimePickerPanel extends Component {
     static propTypes = {
         prefix: PropTypes.string,
@@ -227,7 +229,7 @@ class TimePickerPanel extends Component {
                         {...commonProps}
                         value={valueArr[index]}
                         activeIndex={activeHour[index]}
-                        title={locale.hour}
+                        title={locale?.hour || defaultLocale.hour}
                         mode="hour"
                         step={hourStep}
                         onSelect={this.onSelectMenuItem.bind(this, `${index === 0 ? 'start' : 'end'}`)}
@@ -239,7 +241,7 @@ class TimePickerPanel extends Component {
                         {...commonProps}
                         value={valueArr[index]}
                         activeIndex={activeMinute[index]}
-                        title={locale.minute}
+                        title={locale?.minute || defaultLocale.minute}
                         mode="minute"
                         step={minuteStep}
                         onSelect={this.onSelectMenuItem.bind(this, `${index === 0 ? 'start' : 'end'}`)}
@@ -251,7 +253,7 @@ class TimePickerPanel extends Component {
                         {...commonProps}
                         value={valueArr[index]}
                         activeIndex={activeSecond[index]}
-                        title={locale.second}
+                        title={locale?.second || defaultLocale.second}
                         step={secondStep}
                         mode="second"
                         onSelect={this.onSelectMenuItem.bind(this, `${index === 0 ? 'start' : 'end'}`)}

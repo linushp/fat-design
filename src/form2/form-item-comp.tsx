@@ -10,6 +10,7 @@ import {buildFnFormOnChangeParams} from "./helper/buildParams";
 import {isNil} from "../util/object";
 import {useGetXProps} from "./helper/useGetXProps";
 import {FORM_ITEM_TYPE_MARK} from "./helper/constants";
+import {parseCompositeName, setCompositeValue} from "./helper/parseCompositeName";
 
 
 const triggerAutoValidateDebounce = debounce((triggerName: string, formItemProps: FormItemProps, formActions: FormActions) => {
@@ -38,6 +39,7 @@ function cloneChildren(children: any, childrenProps: any, formItemProps: FormIte
         const typeMark = "" + child.type._typeMark; //TODO 设置
         const supportPreview = child.type._supportPreview; // TODO 设置
 
+        debugger
         // 需要preview但是组件不支持
         if (childrenProps.isPreview && !supportPreview) {
             return renderWrapPreview(childrenProps, formItemProps);
@@ -63,13 +65,15 @@ function renderComponentTag(ComponentTag: any, childProps: any, formItemProps: F
         return null;
     }
 
+    const previewPlaceholder = formItemProps.previewPlaceholder
+
     // 预览模式
     if (childProps.isPreview) {
         if (!ComponentTag._supportPreview) {
             return renderWrapPreview(childProps, formItemProps);
         }
         const className = classnames(childProps.className, `${formItemProps.prefix}form-preview`)
-        return <ComponentTag {...childProps} className={className} />
+        return <ComponentTag previewPlaceholder={previewPlaceholder} {...childProps} className={className}  />
     }
 
     return <ComponentTag {...childProps} />
@@ -119,7 +123,7 @@ function FormItemComp(props: WrapFormItemProps) {
             nextValue = onChangeReturnValue;
         }
 
-        formStore.setValue(`values.${name}`, nextValue);
+        setCompositeValue(formStore, parseCompositeName(name), nextValue);
         formOnChange(formStore);
         formStore.commit();
 

@@ -233,7 +233,7 @@ class RadioGroup extends Component {
         if (isPreview) {
             const previewCls = classnames(className, `${prefix}form-preview`);
 
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div {...others} className={previewCls}>
                         {renderPreview(previewed, this.props)}

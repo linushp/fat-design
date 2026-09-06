@@ -7,15 +7,20 @@
 }
 
 
-.#{$css-prefix}column-setting-dialog-save {
-    //position: absolute;
-    //right: 26px;
-    //top: -5px;
+.#{$css-prefix}column-setting-dialog-tab-wrapper {
+    width: 200px;
+    left: 0;
+    top: -11px;
+    position: absolute;
+
+    .fatd-tabs-pure>.fatd-tabs-bar {
+        border-bottom: none;
+    }
 }
+
 
 .#{$css-prefix}column-setting-dialog-save-group {
     position: absolute;
     right: 26px;
     top: -5px;
 }
-

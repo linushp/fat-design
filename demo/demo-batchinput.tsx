@@ -36,7 +36,7 @@ function DemoBatchInput() {
 
 
             <div style={{width: '300px', marginTop: '100px'}}>
-                openChineseInput= false
+                Native Input
                 <input value={value2} onChange={(e) => setValue2(e.target.value)} />
             </div>
         </PageCard>

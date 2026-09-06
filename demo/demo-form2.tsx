@@ -17,11 +17,7 @@ const initialValues = {
 
 
 const formItemLayout = {
-    // labelCol: {
-    // fixedSpan: 10,
-    // },
     wrapperCol: {
-        // span: 14,
         columns: 3
     },
 };
@@ -39,7 +35,7 @@ export function DemoForm2() {
     const [state, setState] = useState(0);
 
     const onSubmit = (values: any, {formActions}: any) => {
-        debugger;
+        console.log('Form submitted:', values);
     }
 
     const onCreated = (values, {formStore, formActions}: any) => {
@@ -51,20 +47,11 @@ export function DemoForm2() {
     const onChange = (values: any, {stateMap, formActions}: FnFormOnChangeParams) => {
         if (values.name1 === 'z') {
             formActions.setValue('name2','zzzzz')
-            // formActions.setValue('name3','zzzzz')
             formActions.setState('name4',{display:false})
             formActions.setState('name5',{disabled:false})
-            // values.name2 === 'zzzzz';
-            // values.name3 === 'zzzzz';
-            // stateMap.name4.display = false;
-            // stateMap.name5.disabled = false;
         } else {
-            // formActions.setValue('name2','aaaaa')
-            // formActions.setValue('name3','aaaaa')
             formActions.setState('name4',{display:true})
             formActions.setState('name5',{disabled:true})
-            // stateMap.name4.display = true;
-            // stateMap.name5.disabled = true;
         }
         console.info('stateMap.name4', stateMap.name4)
     }
@@ -80,7 +67,7 @@ export function DemoForm2() {
                 </Button>
 
                 <Form defaultValues={initialValues}
-                      labelAlign={'top'}
+                      labelAlign={'left'}
                       components={{}}
                       onSubmit={onSubmit}
                       onCreated={onCreated}
@@ -88,21 +75,6 @@ export function DemoForm2() {
                       autoValidate={true}
                       autoValidateOnCreated={true}
                 >
-
-
-                    {/*<FormItem label={'名字0'}*/}
-                    {/*          name={'name0'}*/}
-                    {/*          component={'Input'}*/}
-                    {/*          validator={(rule: any, value: string) => {*/}
-                    {/*              if (value === 'name0') {*/}
-                    {/*                  return Promise.resolve()*/}
-                    {/*              }*/}
-                    {/*              return Promise.reject(<a href={'xx'}>error</a>)*/}
-                    {/*          }}*/}
-                    {/*/>*/}
-
-
-
                     <FormItem label={'名字1'}
                               name={'name1'}
                               component={'Input'}
@@ -113,10 +85,12 @@ export function DemoForm2() {
                     <FormItem label={'名字2'}
                               name={'name2'}
                               component={'Input'}
-                              // required
-                              // display={(values: any) => {
-                              //     return values.name1 === '222'
-                              // }}
+                    />
+
+
+                    <FormItem label={'颜色'}
+                              name={'color1'}
+                              component={'ColorPicker'}
                     />
 
                     <FormItem label={'名字3'}
@@ -190,20 +164,6 @@ export function DemoForm2() {
                         />
                     })}
 
-
-                    {/*<FormItem label={'FormSubmit'}*/}
-                    {/*          name={'button2'}*/}
-                    {/*          component={'FormSubmit'}*/}
-                    {/*/>*/}
-
-                    {/*<FormItem label={'FormReset toDefault'} component={'FormReset'} xProps={{*/}
-                    {/*    toDefault: true,*/}
-                    {/*    children: 'FormReset toDefault'*/}
-                    {/*}}/>*/}
-
-                    {/*<FormItem label={' '} name={'button43434'} component={'FormReset'} xProps={{*/}
-                    {/*    toDefault: false*/}
-                    {/*}}/>*/}
 
                     <FormItem label={' '}
                               component={'FormButtonGroup'}

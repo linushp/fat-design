@@ -113,7 +113,6 @@ export default class Row extends React.Component {
 
             const value = fetchDataByPath(record, dataIndex);
             const attrs = getCellProps(rowIndex, colIndex, dataIndex, record) || {};
-
             if (this.context.notRenderCellIndex) {
                 const matchCellIndex = this.context.notRenderCellIndex
                     .map(cellIndex => cellIndex.toString())
@@ -155,6 +154,7 @@ export default class Row extends React.Component {
                     record={record}
                     className={className}
                     value={value}
+                    dataIndex={dataIndex}
                     colIndex={colIndex}
                     rowIndex={rowIndex}
                     align={align}

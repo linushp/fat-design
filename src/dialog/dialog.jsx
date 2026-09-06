@@ -212,6 +212,22 @@ export default class Dialog extends Component {
          * @version 1.26
          */
         noPadding: PropTypes.bool,
+        /**
+         * 对话框头部区域（dialog-header）的样式
+         */
+        headerStyle: PropTypes.object,
+        /**
+         * 对话框头部区域（dialog-header）的类名
+         */
+        headerClassName: PropTypes.string,
+        /**
+         * 对话框内容区域（dialog-body）的样式
+         */
+        bodyStyle: PropTypes.object,
+        /**
+         * 对话框内容区域（dialog-body）的类名
+         */
+        bodyClassName: PropTypes.string,
     };
 
     static defaultProps = {
@@ -393,6 +409,10 @@ export default class Dialog extends Component {
             rtl,
             height,
             noPadding,
+            headerStyle,
+            headerClassName,
+            bodyStyle,
+            bodyClassName,
         } = this.props;
         const others = pickOthers(Object.keys(Dialog.propTypes), this.props);
 
@@ -414,6 +434,10 @@ export default class Dialog extends Component {
                 onClose={onClose}
                 height={height}
                 noPadding={noPadding}
+                headerStyle={headerStyle}
+                headerClassName={headerClassName}
+                bodyStyle={bodyStyle}
+                bodyClassName={bodyClassName}
                 {...others}
             >
                 {children}

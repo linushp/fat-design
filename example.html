@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fat-design script 示例</title>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    body { margin: 24px; font-family: sans-serif; }
+    .row { margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <p>用普通 script 标签引入 index.umd.js（不要写 type="module"）。React / ReactDOM 必须先于 fat-design 加载。</p>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="./index.umd.js"></script>
+  <script>
+    var h = React.createElement;
+    var Button = FatDesign.Button;
+    var Message = FatDesign.Message;
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      h('div', null,
+        h('div', null, 'FatDesign.version = ' + FatDesign.version),
+        h('div', { className: 'row' },
+          h(Button, {
+            type: 'primary',
+            onClick: function () {
+              Message.success('来自 script 标签');
+            }
+          }, '点我')
+        )
+      )
+    );
+  </script>
+</body>
+</html>

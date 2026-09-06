@@ -1,10 +1,11 @@
 import { IUseTableProParams } from "./types";
-declare function useTablePro(params: IUseTableProParams): {
+export interface IUseTableProProps {
     formProps: any;
     tableProps: any;
     paginationProps: any;
     filterProps: any;
     operationProps: any;
     actions: any;
-};
+}
+declare function useTablePro(params: IUseTableProParams): IUseTableProProps;
 export { useTablePro };

@@ -215,7 +215,12 @@ export interface FormItemSchema {
 
 
 export interface FormItemProps extends FormItemSchema {
+    /**
+     * 字段名。RangePicker 等范围组件可使用复合语法 `[startField,endField]`，
+     * 将组件的数组值分别映射到 values 中的多个字段。
+     */
     name: string;
+    extItemClassName?: string;
 }
 
 

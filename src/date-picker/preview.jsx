@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import {datejs} from "../util";
 import {MODE2FORMAT} from './constant';
 import ConfigProvider from "../config-provider";
+import {renderFormPreview} from "../util/render-utils.jsx";
 
 const tryFormat = (v, formatter) => {
     if (!v) {
@@ -17,11 +18,11 @@ const tryFormat = (v, formatter) => {
 }
 
 function DatePickerPreview(props) {
-    const { mode, value, format, showTime, className,prefix} = props;
-    if (!value) {
-        return <span />;
-    }
-    const displayStr = useMemo(()=>{
+    const { mode, value, format, showTime, className,prefix, previewPlaceholder} = props;
+    const displayValue = useMemo(()=>{
+        if (!value) {
+            return null;
+        }
         if (format && typeof format === 'string') {
             return tryFormat(value, format);
         }
@@ -30,12 +31,11 @@ function DatePickerPreview(props) {
 
     },[mode, value, format,showTime])
 
-    const cls = classnames(`${prefix}date-picker-preview`, className);
-
-    return (
-        <div className={cls}>{displayStr}</div>
-    )
+    return renderFormPreview({
+        displayValue, className, prefix, previewPlaceholder
+    });
 }
+
 
 DatePickerPreview.displayName = 'DatePickerPreview';
 DatePickerPreview.defaultProps = {

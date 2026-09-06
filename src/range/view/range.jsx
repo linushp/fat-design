@@ -686,7 +686,7 @@ class Range extends React.Component {
         if (isPreview) {
             const previewCls = classNames(className, `${prefix}form-preview`);
 
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div id={id} dir={rtl ? 'rtl' : 'ltr'} {...others} className={previewCls}>
                         {renderPreview(value, this.props)}

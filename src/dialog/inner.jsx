@@ -37,6 +37,22 @@ export default class Inner extends Component {
         closeIcon: PropTypes.node,
         pure: PropTypes.bool,
         noPadding: PropTypes.bool,
+        /**
+         * 对话框头部区域（dialog-header）的样式
+         */
+        headerStyle: PropTypes.object,
+        /**
+         * 对话框头部区域（dialog-header）的类名
+         */
+        headerClassName: PropTypes.string,
+        /**
+         * 对话框内容区域（dialog-body）的样式
+         */
+        bodyStyle: PropTypes.object,
+        /**
+         * 对话框内容区域（dialog-body）的类名
+         */
+        bodyClassName: PropTypes.string,
     };
 
     static defaultProps = {
@@ -96,12 +112,13 @@ export default class Inner extends Component {
     }
 
     renderHeader() {
-        const {prefix, title} = this.props;
+        const {prefix, title, headerStyle, headerClassName} = this.props;
         if (title) {
             this.titleId = guid('dialog-title-');
             return (
                 <div
-                    className={`${prefix}dialog-header`}
+                    className={cx(`${prefix}dialog-header`, headerClassName)}
+                    style={headerStyle}
                     id={this.titleId}
                     ref={this.getNode.bind(this, 'headerNode')}
                     role="heading"
@@ -115,14 +132,15 @@ export default class Inner extends Component {
     }
 
     renderBody() {
-        const {prefix, children, footer, noPadding} = this.props;
+        const {prefix, children, footer, noPadding, bodyStyle, bodyClassName} = this.props;
         if (children) {
             return (
                 <div
                     className={cx(`${prefix}dialog-body`, {
                         [`${prefix}dialog-body-no-footer`]: footer === false,
                         [`${prefix}dialog-body-no-padding`]: noPadding === true,
-                    })}
+                    }, bodyClassName)}
+                    style={bodyStyle}
                     ref={this.getNode.bind(this, 'bodyNode')}
                 >
                     {children}

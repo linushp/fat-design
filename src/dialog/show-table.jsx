@@ -9,6 +9,7 @@ function getDep(name) {
 }
 
 function TableContent(props) {
+    const dialogRef = props.dialogRef;
     const prefix = props.prefix;
     const contentStyle = props.contentStyle;
     const tableProPropsParams = props.tableProProps;
@@ -26,6 +27,8 @@ function TableContent(props) {
 
     _set(tableProProps, 'tableProps.maxBodyHeight', 10000);
 
+    dialogRef.currentTableProProps = tableProProps;
+
     return (
         <div style={contentStyle} className={`${prefix}dialog-show-table-content`}>
             <TablePro {...tableProProps} styleMode={'simple'} />
@@ -38,11 +41,23 @@ function buildShowTable(show) {
         let {
             size = 'small',
             tableProProps = {},
-            contentStyle,
+            contentStyle = {},
             prefix = defaultPrefix,
             className,
+            onOk,
             ...otherProps
         } = config;
+
+        const dialogRef = {
+            currentTableProProps: null,
+        };
+
+        const newOnOk = async (event, ...args) => {
+            if (onOk) {
+                event.tableProProps = dialogRef.currentTableProProps;
+                return await onOk(event, ...args);
+            }
+        }
 
         return show({
             size,
@@ -51,8 +66,10 @@ function buildShowTable(show) {
             content: (
                 <TableContent tableProProps={tableProProps}
                               contentStyle={contentStyle}
+                              dialogRef={dialogRef}
                               prefix={prefix}/>
             ),
+            onOk: newOnOk,
             ...otherProps,
         });
     }

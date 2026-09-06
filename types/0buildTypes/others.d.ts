@@ -6,5 +6,7 @@ import { storageInstance } from "./util/localforage";
 declare function configReactDOM18(ReactDOM: any, ReactDOMClient: any): void;
 declare function configReactDOM19(ReactDOM: any, ReactDOMClient: any): void;
 declare function configReactDOM(ReactDOM: any): void;
+declare function tryAutoConfig(): void;
+declare const version: string;
 declare const logger: Logger;
-export { logger, constants, dependencies, storageInstance, configReactDOM18, configReactDOM19, configReactDOM, ComponentsStore, };
+export { version, logger, constants, dependencies, storageInstance, configReactDOM18, configReactDOM19, configReactDOM, ComponentsStore, tryAutoConfig };

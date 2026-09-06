@@ -36,13 +36,8 @@ class FooterPanel extends React.PureComponent {
         extraRender: SharedPT.render,
     };
 
-    static defaultProps = {
-        locale: defaultLocale.DatePicker,
-    };
-
     constructor(props) {
         super(props);
-
         this.prefixCls = `${props.prefix}date-picker2-footer`;
     }
 
@@ -84,7 +79,7 @@ class FooterPanel extends React.PureComponent {
     render() {
         const { prefixCls } = this;
         const { showOk, locale, onOk, oKable, extraRender, className } = this.props;
-
+        const defaultOkText = defaultLocale?.DatePicker?.ok || 'OK';
         const classNames = classnames(prefixCls, className, {
             [`${prefixCls}-with-actions`]: showOk,
         });
@@ -93,7 +88,7 @@ class FooterPanel extends React.PureComponent {
         const rangeNode = this.renderRanges();
         const actionsNode = (
             <Button size="small" disabled={!oKable} onClick={onOk} className={`${prefixCls}-ok`} type="primary">
-                {locale.ok}
+                {locale?.ok || defaultOkText}
             </Button>
         );
 

@@ -75,7 +75,10 @@ export function isPlainObject(obj) {
  * 对象浅比较
  * @param  {Object} objA
  * @param  {Object} objB
- * @param  {Function}  [compare] 手动调用方法比较
+ * @param  {Function}  [compare] 自定义单项比较，签名：(valA, valB, key) => boolean | undefined
+ *   - 返回 true：该项视为相等
+ *   - 返回 false：该项视为不相等，整体立刻返回 false
+ *   - 返回 undefined：回退到默认的 valA !== valB
  * @return {Boolean}      对象浅比较是否相等
  *
  * @example
@@ -114,6 +117,7 @@ export function shallowEqual(objA, objB, compare) {
 
         const ret = hasCallback ? compare(valA, valB, key) : void 0;
 
+        // compare: true 相等 / false 不等 / undefined 回退到 valA !== valB
         if (ret === false || (ret === void 0 && valA !== valB)) {
             return false;
         }
@@ -210,8 +214,16 @@ export function pickOthers(holdProps, props) {
  * @example
  * object.pickProps(FooComponent.propTypes, this.props);
  * object.pickProps(['className', 'onChange'], this.props);
+ * object.pickProps('className,onChange', this.props);
  */
 export function pickProps(holdProps, props) {
+    if (typeof holdProps === 'string') {
+        holdProps = holdProps.split(',').map(prop1 => {
+            return prop1.trim();
+        }).filter((s)=>{
+            return s.length > 0
+        });
+    }
     const others = {};
     const isArray = typeOf(holdProps) === 'Array';
 
@@ -441,4 +453,13 @@ export function objectExtend(childObj, parentObj, keys){
 
 export function assignDefault(config, defaultConfig){
     return objectExtend(config, defaultConfig, Object.keys(defaultConfig))
+}
+
+
+
+const opt = Object.prototype.toString;
+
+
+export function isObject(obj) {
+    return opt.call(obj) === '[object Object]';
 }

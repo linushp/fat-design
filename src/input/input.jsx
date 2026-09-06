@@ -5,6 +5,8 @@ import Icon from '../icon';
 import { obj, func } from '../util';
 import Base from './base';
 import Group from './group';
+import {isEmptyStr} from "../util/string.ts";
+import {renderFormPreview} from "../util/render-utils.jsx";
 
 // preventDefault here can stop onBlur to keep focus state
 function preventDefault(e) {
@@ -18,6 +20,8 @@ class Input extends Base {
     static displayName = 'Input';
     static getDerivedStateFromProps = Base.getDerivedStateFromProps;
     static propTypes = {
+
+
         ...Base.propTypes,
         /**
          * label
@@ -98,6 +102,8 @@ class Input extends Base {
          * @version 1.24
          */
         hoverShowClear: PropTypes.bool,
+
+        previewPlaceholder: PropTypes.string,
     };
 
     static defaultProps = {
@@ -279,6 +285,7 @@ class Input extends Base {
             hasBorder,
             prefix,
             isPreview,
+            previewPlaceholder,
             renderPreview,
             addonBefore,
             addonAfter,
@@ -327,6 +334,13 @@ class Input extends Base {
         if (isPreview) {
             const { value } = props;
             const { label } = this.props;
+
+            if (isEmptyStr(value)) {
+                return renderFormPreview({
+                    className, prefix, previewPlaceholder
+                })
+            }
+
             if (typeof renderPreview === 'function') {
                 return (
                     <div {...others} className={previewCls}>

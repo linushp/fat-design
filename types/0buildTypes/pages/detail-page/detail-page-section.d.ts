@@ -1,6 +1,5 @@
 import { DetailPageSectionProps } from "./types";
-import React from "react";
-declare function DetailPageSection(props: DetailPageSectionProps): React.JSX.Element;
+declare function DetailPageSection(props: DetailPageSectionProps): import("react/jsx-runtime").JSX.Element;
 declare namespace DetailPageSection {
     var _typeMark: string;
     var defaultProps: {

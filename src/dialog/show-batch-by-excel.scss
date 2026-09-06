@@ -1,0 +1,19 @@
+.FatdBatchProcessByExcelForm {
+    min-height: 150px;
+    width: 500px;
+
+    .fatd-upload-dragable {
+        .fatd-hidden {
+            .fatd-upload-drag {
+                display: none;
+            }
+        }
+    }
+}
+
+.FatdBatchProcessByExcelTableCell {
+    white-space: nowrap; /* 禁止换行 */
+    overflow: hidden; /* 可选：超出容器部分隐藏 */
+    text-overflow: ellipsis; /* 可选：超出部分显示省略号 */
+    width: 100%;
+}

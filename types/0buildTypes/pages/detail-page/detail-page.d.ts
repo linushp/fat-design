@@ -1,6 +1,5 @@
-import React from 'react';
 import { DetailPageProps } from "./types";
-declare function DetailPage(props: DetailPageProps): React.JSX.Element;
+declare function DetailPage(props: DetailPageProps): import("react/jsx-runtime").JSX.Element;
 declare namespace DetailPage {
     var defaultProps: {
         prefix: string;

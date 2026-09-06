@@ -36,6 +36,7 @@ class BalloonInner extends React.Component {
         locale: PropTypes.object,
         pure: PropTypes.bool,
         v2: PropTypes.bool,
+        styleOption: PropTypes.string,
     };
     static defaultProps = {
         prefix: defaultPrefix,
@@ -64,6 +65,7 @@ class BalloonInner extends React.Component {
             children,
             rtl,
             locale,
+            styleOption,
             ...others
         } = this.props;
 
@@ -85,6 +87,7 @@ class BalloonInner extends React.Component {
             [`${_prefix}-medium`]: true,
             [`${_prefix}-${alignMap[align].arrow}`]: alignMap[align],
             [`${_prefix}-closable`]: closableInContent,
+            [`${_prefix}-black`]: isTooltip && styleOption === 'black',
             [className]: className,
         });
 

@@ -26,6 +26,10 @@ class CardBulletHeader extends Component {
          * 标题区域的用户自定义内容
          */
         extra: PropTypes.node,
+        /**
+         * 头部点击回调（collapsible 卡片切换收起/展开用）
+         */
+        onClick: PropTypes.func,
     };
 
     static defaultProps = {
@@ -34,7 +38,7 @@ class CardBulletHeader extends Component {
     };
 
     render() {
-        const { prefix, title, subTitle, extra, showTitleBullet } = this.props;
+        const { prefix, title, subTitle, extra, showTitleBullet, onClick } = this.props;
 
         if (!title) return null;
 
@@ -48,7 +52,7 @@ class CardBulletHeader extends Component {
         ) : null;
 
         return (
-            <div className={headCls}>
+            <div className={headCls} onClick={onClick}>
                 <div className={`${prefix}card-head-main`}>
                     <div className={`${prefix}card-title`}>
                         {title}

@@ -31,10 +31,9 @@
             display: block;
         }
 
-
         &.has-error {
             #{$form-prefix}-item-control {
-                 #{$form-prefix}-item-help {
+                #{$form-prefix}-item-help {
                     color: $form-error-color;
                 }
             }
@@ -42,7 +41,7 @@
 
         &.has-warning {
             #{$form-prefix}-item-control {
-                 #{$form-prefix}-item-help {
+                #{$form-prefix}-item-help {
                     color: $form-warning-color;
                 }
             }
@@ -54,12 +53,15 @@
         }
 
 
-        #{$form-prefix}-item-label, #{$form-prefix}-text-align, p {
+        #{$form-prefix}-item-label,
+        #{$form-prefix}-text-align,
+        p {
             line-height: $form-element-medium-height;
         }
 
 
-        #{$form-prefix}-text-align, p {
+        #{$form-prefix}-text-align,
+        p {
             margin: 0;
         }
 
@@ -69,7 +71,7 @@
         #{$form-prefix}-item-label {
             font-size: $form-element-medium-font-size;
 
-            > label {
+            >label {
                 display: inline-block;
                 line-height: $font-lineheight-2;
             }
@@ -77,7 +79,10 @@
 
         &.#{$css-prefix}large {
             margin-bottom: $form-item-l-margin-b;
-            #{$form-prefix}-item-label, #{$form-prefix}-text-align, p {
+
+            #{$form-prefix}-item-label,
+            #{$form-prefix}-text-align,
+            p {
                 line-height: $form-element-large-height;
             }
 
@@ -101,7 +106,9 @@
         &.#{$css-prefix}small {
             margin-bottom: $form-item-s-margin-b;
 
-            #{$form-prefix}-item-label, #{$form-prefix}-text-align, p {
+            #{$form-prefix}-item-label,
+            #{$form-prefix}-text-align,
+            p {
                 line-height: $form-element-small-height;
             }
 
@@ -128,12 +135,14 @@
             line-height: inherit;
         }
     }
+
     &-item-control {
         #{$form-prefix}-text-align {
             margin: 0;
         }
 
-        .#{$css-prefix}input-group, .#{$css-prefix}input {
+        .#{$css-prefix}input-group,
+        .#{$css-prefix}input {
             width: 100%;
         }
 
@@ -147,16 +156,16 @@
         padding-top: 2px;
     }
 
-
     &-item-fullwidth &-item-control {
-         .#{$css-prefix}input-group,
-         .#{$css-prefix}input,
-         .#{$css-prefix}select,
-         .#{$css-prefix}date-picker,
-         .#{$css-prefix}month-picker,
-         .#{$css-prefix}year-picker,
-         .#{$css-prefix}range-picker,
-         .#{$css-prefix}time-picker {
+
+        .#{$css-prefix}input-group,
+        .#{$css-prefix}input,
+        .#{$css-prefix}select,
+        .#{$css-prefix}date-picker,
+        .#{$css-prefix}month-picker,
+        .#{$css-prefix}year-picker,
+        .#{$css-prefix}range-picker,
+        .#{$css-prefix}time-picker {
             width: 100%;
         }
 
@@ -190,10 +199,11 @@
         &.#{$css-prefix}left {
             text-align: left;
 
-            > label[data-required]::before {
+            >label[data-required]::before {
                 display: none;
             }
-            > label[data-required]::after {
+
+            >label[data-required]::after {
                 margin-left: 4px;
                 content: "*";
                 color: $form-error-color;
@@ -225,9 +235,11 @@
             &:not(:last-child) {
                 margin-right: $form-inline-m-item-margin-r;
             }
+
             &.#{$css-prefix}large:not(:last-child) {
                 margin-right: $form-inline-l-item-margin-r;
             }
+
             &.#{$css-prefix}small:not(:last-child) {
                 margin-right: $form-inline-s-item-margin-r;
             }
@@ -240,12 +252,19 @@
     display: flex;
     gap: 12px;
     flex-direction: row;
+    align-items: center;
+    user-select: none;
+
+    .fatd-btn {
+        user-select: none;
+    }
 }
 
 .#{$css-prefix}preview.#{$css-prefix}form-item {
     #{$form-prefix}-item-label {
         color: $form-element-preview-label-color;
     }
+
     #{$form-prefix}-preview {
         color: $form-element-preview-text-color;
     }
@@ -256,12 +275,14 @@
             line-height: $form-element-medium-preview-height;
         }
     }
+
     &.#{$css-prefix}small {
         #{$form-prefix}-item-label {
             font-size: $form-element-small-preview-label-font-size;
             line-height: $form-element-small-preview-height;
         }
     }
+
     &.#{$css-prefix}large {
 
         #{$form-prefix}-item-label {
@@ -295,31 +316,25 @@
 
 
 
-@media screen and (min-width: 0\0) and (min-resolution: .001dpcm) {
-    #{$form-prefix}-item.#{$css-prefix}left > #{$form-prefix}-item-label {
-        display: table-cell;
-    }
-    #{$form-prefix}.#{$css-prefix}inline #{$form-prefix}-item.#{$css-prefix}left #{$form-prefix}-item-control {
-        display: table-cell;
-    }
-}
-
 #{$form-prefix}[dir="rtl"] {
     #{$form-prefix}-item-label {
         text-align: left;
         padding-left: $form-label-padding-r;
         padding-right: 0;
     }
+
     &.#{$css-prefix}inline {
         #{$form-prefix}-item {
             &:not(:last-child) {
                 margin-left: $form-inline-m-item-margin-r;
                 margin-right: 0;
             }
+
             &.#{$css-prefix}large:not(:last-child) {
                 margin-left: $form-inline-l-item-margin-r;
                 margin-right: 0;
             }
+
             &.#{$css-prefix}small:not(:last-child) {
                 margin-left: $form-inline-s-item-margin-r;
                 margin-right: 0;

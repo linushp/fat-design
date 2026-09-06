@@ -44,8 +44,10 @@ function tryAutoConfig() {
 
 tryAutoConfig();
 
+const version: string = __FAT_DESIGN_VERSION__;
 const logger = new Logger("others", "others");
 export {
+    version,
     logger,
     constants,
     dependencies,
@@ -54,4 +56,5 @@ export {
     configReactDOM19,
     configReactDOM,
     ComponentsStore,
+    tryAutoConfig
 }

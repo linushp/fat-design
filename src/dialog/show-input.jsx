@@ -1,4 +1,3 @@
-import {str} from "../util";
 import {buildShowForm} from "./show-form.jsx";
 import classNames from 'classnames';
 import {defaultPrefix} from "../config-provider";

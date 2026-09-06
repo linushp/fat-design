@@ -84,6 +84,10 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLElement>, CommonP
      * [v2] 箭头是否指向目标元素的中心
      */
     arrowPointToCenter?: boolean;
+    /**
+     * 样式选项，black 时弹出层为黑底白字风格
+     */
+    styleOption?: 'black' | string;
 }
 
 export class Tooltip extends React.Component<TooltipProps, any> {}

@@ -19,4 +19,32 @@
   .#{$css-prefix}form-item-help {
     display: none;
   }
+
+  // 更多按钮
+  .fatd-query-form-button-expand-more1,
+  .fatd-query-form-button-expand-more2 {
+    display: none;
+  }
+
+  // 更多FormItem
+  .fatd-query-form-item-more {
+    display: none;
+  }
+
+  &.fatd-query-form-has-more-visible {
+
+    // 按钮未展开状态
+    .fatd-query-form-button-expand-more1 { display: block;  }
+    .fatd-query-form-button-expand-more2 { display: none;  }
+
+    // 按钮展开状态
+    &.fatd-query-form-more-expand {
+      .fatd-query-form-button-expand-more1 { display: none; }
+      .fatd-query-form-button-expand-more2 { display: block; }
+      .fatd-query-form-item-more {
+        display: block;
+      }
+    }
+  }
 }
+

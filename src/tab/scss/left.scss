@@ -1,0 +1,43 @@
+@import "./variable.scss";
+
+.fatd-tabs-vertical {
+  &.fatd-tabs-shape_line {
+    display: flex;
+    flex-direction: row;
+
+    .fatd-tabs-bar {
+      border-right: 1px solid #1c1f2314;
+
+      .fatd-tabs-tab {
+        display: block;
+        .fatd-tabs-tab-inner {
+          border-left: 2px solid transparent;
+          color: #1c1f239e;
+          font-weight: 400;
+        }
+      }
+      .fatd-tabs-tab:hover {
+        .fatd-tabs-tab-inner {
+          border-left: 2px solid #2e32380d;
+          background: #2e32380d;
+        }
+      }
+
+      .fatd-tabs-tab.active {
+        .fatd-tabs-tab-inner {
+          border-left: 2px solid  var(--color-brand1-6, #5263ff);
+          background: #eaf5ff;
+          font-weight: 600;
+        }
+      }
+
+
+
+    }
+
+    .fatd-tabs-content {
+      flex: 100% 1 1;
+    }
+
+  }
+}

@@ -82,7 +82,14 @@ export interface ObjectFile extends CommonModifiedFile {
     alt?: string;
 }
 
-
+export interface IFileValueObject {
+    name?: string;
+    state?: string;
+    url?: string;
+    downloadURL?: string;
+    imgURL?: string;
+    size?: number;
+}
 
 export interface CardProps extends HTMLAttributesWeak, CommonProps {
     /**
@@ -321,12 +328,30 @@ export interface CardProps extends HTMLAttributesWeak, CommonProps {
 export class Card extends React.Component<CardProps, any> {}
 
 export interface SimpleJSONUploadProps extends UploadProps, CardProps {
-    uploadComponent?: any; // 可以指定上传组件
+
+    /**
+     * 可以指定上传组件
+     */
+    uploadComponent?: any;
+
     /**
      * 上传文件改变时的状态。两个参数的OnChange函数，可以接收最原始的返回值。
      */
     onChange2?: (value: File[], param2?: any) => void;
+
+    /**
+     * 在Preview模式下，如何显示 预览效果
+     * 默认：default
+     */
+    previewMode?: 'default' | 'auto' | 'image' | 'download' | 'weboffice' | 'auto-list';
+
+    /**
+     * 可以是标准的value数组，也可以是字符串
+     */
+    value?: IFileValueObject | IFileValueObject[] | string;
 }
+
+
 
 export class SimpleJSONUpload extends React.Component<SimpleJSONUploadProps, any> {} {
 
@@ -529,12 +554,12 @@ export interface UploadProps extends HTMLAttributesWeak, CommonProps {
     /**
      * 文件列表
      */
-    value?: Array<any>;
+    value?: IFileValueObject[];
 
     /**
      * 默认文件列表
      */
-    defaultValue?: Array<any>;
+    defaultValue?: IFileValueObject[];
 
     /**
      * 上传按钮形状

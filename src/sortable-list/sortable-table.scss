@@ -70,3 +70,15 @@ $header-bg: #f2f3f5;
   border: 1px solid $border-color;
   background: #eef3f5;
 }
+
+
+.#{$css-prefix}sortable-table-small {
+  .#{$css-prefix}sortable-table-td,
+  .#{$css-prefix}sortable-table-th {
+    padding: 6px;
+  }
+
+  .#{$css-prefix}icon-list:before {
+    font-size: 15px;
+  }
+}

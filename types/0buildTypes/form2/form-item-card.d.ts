@@ -1,4 +1,3 @@
-import React from "react";
 import { IFormItemCardProps } from "./form-types";
-declare function FormItemCard(props: IFormItemCardProps): React.JSX.Element;
+declare function FormItemCard(props: IFormItemCardProps): import("react/jsx-runtime").JSX.Element;
 export { FormItemCard };

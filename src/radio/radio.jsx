@@ -209,7 +209,7 @@ class Radio extends UIState {
         if (isPreview) {
             const previewCls = classnames(className, `${prefix}form-preview`);
 
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div id={id} dir={rtl ? 'rtl' : 'ltr'} {...others} className={previewCls}>
                         {renderPreview(checked, this.props)}

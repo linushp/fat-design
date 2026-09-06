@@ -27,3 +27,6 @@ distTmp
 types/0buildTypes/index.d.ts
 types/0buildTypes/libs.d.ts
 stats.html
+demos2/
+.qoder/
+.qoder/repowiki/

@@ -75,6 +75,18 @@ $tag-size-m-text-size: $font-size-body-2 !default;
 /// @namespace size/content
 $tag-size-s-text-size: $font-size-caption !default;
 
+/// line height
+/// @namespace size/content
+$tag-size-s-body-line-height: 18px !default;
+
+/// line height
+/// @namespace size/content
+$tag-size-m-body-line-height: 26px !default;
+
+/// line height
+/// @namespace size/content
+$tag-size-l-body-line-height: 38px !default;
+
 /// min width
 /// @namespace size/content
 $tag-size-s-content-min-width: $s-7 !default;

@@ -69,7 +69,7 @@ function FormButton(props: BaseBtnProps) {
     const [loading, setLoading] = useState(false);
     const loadingRef = useRef(false);
 
-    
+
     const formActions = formContext.formActions as FormActions;
     const formStore = formContext.formStore;
     const formEventBus = formContext.formEventBus;
@@ -77,15 +77,20 @@ function FormButton(props: BaseBtnProps) {
 
     const handleClick = usePersistFn(async (e: any, b: any, c: any) => {
         const innerFn = async (e: any, b: any, c: any) => {
+            const params = buildFnFormOnChangeParams(formStore, formActions);
+            params.eventArgs = [e, b, c];
             if (typeof onClick === "function") {
-                const params = buildFnFormOnChangeParams(formStore, formActions);
-                params.eventArgs = [e, b, c];
                 await onClick(e, params);
             }
-            await bizCallback(formStore, formActions, formContext);
+            if (xProps && typeof xProps.onClick === "function") {
+                await xProps.onClick(e, params);
+            }
+            if (typeof bizCallback === "function") {
+                await bizCallback(formStore, formActions, formContext);
+            }
         }
 
-        if(loadingRef.current) {
+        if (loadingRef.current) {
             return;
         }
 
@@ -133,7 +138,7 @@ function FormButton(props: BaseBtnProps) {
 
     return (
         <Button {...otherProps}
-            type={type}
+            type={type || xProps?.type}
             htmlType={htmlType}
             loading={loading}
             onClick={handleClick}>

@@ -74,10 +74,14 @@ export interface FormItemState extends FormItemStateSaved {
     state?: string;
     stateMessage?: string;
 }
+/**
+ * 校验规则
+ */
 export interface FormItemValidateRule {
     message?: string;
     trigger?: string;
     validator?: FnValidator;
+    pattern?: RegExp | string;
     minLength?: number;
     maxLength?: number;
     min?: number;
@@ -114,6 +118,7 @@ export type FnFormOnChange = (values: any, params: FnFormOnChangeParams) => any;
 export type FnFormItemOnChange = (value: any, params: FnFormOnChangeParams) => any;
 export type FnFormOnSubmit = (values: any, params: FnFormOnChangeParams) => any;
 export type TypeHelpPos = "tip" | 'always' | 'bottom';
+export type TypeFormItemSchemaFormat = 'number' | 'tel' | 'url' | 'email';
 export interface FormItemSchema {
     id?: string;
     label?: string | IReactElement;
@@ -151,8 +156,8 @@ export interface FormItemSchema {
     autoValidate?: boolean;
     max?: number;
     min?: number;
-    format?: string;
-    pattern?: string;
+    format?: TypeFormItemSchemaFormat;
+    pattern?: RegExp | string;
     required?: boolean | FnGetStateBool;
     requiredMessage?: string;
     length?: number;
@@ -167,7 +172,12 @@ export interface FormItemSchema {
     description?: string;
 }
 export interface FormItemProps extends FormItemSchema {
+    /**
+     * 字段名。RangePicker 等范围组件可使用复合语法 `[startField,endField]`，
+     * 将组件的数组值分别映射到 values 中的多个字段。
+     */
     name: string;
+    extItemClassName?: string;
 }
 export interface FormSchema {
     type: string;

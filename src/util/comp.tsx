@@ -49,6 +49,7 @@ interface ComponentsStoreProps {
 const SPECIAL_COMPONENTS = {
     TextArea: 'Input.TextArea',
     Password: 'Input.Password',
+    ColorPicker: 'Input.ColorPicker',
 }
 
 class ComponentsStore {

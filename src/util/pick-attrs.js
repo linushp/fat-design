@@ -65,4 +65,6 @@ function pickAttrs(props){
 // };
 
 
-export default pickAttrs;
+export {
+    pickAttrs
+};

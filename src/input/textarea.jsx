@@ -1,9 +1,11 @@
 import React from 'react';
-import {pReactDOM} from "../util";
+import { pReactDOM } from "../util";
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { obj, env } from '../util';
 import Base from './base';
+import {isEmptyStr} from "../util/string.ts";
+import {renderFormPreview} from "../util/render-utils.jsx";
 
 function onNextFrame(cb) {
     if (window.requestAnimationFrame) {
@@ -71,6 +73,8 @@ export default class TextArea extends Base {
          * @param {number} value 评分值
          */
         renderPreview: PropTypes.func,
+
+        previewPlaceholder: PropTypes.string,
     };
 
     static defaultProps = {
@@ -210,6 +214,7 @@ export default class TextArea extends Base {
             autoHeight,
             isPreview,
             renderPreview,
+            previewPlaceholder,
             prefix,
             rtl,
             hasBorder,
@@ -250,13 +255,30 @@ export default class TextArea extends Base {
 
         if (isPreview) {
             const { value } = props;
-            if ('renderPreview' in this.props) {
+
+            if (isEmptyStr(value)) {
+                return renderFormPreview({
+                    className, prefix, previewPlaceholder
+                })
+            }
+
+
+            if (typeof renderPreview === 'function') {
                 return (
                     <div {...others} className={previewCls}>
                         {renderPreview(value, this.props)}
                     </div>
                 );
             }
+
+            if (typeof value === 'undefined' || value === null) {
+                return (<div {...others} className={previewCls} />)
+            }
+
+            if (typeof value !== 'string') {
+                return (<div {...others} className={previewCls} >{"" + value}</div>)
+            }
+
             return (
                 <div {...others} className={previewCls}>
                     {value.split('\n').map((data, i) => (

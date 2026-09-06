@@ -74,6 +74,11 @@ export interface ButtonProps extends HTMLAttributesWeak, CommonProps {
     disabled?: boolean;
 
     /**
+     * 禁用（disabled为true）时点击可触发气泡提示，用于解释按钮为何禁用
+     */
+    tooltip?: React.ReactNode;
+
+    /**
      * 点击按钮的回调
      */
     onClick?: React.MouseEventHandler;
@@ -165,7 +170,12 @@ export interface ActionButtonProps extends ButtonProps {
 declare function ActionButton(props: ActionButtonProps): React.JSX.Element;
 
 
+export interface LoadingButtonProps extends ButtonProps {
+    renderChildren?: (loading: boolean)=> React.ReactNode;
+}
 
+
+declare function LoadingButton(props: LoadingButtonProps): React.JSX.Element;
 
 
 
@@ -173,6 +183,7 @@ export default class Button extends React.Component<ButtonProps, any> {
     static Group: typeof Group;
     static SaveButton: typeof SaveButton;
     static ActionButton: typeof ActionButton;
+    static LoadingButton: typeof LoadingButton;
 }
 
 

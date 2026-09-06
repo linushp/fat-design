@@ -10,11 +10,15 @@ import {buildShowForm} from "./show-form.jsx";
 import {buildShowInput} from "./show-input.jsx";
 import {buildShowBatchInput} from "./show-batch-input.jsx";
 import {buildShowComp} from "./show-comp.jsx";
+import {buildShowAudit} from "./show-audit.jsx";
 import {PopManager} from "../pop-manager";
 import {wrapperFn} from "../util/func";
 import {buildShowTable} from "./show-table.jsx";
+import {buildShowBatchByExcel} from "./show-batch-by-excel.jsx";
 import {defaultWidth, MESSAGE_TYPE} from "./constants.jsx";
 import {wrapperMessage} from "./utils.jsx";
+import {buildShowBatchProcess} from "./show-batch-process.jsx";
+import {buildShowTab} from "./show-tab.jsx";
 
 const Dialog = ConfigProvider.config(dialog, {});
 
@@ -210,31 +214,26 @@ const showManager = new PopManager({
     duration: PopManager.MAX_DURATION,
 }).createExports();
 
-showManager.showForm = (config) => {
-    const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
-    const showForm = buildShowForm(showManager.show);
-    return showForm({...config2, ...config});
-};
-showManager.showInput = (config) => {
-    const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
-    const showInput = buildShowInput(showManager.show);
-    return showInput({...config2, ...config});
-};
-showManager.showTable = (config) => {
-    const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
-    const showTable = buildShowTable(showManager.show);
-    return showTable({...config2, ...config});
+
+function createShowFn(showFnBuild) {
+    return (config) => {
+        const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
+        const showFn = showFnBuild(showManager.show);
+        return showFn({...config2, ...config});
+    };
 }
-showManager.showBatchInput = (config) => {
-    const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
-    const showBatchInput = buildShowBatchInput(showManager.show);
-    return showBatchInput({...config2, ...config});
-}
-showManager.showComp = (config) => {
-    const config2 = ConfigProvider.getContextProps({props: config, displayName: 'Dialog'});
-    const showBatchInput = buildShowComp(showManager.show);
-    return showBatchInput({...config2, ...config});
-}
+
+
+showManager.showForm = createShowFn(buildShowForm);
+showManager.showInput = createShowFn(buildShowInput);
+showManager.showTable = createShowFn(buildShowTable);
+showManager.showBatchInput = createShowFn(buildShowBatchInput);
+showManager.showComp = createShowFn(buildShowComp);
+showManager.showAudit = createShowFn(buildShowAudit);
+showManager.showBatchByExcel = createShowFn(buildShowBatchByExcel);
+showManager.showBatchProcess = createShowFn(buildShowBatchProcess);
+showManager.showTab = createShowFn(buildShowTab);
+
 
 showManager.confirmPromise = (config) => {
     return new Promise((resolve, reject) => {

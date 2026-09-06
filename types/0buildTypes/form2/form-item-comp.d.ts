@@ -1,4 +1,3 @@
-import React from "react";
 import { WrapFormItemProps } from "./form-types";
-declare function FormItemComp(props: WrapFormItemProps): React.JSX.Element;
+declare function FormItemComp(props: WrapFormItemProps): import("react/jsx-runtime").JSX.Element;
 export { FormItemComp };

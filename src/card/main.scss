@@ -199,4 +199,62 @@
         line-height: $card-content-line-height;
         color: $card-content-color;
     }
+
+    // 收起/展开（collapsible）
+    &-collapsible {
+        > #{$card-prefix}-head {
+            cursor: pointer;
+            user-select: none;
+            transition: background-color $motion-duration-standard $motion-ease;
+
+            // 悬浮时轻微背景变化，提示头部可点击切换收起/展开
+            &:hover {
+                background: #f5f8fc;
+            }
+        }
+    }
+
+    &-collapse-title {
+        display: inline-flex;
+        align-items: center;
+        max-width: 100%;
+    }
+
+    &-collapse-icon {
+        margin-left: 10px;
+        margin-right: 10px;
+        transition: transform $motion-duration-standard $motion-ease;
+
+        // core 的 icon-size mixin 按尺寸生成 .fatd-icon.fatd-xxs 的负 margin
+        // （双类选择器，特异性高于此处单类），卡片箭头实际用 size="xxs"，
+        // 叠加 icon 类名提升特异性覆盖
+        &.#{$css-prefix}icon.#{$css-prefix}xxs {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        &-collapsed {
+            transform: rotate(-90deg);
+
+            // icon-size mixin 的 .#{$css-prefix}icon.#{$css-prefix}xxs 带有
+            // transform: scale(0.5)（双类特异性高于此处单类），会压掉旋转；
+            // 叠加 icon 类名提升特异性，并保留 scale(0.5) 避免箭头变大
+            &.#{$css-prefix}icon.#{$css-prefix}xxs {
+                transform: scale(0.5) rotate(-90deg);
+            }
+        }
+    }
+
+    &-collapse-hint {
+        margin-left: $s-3;
+        color: $card-title-extra-color;
+    }
+
+    &-collapsed {
+        > #{$card-prefix}-media,
+        > #{$card-prefix}-body,
+        > #{$card-prefix}-actions {
+            display: none;
+        }
+    }
 }

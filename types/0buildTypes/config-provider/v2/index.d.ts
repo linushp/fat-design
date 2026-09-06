@@ -3,16 +3,16 @@ import { IConfigProviderProps, IGetContextProps } from "./types";
 declare class ConfigProvider extends React.Component<IConfigProviderProps, any> {
     static defaultPrefix: string;
     static propTypes: {
-        prefix: import("prop-types").Requireable<string>;
-        locale: import("prop-types").Requireable<object>;
-        defaultPropsConfig: import("prop-types").Requireable<object>;
-        errorBoundary: import("prop-types").Requireable<NonNullable<boolean | object>>;
-        pure: import("prop-types").Requireable<boolean>;
-        warning: import("prop-types").Requireable<boolean>;
-        rtl: import("prop-types").Requireable<boolean>;
-        device: import("prop-types").Requireable<string>;
-        children: import("prop-types").Requireable<any>;
-        popupContainer: import("prop-types").Requireable<any>;
+        prefix: any;
+        locale: any;
+        defaultPropsConfig: any;
+        errorBoundary: any;
+        pure: any;
+        warning: any;
+        rtl: any;
+        device: any;
+        children: any;
+        popupContainer: any;
     };
     static config<T>(Component: any, options?: any): T;
     static configFn<T>(Component: any, options?: any): T;
@@ -27,10 +27,10 @@ declare class ConfigProvider extends React.Component<IConfigProviderProps, any> 
     static getDirection(): string;
     static getPrefix(): string;
     static createBoolComponent(Component: any, displayName?: string): {
-        (props: any): React.JSX.Element;
+        (props: any): import("react/jsx-runtime").JSX.Element;
         displayName: string;
     };
     constructor(props: IConfigProviderProps);
-    render(): React.JSX.Element;
+    render(): import("react/jsx-runtime").JSX.Element;
 }
 export { ConfigProvider };

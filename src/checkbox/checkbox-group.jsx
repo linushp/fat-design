@@ -204,10 +204,11 @@ class CheckboxGroup extends Component {
             });
         }
 
+        
         if (isPreview) {
             const previewCls = classnames(className, `${prefix}form-preview`);
 
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div {...others} dir={rtl ? 'rtl' : undefined} className={previewCls}>
                         {renderPreview(previewed, this.props)}

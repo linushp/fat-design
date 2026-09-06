@@ -9,7 +9,7 @@ import ConfigProvider from "../config-provider";
 import Button from "../button";
 import tableUtils from "./widget/index";
 import {logger} from "../util/log";
-import { isSettingNameValid } from './widget/column-setting'
+import { isSettingNameValid, resolveDefaultStyleSetting } from './widget/column-setting'
 
 interface TableProState {
     columns: any[] | null,
@@ -46,8 +46,32 @@ class TableProImpl extends React.Component<TableProProps, TableProState> {
         this.setState({columns: columns});
     }
 
+    // 挂载时应用风格设置：本地有数据用 storage，没有则保持 useTablePro 写入的初始值
+    applyStyleSetting = async () => {
+        const {actions, settingName} = this.props;
+        if (!isSettingNameValid(settingName)) {
+            return;
+        }
+        const savedStyleSetting = await tableUtils.getTableStyleBySetting(settingName);
+        if (!savedStyleSetting) {
+            return;
+        }
+        const defaultStyleSetting = typeof actions.getDefaultStyleSetting === 'function'
+            ? actions.getDefaultStyleSetting()
+            : resolveDefaultStyleSetting(actions.getInitialParams?.()?.initTableProps);
+        const currentTableProps = actions.getTableProps();
+        actions.updateTableProps({
+            ...currentTableProps,
+            size: savedStyleSetting.size || defaultStyleSetting.size,
+            isZebra: typeof savedStyleSetting.isZebra === 'boolean'
+                ? savedStyleSetting.isZebra
+                : defaultStyleSetting.isZebra,
+        });
+    }
+
     componentDidMount() {
         this.updateColumns();
+        this.applyStyleSetting();
     }
 
     paginationTotalRender = (total: string) => {

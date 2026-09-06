@@ -30,3 +30,9 @@ export declare function isImageURL(url: string | any): boolean;
  * @param str
  */
 export declare function isNumeric(str: any): boolean;
+/**
+ * 根据URL获取文件名
+ * @param url
+ */
+export declare function getLastFileNameFromUrl(url: any): string;
+export declare function isEmptyStr(value: any): boolean;

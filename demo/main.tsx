@@ -1,79 +1,140 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as ReactDOMClient from 'react-dom/client'
 import * as ReactDOM from 'react-dom'
 
-import {DemoLoading} from './demo-loading'
-import {DemoTmp} from './demo-tmp'
-import {DemoQueryForm} from './demo-query-form'
-import {DemoQueryFormSimple} from './demo-query-form-simple'
-import {DemoForm1} from './demo-form1'
-import {DemoForm2} from './demo-form2'
-import {DemoForm3} from './demo-form3'
-import {DemoFormLayout} from './demo-form-layout'
-import {DemoButtons} from './demo-buttons'
-// import {DemoBatchInput} from './demo-batchinput'
-import {DemoDetailPage} from './demo-detail-page'
-import {DemoFormTable} from './demo-form-table'
-import {DemoTablePro} from './demo-table-pro'
+import { Box } from '../src/index'
+import { utils } from '../src/index'
+import { DemoNavigator } from './demo-navigator'
+import { getDefaultDemo, getDemoById, DemoItem } from './demo-registry'
 import './index.css'
-import {DemoFilter} from "./demo-filter";
-import {DemoImage} from "./demo-image";
-import {DemoUpload} from "./demo-upload";
-import {DemoMenuButton} from "./demo-menu-button";
-import {DemoDialogShow} from "./demo-dialog-show";
-import {DemoDrawerShow} from "./demo-drawer-show";
-import {DemoSortableTable} from "./demo-sortable-table";
-import {CurdApiDetail} from "./demo-crud-api/curd-api-detail";
-import DemoMessage from "./demo-message";
-import DemoSimpleUpload from "./demo-simple-upload.jsx";
-// import DemoSetters from "./demo-setters";
-import DemoIcons from "./demo-icons";
-import {utils} from '../src/index'
 
-const {pReactDOM,log} = utils;
+const { pReactDOM, log } = utils;
 
+// Disable logs for cleaner console
 log.setLogEnable({
-    debug: false,
-    error: false,
-    info: false,
-    log: false,
-    deprecated: false,
-    warning: false,
+  debug: false,
+  error: false,
+  info: false,
+  log: false,
+  deprecated: false,
+  warning: false,
 });
 
 pReactDOM.configReactDOM18(ReactDOM, ReactDOMClient);
 
+// Demo App with Navigation
+function DemoApp() {
+  // Get initial demo from URL hash or default to first demo
+  const getInitialDemo = (): DemoItem => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const demo = getDemoById(hash);
+      if (demo) return demo;
+    }
+    return getDefaultDemo();
+  };
+
+  const [activeDemo, setActiveDemo] = useState<DemoItem>(getInitialDemo());
+
+  const handleSelectDemo = (demo: DemoItem) => {
+    setActiveDemo(demo);
+    // Update URL hash for shareable links
+    window.location.hash = demo.id;
+  };
+
+  // Listen for hash changes (browser back/forward)
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const demo = getDemoById(hash);
+        if (demo && demo.id !== activeDemo.id) {
+          setActiveDemo(demo);
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [activeDemo.id]);
+
+  const ActiveDemoComponent = activeDemo.component;
+
+  return (
+    <Box direction="row" style={{ height: '100vh', overflow: 'hidden' }}>
+      {/* Sidebar Navigation */}
+      <div style={{
+        width: '260px',
+        flexShrink: 0,
+        height: '100%',
+        borderRight: '1px solid #e8e8e8',
+        backgroundColor: '#fafafa'
+      }}>
+        <DemoNavigator
+          activeDemoId={activeDemo.id}
+          onSelectDemo={handleSelectDemo}
+        />
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{
+        flex: 1,
+        height: '100%',
+        overflow: 'auto',
+        backgroundColor: '#f0f2f5',
+        padding: '20px'
+      }}>
+        {/* Demo Header */}
+        <div style={{
+          marginBottom: '16px',
+          padding: '16px 20px',
+          backgroundColor: '#fff',
+          borderRadius: '4px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+        }}>
+          <h1 style={{
+            margin: 0,
+            fontSize: '20px',
+            fontWeight: 500,
+            color: '#333'
+          }}>
+            {activeDemo.title}
+          </h1>
+          {activeDemo.description && (
+            <p style={{
+              margin: '8px 0 0',
+              fontSize: '14px',
+              color: '#666'
+            }}>
+              {activeDemo.description}
+            </p>
+          )}
+          <div style={{
+            marginTop: '8px',
+            fontSize: '12px',
+            color: '#999',
+            fontFamily: 'monospace'
+          }}>
+            Demo ID: {activeDemo.id}
+          </div>
+        </div>
+
+        {/* Demo Content */}
+        <div style={{
+          backgroundColor: '#fff',
+          borderRadius: '4px',
+          minHeight: 'calc(100vh - 200px)',
+          padding: '20px'
+        }}>
+          <ActiveDemoComponent />
+        </div>
+      </div>
+    </Box>
+  );
+}
+
 const root = pReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-
 root.render(
-    // <React.StrictMode>
-    <div>
-        {/*<DemoSimpleUpload />*/}
-        {/*<DemoBatchInput />*/}
-        {/*<DemoForm3 />*/}
-        {/*<DemoLoading />*/}
-        {/*<DemoSortableTable />*/}
-        {/*<DemoQueryFormSimple />*/}
-        <DemoTablePro />
-        {/*<DemoFormTable />*/}
-        {/*<DemoButtons/>*/}
-        {/*<DemoDialogShow/>*/}
-        {/*<DemoUpload/>*/}
-        {/*<DemoDrawerShow/>*/}
-        {/*<DemoMenuButton/>*/}
-        {/*<DemoFilter/>*/}
-        {/*<DemoFormLayout />*/}
-        {/*<DemoForm1/>*/}
-        {/*<DemoForm2/>*/}
-        {/*<DemoDetailPage/>*/}
-        {/* <DemoQueryForm/> */}
-        {/*<DemoTmp/>*/}
-        {/*<CurdApiDetail />*/}
-        {/*<DemoImage />*/}
-        {/*<DemoMessage />*/}
-        {/*<DemoIcons />*/}
-        {/*<DemoSetters />*/}
-    </div>
-     // </React.StrictMode>
+  <DemoApp />
 )

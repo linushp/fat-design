@@ -84,7 +84,7 @@
     &tag-large {
         @include tag-size(
             $tag-size-l-height,
-            $tag-size-line-height,
+            $tag-size-l-body-line-height,
             $tag-border-width,
             $tag-size-l-padding-lr,
             $tag-size-l-text-size,
@@ -97,7 +97,7 @@
     &tag-medium {
         @include tag-size(
             $tag-size-m-height,
-            $tag-size-line-height,
+            $tag-size-m-body-line-height,
             $tag-border-width,
             $tag-size-m-padding-lr,
             $tag-size-m-text-size,
@@ -110,7 +110,7 @@
     &tag-small {
         @include tag-size(
             $tag-size-s-height,
-            $tag-size-line-height,
+            $tag-size-s-body-line-height,
             $tag-border-width,
             $tag-size-s-padding-lr,
             $tag-size-s-text-size,

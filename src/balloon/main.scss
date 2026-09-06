@@ -132,6 +132,23 @@
     &-medium {
         @include balloon-size($balloon-tooltip-size-padding-top, $balloon-tooltip-size-padding-right, $balloon-tooltip-size-padding-bottom, $balloon-tooltip-size-padding-left);
     }
+
+    /* black style option */
+    &-black {
+        background-color: #1a1a1a;
+        color: #fff;
+        border-color: #1a1a1a;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0, 0, 0, 0.3);
+
+        .#{$css-prefix}balloon-content {
+            color: #fff;
+        }
+
+        .#{$css-prefix}balloon-arrow .#{$css-prefix}balloon-arrow-content {
+            background-color: #1a1a1a;
+            border-color: #1a1a1a;
+        }
+    }
 }
 
 @import "rtl";

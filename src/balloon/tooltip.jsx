@@ -83,6 +83,10 @@ export default class Tooltip extends React.Component {
          * [v2] 箭头是否指向目标元素的中心
          */
         arrowPointToCenter: PropTypes.bool,
+        /**
+         * 样式选项，black 时为黑底白字风格
+         */
+        styleOption: PropTypes.string,
     };
     static defaultProps = {
         triggerType: 'hover',
@@ -181,6 +185,7 @@ export default class Tooltip extends React.Component {
             delay,
             v2,
             arrowPointToCenter,
+            styleOption,
             ...others
         } = this.props;
 
@@ -210,6 +215,7 @@ export default class Tooltip extends React.Component {
                 rtl={rtl}
                 alignEdge={alignEdge}
                 v2={v2}
+                styleOption={styleOption}
             >
                 {children}
             </BalloonInner>

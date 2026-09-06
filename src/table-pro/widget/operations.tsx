@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {OperationBtnItem, OperationsProps} from "../types";
 import Box from "../../box";
 import Button from '../../button';
@@ -9,6 +9,8 @@ import {deepEqual} from "../../util/shallowEqual";
 import ConfigProvider from "../../config-provider";
 import {executeOperationAction} from "./operationsActions";
 
+const LoadingButton = Button.LoadingButton;
+const ActionButton = Button.ActionButton;
 
 const {Tooltip} = Balloon
 const MenuButtonItem = MenuButton.Item
@@ -25,10 +27,10 @@ interface ButtonItemProps {
 function wrapOnClick(fn: any, btnItem: any, actions: any) {
     return () => {
         if (typeof fn === "function") {
-            fn(btnItem, actions);
+            return fn(btnItem, actions);
         }
         if (typeof fn === 'string') {
-            executeOperationAction(fn, btnItem, actions);
+            return executeOperationAction(fn, btnItem, actions);
         }
     };
 }
@@ -47,7 +49,7 @@ function IconText(props: any) {
 
 function renderButtonItem(props: ButtonItemProps) {
     const {btn, prefix, index, actions} = props;
-    const {text, size , onClick, icon, tooltip, type = 'normal', children} = btn;
+    const {text, size, onClick, icon, tooltip, type = 'normal', children, disabled = false} = btn;
 
     const key = btn.text + index;
 
@@ -55,7 +57,14 @@ function renderButtonItem(props: ButtonItemProps) {
     const cls = (txt: string) => {
         return `${prefix}query-form-table-${txt}`;
     }
-    const renderIconText = (icon: any, text: any) => {
+    const renderIconText = (icon: any, text: any, loading: boolean) => {
+        if (loading) {
+            return (
+                <span className={cls('operation-btn')}>
+                    <span className={cls('operation-text')}>{text}</span>
+                </span>
+            )
+        }
         return (
             <span className={cls('operation-btn')}>
                 {icon ? (
@@ -94,7 +103,7 @@ function renderButtonItem(props: ButtonItemProps) {
                             onClick={childOnClick}
                             style={itemStyle}
                             key={index}>
-                            {renderIconText(child.icon, child.text)}
+                            {renderIconText(child.icon, child.text, false)}
                         </MenuButtonItem>
                     );
                 })}
@@ -105,32 +114,38 @@ function renderButtonItem(props: ButtonItemProps) {
 
     const renderSingleBtn = () => {
 
-        const element = (
-            <Button key={'button_' + key}
-                    type={type}
-                    size={size}
-                    iconSize={'xs'}
-                    onClick={wrapOnClick(onClick, btn, actions)}>
-                {renderIconText(icon, text)}
-            </Button>
-        );
+        const renderChildren = (loading: boolean) => {
+            return renderIconText(icon, text, loading)
+        }
 
-        return tooltip ? (
-            <Tooltip
-                key={'tooltip_' + key}
-                trigger={element}
-                align="t">
-                {tooltip}
-            </Tooltip>
-        ) : (
-            element
-        )
+        const element = (
+            <LoadingButton key={'button_' + key}
+                           type={type}
+                           size={size}
+                           iconSize={'xs'}
+                           disabled={disabled}
+                           tooltip={tooltip}
+                           renderChildren={renderChildren}
+                           onClick={wrapOnClick(onClick, btn, actions)}/>
+        );
+        return element;
+        // return tooltip ? (
+        //     <Tooltip
+        //         key={'tooltip_' + key}
+        //         trigger={element}
+        //         align="t">
+        //         {tooltip}
+        //     </Tooltip>
+        // ) : (
+        //     element
+        // )
     }
 
 
     if (children && children.length > 0) {
         return renderMultiBtn();
     }
+
     return renderSingleBtn();
 }
 
@@ -160,7 +175,7 @@ const Operations = React.memo(React.forwardRef(OperationsImpl), (prevProps, next
 
 
 const TableOperations = ConfigProvider.config<typeof OperationsImpl>(Operations, {
-    componentName : 'TableOperations',
+    componentName: 'TableOperations',
 });
 
 export {

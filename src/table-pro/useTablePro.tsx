@@ -9,6 +9,8 @@ import _get from "../util/lodash-get.js";
 import {pickErrorMessage} from "../util/pick-res-data";
 import {toMap} from "../util/toMap";
 import {IUseTableProParams} from "./types";
+import {resolveFormDefaults} from "../query-form/form-default-values";
+import {resolveDefaultStyleSetting} from "./widget/column-setting";
 
 function getDep(name:string) {
     return _get(ComponentsStore.buildInComponents, name);
@@ -35,6 +37,7 @@ const QUERY_TRIGGER = {
     FILTER_ON_CHANGE: 'FILTER_ON_CHANGE',
     PAGINATION_ON_CHANGE: 'PAGINATION_ON_CHANGE',
     PAGINATION_ON_CHANGE_SIZE: 'PAGINATION_ON_CHANGE_SIZE',
+    TABLE_ON_SORT: 'TABLE_ON_SORT',
 };
 
 
@@ -56,7 +59,17 @@ interface TempVars {
     entireDataSourceMap: any // 所有的表格数据。用于跨页选择的缓存
 }
 
-function useTablePro(params: IUseTableProParams) {
+export interface IUseTableProProps {
+    formProps: any,
+    tableProps: any,
+    paginationProps: any,
+    filterProps: any,
+    operationProps: any,
+    actions: any,
+}
+
+
+function useTablePro(params: IUseTableProParams): IUseTableProProps {
 
     const Message = getDep('Message');
 
@@ -76,18 +89,27 @@ function useTablePro(params: IUseTableProParams) {
 
     const [rowSelection, updateRowSelection, getRowSelection] = useCurrentState2(initByParams({
         selectedRowKeys: []
-    }, params.initTableProps.rowSelection));
+    }, params.initTableProps?.rowSelection));
 
     const [formProps, updateFormProps, getFormProps] = useCurrentState2(initByParams({
         _tmpFormValues: params.initFormProps?.defaultValues || {},
         isUseCard: true
     }, params.initFormProps));
 
-    const [tableProps, updateTableProps, getTableProps] = useCurrentState2(initByParams({
-        showTotal: true,
-        title: null,
-        primaryKey: 'id'
-    }, params.initTableProps));
+    // 快照「用户未做任何设置」时的风格初始值，供列设置抽屉「恢复默认」和初始化使用
+    const defaultStyleSettingRef = useRef(resolveDefaultStyleSetting(params.initTableProps));
+    const initialSortRef = useRef(params.initTableProps?.sort || {});
+
+    const [tableProps, updateTableProps, getTableProps] = useCurrentState2({
+        ...initByParams({
+            showTotal: true,
+            title: null,
+            primaryKey: 'id',
+            size: defaultStyleSettingRef.current.size,
+            isZebra: defaultStyleSettingRef.current.isZebra,
+        }, params.initTableProps),
+        sort: {...initialSortRef.current},
+    });
 
     const [paginationProps, updatePaginationProps, getPaginationProps] = useCurrentState2(initByParams({
         pageSizeList: [10, 20, 50, 100, 200],
@@ -99,7 +121,7 @@ function useTablePro(params: IUseTableProParams) {
         current: 1,
         total: 0,
         totalRender: 'default',
-        size: params.initTableProps.size,
+        size: params.initTableProps?.size,
     }, params.initPaginationProps));
 
 
@@ -118,14 +140,14 @@ function useTablePro(params: IUseTableProParams) {
         const currentPaginationProps = getPaginationProps();
         const currentFilterProps = getFilterProps();
         const currentFormProps = getFormProps();
-
         return {
             formValues: currentFormProps._tmpFormValues,
             otherValues: {
                 queryTrigger,
                 current: currentPaginationProps.current,
                 pageSize: currentPaginationProps.pageSize,
-                filterValue: currentFilterProps.value
+                filterValue: currentFilterProps.value,
+                sort: getTableProps().sort || {},
             }
         }
     });
@@ -263,13 +285,8 @@ function useTablePro(params: IUseTableProParams) {
 
         updatePaginationProps(paginationProps);
         updateFormProps(formProps);
-        return doQuery(QUERY_TRIGGER.FORM_ON_SUBMIT).then((isSuccess) => {
-            if (isSuccess) {
-                updateFilterProps({
-                    value: getFilterProps().defaultValue,
-                });
-            }
-        });
+        updateFilterProps({ value: getFilterProps().defaultValue});
+        return doQuery(QUERY_TRIGGER.FORM_ON_SUBMIT).then(noop);
     });
 
     formProps.onReset = usePersistFn((values: any) => {
@@ -282,11 +299,9 @@ function useTablePro(params: IUseTableProParams) {
 
         updatePaginationProps(paginationProps);
         updateFormProps(formProps);
-        return doQuery(QUERY_TRIGGER.FORM_ON_RESET).then(() => {
-            updateFilterProps({
-                value: getFilterProps().defaultValue,
-            });
-        });
+        updateFilterProps({ value: getFilterProps().defaultValue});
+        updateTableProps({sort: {...initialSortRef.current}});
+        return doQuery(QUERY_TRIGGER.FORM_ON_RESET).then(noop);
     });
 
 
@@ -318,6 +333,19 @@ function useTablePro(params: IUseTableProParams) {
         doQuery(QUERY_TRIGGER.PAGINATION_ON_CHANGE_SIZE).then(noop);
     });
 
+    tableProps.onSort = usePersistFn((dataIndex: string, order: string, sort: any) => {
+        if (getIsLoading()) {
+            return;
+        }
+
+        const nextSort = (!order || order === 'default') ? {} : (sort || {});
+        paginationProps.current = 1;
+
+        updatePaginationProps(paginationProps);
+        updateTableProps({sort: nextSort});
+        doQuery(QUERY_TRIGGER.TABLE_ON_SORT).then(noop);
+    });
+
     rowSelection.onChange = usePersistFn((ids: any, records: any) => {
         logger.debug('rowSelection.onChange ids:', ids)
         rowSelection.selectedRowKeys = ids;
@@ -334,7 +362,24 @@ function useTablePro(params: IUseTableProParams) {
     }
 
     useEffect(() => {
-        tryFirstQuery(QUERY_TRIGGER.DID_MOUNT).then(noop);
+        const initAndQuery = async () => {
+            // 如果开启了表单设置，先读取已保存的设置并更新 _tmpFormValues
+            if (params.initFormProps?.settings && params.initFormProps?.settingName) {
+                try {
+                    const originalDefaults = params.initFormProps?.defaultValues || {};
+                    const { modifiedDefaultValues } = await resolveFormDefaults(
+                        params.initFormProps.settingName,
+                        originalDefaults
+                    );
+                    formProps._tmpFormValues = modifiedDefaultValues;
+                    updateFormProps(formProps);
+                } catch (e) {
+                    // 读取设置失败，使用原始默认值
+                }
+            }
+            tryFirstQuery(QUERY_TRIGGER.DID_MOUNT).then(noop);
+        };
+        initAndQuery();
     }, []);
 
 
@@ -369,6 +414,7 @@ function useTablePro(params: IUseTableProParams) {
     actions.doQuery = usePersistFn(doQuery);
     actions.getSelectedRowList = getSelectedRowList;
     actions.getInitialParams = ()=>{return params;};
+    actions.getDefaultStyleSetting = () => defaultStyleSettingRef.current;
     actions.getSettingName = ()=> {
         logger.error("getSettingName not implemented");
     };

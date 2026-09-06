@@ -48,6 +48,32 @@ function DemoDialogShow() {
         <PageCard>
 
             <div style={sectionTitle}>
+                showAudit
+            </div>
+
+            <Box direction="row" spacing={20}>
+
+                <Button onClick={() => {
+                    Dialog.showAudit({
+                        onOk(event: any) {
+
+                            const formValues = event.formValues;
+                            console.log("Dialog.showAudit: formValues", formValues);
+
+                            return new Promise((resolve) => {
+                                setTimeout(() => {
+                                    Message.success('OK')
+                                    resolve('');
+                                }, 3000)
+                            })
+                        }
+                    });
+                }}>
+                    流程审批
+                </Button>
+            </Box>
+
+                <div style={sectionTitle}>
                 showInput
             </div>
 
@@ -57,7 +83,15 @@ function DemoDialogShow() {
                     Dialog.showInput({
                         title: '确认审批通过',
                         label: '意见',
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -77,7 +111,15 @@ function DemoDialogShow() {
                         formProps: {
                             labelAlign: 'top',
                         },
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -96,7 +138,16 @@ function DemoDialogShow() {
                         title: '确认审批通过',
                         label: '审批意见',
                         placeholder: '请输入审批意见?',
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -117,8 +168,16 @@ function DemoDialogShow() {
                         okText: '审批通过',
                         deleteText: '删除',
                         footerActions: ['ok', 'cancel', 'delete'],
-                        onOk(v: any) {
-                            debugger
+                        onOk(event: any) {
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
+
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -138,7 +197,14 @@ function DemoDialogShow() {
                         mode: 'textareaMode',
                         label: '请输入审批意见',
                         placeholder: '请输入审批意见??',
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -159,8 +225,18 @@ function DemoDialogShow() {
                         placeholder: '请输入审批意见??',
                         bottomTips: '下方提示信息',
                         topTips: '上方提示文案',
-                        // required:false,
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
+
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -181,8 +257,17 @@ function DemoDialogShow() {
                         placeholder: '请输入审批意见??',
                         bottomTips: '下方提示信息',
                         topTips: '上方提示文案',
-                        // required:false,
-                        onOk(v: any) {
+                        onOk(event: any) {
+
+
+
+                            const formValues = event.formValues;
+                            const formInputValue = event.formInputValue;
+
+                            console.log("Dialog.showInput: formValues", formValues);
+                            console.log("Dialog.showInput: formInputValue", formInputValue);
+
+
                             return new Promise((resolve) => {
                                 setTimeout(() => {
                                     Message.success('OK')
@@ -207,8 +292,17 @@ function DemoDialogShow() {
                 <div style={sectionTitle}>
                     <Button onClick={() => {
                         Dialog.showBatchInput({
-                            onOk(v: any) {
-                                console.log(v);
+                            onOk(event: any) {
+
+
+                                const value = event.value;
+                                const ids = event.ids;
+
+                                console.log("Dialog.showBatchInput: value", value);
+                                console.log("Dialog.showBatchInput: ids", ids);
+
+
+
                                 return new Promise((resolve) => {
                                     setTimeout(() => {
                                         Message.success('OK')
@@ -395,6 +489,11 @@ function DemoDialogShow() {
                                 })
                             },
                         },
+                        onOk: (event: any)=> {
+                            const actions = event.tableProProps.actions;
+                            const selectedRows = actions.getSelectedRowList();
+                            console.log(selectedRows);
+                        }
                     })
 
 
@@ -415,7 +514,6 @@ function DemoDialogShow() {
                                 required: true,
                                 xProps: {
                                     hasClear: true,
-                                    // style: {width: 200}
                                 }
                             },
                             username2: {
@@ -568,9 +666,6 @@ function DemoDialogShow() {
                         footer: false,
                         style: {width: '500px', height: '300px', border: 'none'},
                         closeMode: ['close', 'mask', 'esc'],
-                        onClose: () => {
-                            // debugger;
-                        },
                         content: (
                             <img style={{width: '500px', height: '300px'}}
                                  src={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}/>

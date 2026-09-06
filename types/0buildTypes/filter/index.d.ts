@@ -1,6 +1,5 @@
-import React from 'react';
 declare const Filter: {
-    (props: import("./filter-types").FilterProps, ref: any): React.JSX.Element;
+    (props: import("./filter-types").FilterProps, ref: any): import("react/jsx-runtime").JSX.Element;
     defaultProps: {
         prefix: string;
     };

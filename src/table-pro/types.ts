@@ -1,4 +1,5 @@
 import React from "react";
+import type { TableProps as TableComponentProps } from '../table/types';
 
 
 export enum StyleModeEnum {
@@ -10,13 +11,18 @@ export  interface QueryFormTableSlots {
     renderAfterQueryForm: any
 }
 
+export type TableProTableProps = TableComponentProps & {
+    title?: React.ReactNode;
+    showTotal?: boolean;
+};
+
 export interface TableProProps {
     className?: string,
     settingName: string, // 所有设置相关的存储，用此name作为唯一标记
     prefix: string,
     components: any, //{}
     formProps: any,
-    tableProps: any,
+    tableProps: TableProTableProps,
     paginationProps: any,
     filterProps: any,
     operationProps: OperationsProps,
@@ -42,7 +48,7 @@ export interface IUseTableProParams {
     isEnableFrontendPagination?: boolean, // 是否开启前端分页，开启前端分页后。点击分页不会再发起请求。
 
     initFormProps?: any,
-    initTableProps?: any,
+    initTableProps?: TableProTableProps,
     initPaginationProps?: any,
     initFilterProps?: any,
     initOperationProps?: any
@@ -56,6 +62,7 @@ export interface OperationBtnItem {
     tooltip?: any;
     onClick?: any | string; //函数 或内置函数
     children?: OperationBtnItem[]
+    disabled?: boolean;
 }
 
 export interface OperationsProps {
@@ -114,7 +121,7 @@ export interface MultiFieldCellProps {
 
 export type IGetTableColumnsBySettingFunc = (tableProProps: TableProProps)=> Promise<any[]>;
 export type IUseTableProFunc = (params: IUseTableProParams) => any;
-export type ICellRenderFunc = (value: any) => React.JSX.Element;
+export type ICellRenderFunc = (value: any, others?: any) => React.JSX.Element;
 export type IRenderTableToolbar =  (props: TableToolbarProps) => any;
 export type IRenderOperationCell = (operationItems: OperateCellItemProps[], others?: OperateCellProps) => any;
 export type IRenderMultiFieldCell = (itemList: MultiFieldCellItem2[]) => any;

@@ -17,7 +17,7 @@ function mapIconSize(size) {
 }
 
 /** Button */
-export default class Button extends ReactComponent {
+class ButtonOrigin extends ReactComponent {
     static propTypes = {
         ...ConfigProvider.propTypes,
         prefix: PropTypes.string,
@@ -219,7 +219,7 @@ export default class Button extends ReactComponent {
 
         const TagName = component;
         const tagAttrs = {
-            ...obj.pickOthers(Object.keys(Button.propTypes), others),
+            ...obj.pickOthers(Object.keys(ButtonOrigin.propTypes), others),
             type: htmlType,
             disabled: disabled,
             onClick: onClick,
@@ -246,4 +246,30 @@ export default class Button extends ReactComponent {
             </TagName>
         );
     }
+}
+
+
+
+
+const noop = () => {};
+
+// tooltip: 禁用时仍可点击触发气泡提示，用于解释按钮为何禁用
+export default function Button(props) {
+    const Balloon = ComponentsStore.getBuildIn('Balloon');
+    const Tooltip = Balloon?.Tooltip;
+    const { tooltip, disabled, text, warning, ...otherProps } = props;
+
+    if (tooltip && Tooltip && disabled) {
+        const className = text ? `${defaultPrefix}btn-tooltip-text-disabled` : `${defaultPrefix}btn-tooltip-disabled`
+        const buttonElement = (
+            <ButtonOrigin {...otherProps} 
+                type={'normal'} disabled={false} text={text} onClick={noop} className={className} />
+        );
+        return (
+            <Tooltip v2 trigger={buttonElement} align="t" arrowPointToCenter triggerType="click">
+                {tooltip}
+            </Tooltip>
+        );
+    }
+    return (<ButtonOrigin disabled={disabled} text={text} warning={warning} {...otherProps} />);
 }

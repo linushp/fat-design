@@ -4,6 +4,36 @@ export interface IconsType {
     [key: string]: ReactNode;
 }
 
+/**
+ * 事件监听器类型
+ */
+export type ListenerType = (...args: any[]) => any;
+
+/**
+ * 事件发射器接口
+ */
+export interface TinyEmitter {
+    /**
+     * 添加事件监听器
+     */
+    on: (eventName: string, listener: ListenerType) => void;
+    
+    /**
+     * 移除事件监听器
+     */
+    off: (eventName: string, listener?: ListenerType) => void;
+    
+    /**
+     * 清除所有事件监听器
+     */
+    clear: () => void;
+    
+    /**
+     * 触发事件
+     */
+    emit: (eventName: string, ...args: any[]) => any[];
+}
+
 export default interface CommonProps {
     /**
      * 样式类名的品牌前缀

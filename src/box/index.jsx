@@ -14,8 +14,10 @@ import createStyle, {
     // getBoxChildProps,
 } from '../responsive-grid/create-style';
 import {isChildTypeComp} from "../util/checkChild.js";
+import BoxV2 from './box-v2';
 
 const { pickOthers } = obj;
+
 
 const createChildren = (children, { spacing, direction, wrap, device }) => {
     const array = React.Children.toArray(children);
@@ -148,6 +150,10 @@ class Box extends Component {
          * 定制标签名， 例如section等
          */
         component: PropTypes.string,
+        /**
+         * 是否使用v2版本实现，v2版本使用纯CSS布局，不修改children属性
+         */
+        v2: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -155,6 +161,7 @@ class Box extends Component {
         direction: 'column',
         wrap: false,
         component: 'div',
+        v2: false,
     };
 
     render() {
@@ -173,8 +180,33 @@ class Box extends Component {
             children,
             device,
             component,
+            v2,
         } = this.props;
 
+        // 如果使用v2版本，直接使用BoxV2组件
+        if (v2) {
+            return (
+                <BoxV2
+                    prefix={prefix}
+                    direction={direction}
+                    justify={justify}
+                    align={align}
+                    wrap={wrap}
+                    flex={flex}
+                    spacing={spacing}
+                    padding={padding}
+                    margin={margin}
+                    style={style}
+                    className={className}
+                    component={component}
+                    {...pickOthers(['prefix', 'direction', 'justify', 'align', 'wrap', 'flex', 'spacing', 'padding', 'margin', 'style', 'className', 'component', 'v2', 'device', 'children'], this.props)}
+                >
+                    {children}
+                </BoxV2>
+            );
+        }
+
+        // 原有的v1实现逻辑
         const styleProps = {
             direction,
             justify,

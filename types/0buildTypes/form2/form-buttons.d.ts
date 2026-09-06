@@ -1,11 +1,11 @@
 import React from "react";
 import { BaseBtnProps, FormButtonGroupProps, ResetProps, SubmitProps } from "./form-types";
-declare function FormButton(props: BaseBtnProps): React.JSX.Element;
+declare function FormButton(props: BaseBtnProps): import("react/jsx-runtime").JSX.Element;
 declare namespace FormButton {
     var _typeMark: string;
     var _supportPreview: boolean;
 }
-declare function Submit(props: SubmitProps): React.JSX.Element;
+declare function Submit(props: SubmitProps): import("react/jsx-runtime").JSX.Element;
 declare namespace Submit {
     var defaultProps: {
         validate: boolean;
@@ -13,7 +13,7 @@ declare namespace Submit {
     var _typeMark: string;
     var _supportPreview: boolean;
 }
-declare function Reset(props: ResetProps): React.JSX.Element;
+declare function Reset(props: ResetProps): import("react/jsx-runtime").JSX.Element;
 declare namespace Reset {
     var _typeMark: string;
     var _supportPreview: boolean;

@@ -72,6 +72,7 @@ function wrapOnClick(fn: any, btnItem: any) {
 
 const noop = () => { };
 
+// tooltip: 禁用时仍可点击触发气泡提示，用于解释按钮为何禁用
 function ButtonWithTooltip(props: any) {
     const Button = getDep('Button');
     const Balloon = getDep('Balloon');

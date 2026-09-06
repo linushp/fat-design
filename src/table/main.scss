@@ -577,6 +577,8 @@
     width: 16px;
     display: inline-block;
     line-height: 1;
+    user-select: none !important;
+    
     &:focus {
         outline: 0;
     }
@@ -625,6 +627,7 @@
 
 #{$table-prefix}-header-icon {
     margin-left: $table-header-icon-margin-left;
+    user-select: none !important;
 }
 
 

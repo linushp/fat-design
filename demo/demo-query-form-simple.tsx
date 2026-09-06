@@ -132,6 +132,8 @@ function DemoQueryFormSimple() {
                 <QueryForm
                     defaultValues={initialValues}
                     onSubmit={onSubmit}
+                    settings={true}
+                    settingName="demoQueryFormSimple"
                     autoValidateOnCreated={false}
                     schema={schema}/>
         </div>

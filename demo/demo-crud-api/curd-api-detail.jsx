@@ -43,8 +43,7 @@ const initialValues = {
 
 const formItemLayout = {
     labelCol: {
-        // fixedSpan: 10, // 10 * 20px
-        span: 4, // 4/24 %
+        span: 4,
     },
     wrapperCol: {
         span: 10,

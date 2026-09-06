@@ -314,7 +314,7 @@ export default class NewTextArea extends TextArea{
 
         if (isPreview) {
             const { value } = props;
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div {...others} className={previewCls}>
                         {renderPreview(value, this.props)}

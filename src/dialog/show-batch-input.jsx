@@ -24,7 +24,10 @@ function pickValidIdsArray(text, matchPattern) {
     const arr = text.split('\n').map((t) => {
         return t.trim()
     }).filter((a) => {
-        return a.length > 0 && matchPattern.test(a)
+        if(matchPattern && typeof matchPattern.test === 'function') {
+            return a.length > 0 && matchPattern.test(a)
+        }
+        return a.length > 0;
     })
     // 去重
     return [...new Set(arr)]
@@ -83,7 +86,7 @@ const defaultConfig = {
 
 function buildShowBatchInput(show) {
 
-    return (config) => {
+    return function showBatchInput(config) {
 
         const Message = ComponentsStore.getBuildIn('Message');
         const {

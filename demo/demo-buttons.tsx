@@ -34,7 +34,8 @@ function DemoButtons() {
                     <Button type="primary">primary</Button>
                     <Button type="secondary">Secondary</Button>
                 </Box>
-                <br/>
+                <br />
+                <br />
                 <Box direction="row" spacing={20}>
                     <Button type="normal" text>
                         Normal
@@ -45,37 +46,69 @@ function DemoButtons() {
                     <Button type="secondary" text>
                         Secondary
                     </Button>
+                    <Button type="secondary" text warning>
+                        Secondary
+                    </Button>
                 </Box>
-                <br/>
+                <br />
+                <br />
                 <Box direction="row" spacing={20}>
                     <Button type="normal" warning>
+                        Normal
+                    </Button>
+                    <Button type="secondary" warning>
                         Normal
                     </Button>
                     <Button type="primary" warning>
                         Primary
                     </Button>
                 </Box>
+                <br />
+                disabled normal
+                <br />
+                <Box direction="row" spacing={20}>
+                    <Button type="normal" disabled={true} tooltip="没有权限">
+                        没有权限
+                    </Button>
+
+                    <Button type="normal" disabled={true} tooltip="没有权限">
+                        没有权限
+                    </Button>
+                </Box>
+
+                <br />
+                disabled text
+                <br />
+                <Box direction="row" spacing={20}>
+                    <Button disabled={true} tooltip="没有权限" text>
+                        没有权限
+                    </Button>
+
+                    <Button disabled={true} tooltip="没有权限" text>
+                        没有权限
+                    </Button>
+                </Box>
             </div>
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
 
 
             ActionButton
 
             <Box direction="row" spacing={20}>
                 <ActionButton type={'primary'}
-                              doubleConfirm
-                              onClick={handleSave}> 二次确认（对话框）</ActionButton>
+                    doubleConfirm
+                    onClick={handleSave}> 二次确认（对话框）</ActionButton>
                 <ActionButton type={'secondary'}
-                              doubleConfirm
-                              doubleConfirmConfig={{type: 'balloon'}}
-                              onClick={handleSave}> 二次确认</ActionButton>
+                    doubleConfirm
+                    doubleConfirmConfig={{ type: 'balloon' }}
+                    onClick={handleSave}> 二次确认</ActionButton>
                 <ActionButton type={'primary'} onClick={handleSave}> 无确认</ActionButton>
                 <SaveButton type={'secondary'} onClick={handleSave}> 保存按钮</SaveButton>
                 <SaveButton type={'secondary'} onClick={handleSave}> 保存按钮2</SaveButton>
             </Box>
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
 
 
             Message
@@ -149,7 +182,7 @@ function DemoButtons() {
             </Box>
 
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
             Message2
 
             <Box direction="row" spacing={20}>
@@ -218,7 +251,7 @@ function DemoButtons() {
             </Box>
 
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
 
             Notification
 
@@ -322,11 +355,11 @@ function DemoButtons() {
             </Box>
 
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
 
             BalloonConfirm
 
-            <Box direction="row" spacing={20}>
+            <Box direction="row" spacing={20} v2>
 
 
                 <BalloonConfirm
@@ -347,7 +380,7 @@ function DemoButtons() {
                     onOk={() => {
                         return new Promise((resolve, reject) => {
                             setTimeout(() => {
-                                reject({success: false, message: 'aa'})
+                                reject({ success: false, message: 'aa' })
                             }, 1000)
                         })
                     }}
@@ -359,17 +392,17 @@ function DemoButtons() {
             </Box>
 
 
-            <PageCard.Divider/>
+            <PageCard.Divider />
 
             Balloon
 
-            <div direction="row" spacing={20}>
+            <Box direction="row" spacing={20} v2>
 
 
                 <Balloon
                     title={'hello'}
                     align={'r'}
-                    trigger={<Icon type={'help'} size={'small'}/>}
+                    trigger={<Icon type={'help'} size={'small'} />}
                 >
                     这是是一段文字描述
                 </Balloon>
@@ -377,24 +410,13 @@ function DemoButtons() {
 
                 <Balloon
                     align={'r'}
-                    trigger={<Icon type={'help'} size={'small'}/>}
+                    trigger={<Icon type={'help'} size={'small'} />}
                 >
                     这是是一段文字描述
                 </Balloon>
 
 
-            </div>
-
-
-            {/*<PageCard.Divider />*/}
-
-            {/*Loading*/}
-
-            {/*<div>*/}
-            {/*    <Loading tip="large" size="large" style={{width:'100%', height: 200}}>*/}
-            {/*        <div className="demo-size" style={{width:'100%'}}>test</div>*/}
-            {/*    </Loading>*/}
-            {/*</div>*/}
+            </Box>
 
 
         </PageCard>

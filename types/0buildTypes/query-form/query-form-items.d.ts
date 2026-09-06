@@ -1,3 +1,4 @@
 import { QueryFormProps } from "./types";
-declare function useQueryFormItems(props: QueryFormProps): any[];
+import { TinyEmitter } from "../util/tiny-emitter";
+declare function useQueryFormItems(props: QueryFormProps, queryFormEventBus: TinyEmitter, originalSchema?: any, originalDefaultValues?: any): any[];
 export { useQueryFormItems };

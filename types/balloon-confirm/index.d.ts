@@ -7,20 +7,54 @@ export interface BalloonConfirmProps extends BalloonProps {
     prefix?: string;
     locale?: any;
     className?: string;
+    
+    /**
+     * 是否在 onOk 成功时自动显示成功消息
+     */
     autoOnOkMessage?: boolean;
-    children?: any;
-
+    
     messageProps?: any;
 
     /**
-     * 在点击确定按钮时触发的回调函数
+     * 底部内容，设置为 false 则不进行显示
+     * @default [<Button type="primary">确定</Button>, <Button>取消</Button>]
      */
-    onOk?: (event: React.MouseEvent) => void;
+    footer?: React.ReactNode | boolean;
+    
+    /**
+     * 底部按钮的对齐方式
+     */
+    footerAlign?: 'left' | 'center' | 'right';
+    
+    /**
+     * 指定确定按钮和取消按钮是否存在以及如何排列
+     * @example ['ok', 'cancel'] | ['cancel', 'ok'] | ['ok'] | ['cancel']
+     */
+    footerActions?: Array<'ok' | 'cancel'>;
+    
+    /**
+     * 确认按钮文案
+     */
+    okText?: React.ReactNode;
+    
+    /**
+     * 取消按钮文案
+     */
+    cancelText?: React.ReactNode;
 
     /**
-     * 在点击取消按钮时触发的回调函数
+     * 在点击确定按钮时触发的回调函数，支持返回 Promise
+     * @param event 点击事件对象
+     * @returns 可以返回 void、Promise、false（阻止关闭）或其他值
      */
-    onCancel?: (event: React.MouseEvent) => void;
+    onOk?: (event: React.MouseEvent) => void | Promise<any> | boolean | any;
+
+    /**
+     * 在点击取消按钮时触发的回调函数，支持返回 Promise
+     * @param event 点击事件对象
+     * @returns 可以返回 void、Promise、false（阻止关闭）或其他值
+     */
+    onCancel?: (event: React.MouseEvent) => void | Promise<any> | boolean | any;
 
     /**
      * 应用于确定按钮的属性对象
@@ -44,18 +78,25 @@ declare namespace BalloonConfirm {
         okProps: {};
         cancelProps: {};
         autoOnOkMessage: boolean;
-        footerAlign: string;
-        footerActions: string[];
+        footerAlign: 'right';
+        footerActions: ['ok', 'cancel'];
         onVisibleChange: () => void;
-        triggerType: string;
+        triggerType: 'click';
     };
 }
 export default BalloonConfirm;
 
 
-export interface PopConfirmProps extends BalloonConfirmProps {
-    title?: any;
-    content?: any;
+export interface PopConfirmProps extends Omit<BalloonConfirmProps, 'content'> {
+    /**
+     * 确认框的标题
+     */
+    title?: React.ReactNode;
+    
+    /**
+     * 确认框的内容
+     */
+    content?: React.ReactNode;
 }
 
 declare function PopConfirm(props: PopConfirmProps): React.JSX.Element;

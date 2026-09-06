@@ -39,7 +39,7 @@ export interface CardProps extends HTMLAttributesWeak, CommonProps {
     showHeadDivider?: boolean;
 
     /**
-     * 内容区域的固定高度
+     * 内容区域的固定高度，默认： 120px
      */
     contentHeight?: string | number;
 
@@ -49,10 +49,34 @@ export interface CardProps extends HTMLAttributesWeak, CommonProps {
     extra?: React.ReactNode;
 
     /**
-     * 是否开启自由模式，开启后card 将使用子组件配合使用, 设置此项后 title, subtitle, 等等属性都将失效
+     * 是否开启自由模式
+     * - true（默认）：内容直接展示，无高度限制和折叠功能
+     * - false：内容区域固定高度（默认120px），超出时显示展开/折叠按钮
      */
     free?: boolean;
     hasBorder?: boolean;
+
+    /**
+     * 是否开启收起/展开能力（需同时设置 title）
+     * - 开启后：头部可点击切换，标题前显示箭头，extra 区域追加「收起/展开」提示
+     * - 收起时隐藏内容区域（display:none，保留子组件状态不卸载）
+     */
+    collapsible?: boolean;
+
+    /**
+     * 初始是否收起（非受控模式）
+     */
+    defaultCollapsed?: boolean;
+
+    /**
+     * 受控模式：是否收起（传入后由外部完全控制）
+     */
+    collapsed?: boolean;
+
+    /**
+     * 收起/展开状态变化回调
+     */
+    onCollapsedChange?: (collapsed: boolean, e: React.MouseEvent) => void;
 }
 
 export interface CardBulletHeaderProps extends HTMLAttributesWeak, CommonProps {

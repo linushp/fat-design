@@ -97,7 +97,6 @@ function DemoDrawerShow() {
                 </Box>
                 <Drawer
                     title={'个性化设置'}
-                    // closeMode={'mask'}
                     placement={'right'}
                     visible={isOpen}
                     onClose={()=>{

@@ -196,7 +196,7 @@ class Switch extends React.Component {
                 [`${prefix}form-preview`]: true,
             });
 
-            if ('renderPreview' in this.props) {
+            if (typeof renderPreview === 'function') {
                 return (
                     <div className={previewCls} {...others}>
                         {renderPreview(checked, this.props)}

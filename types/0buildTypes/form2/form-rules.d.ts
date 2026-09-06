@@ -1,3 +1,3 @@
-import { FormItemProps } from "./form-types";
-declare function buildValidateRules(props: FormItemProps): any[];
+import { FormItemProps, FormItemValidateRule } from "./form-types";
+declare function buildValidateRules(props: FormItemProps): FormItemValidateRule[];
 export { buildValidateRules };

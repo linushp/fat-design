@@ -14,7 +14,7 @@ import _guid from './guid';
 import _KEYCODE from './keycode';
 import datejs from './date';
 import {constants} from './constants'
-import pickAttrs from './pick-attrs';
+import { pickAttrs } from './pick-attrs';
 import {wrapAutoMessage as _wrapAutoMessage} from './func-wrapper';
 import {createPortal as _createPortal, findDOMNode as _findDOMNode, pReactDOM as _pReactDOM} from './react-dom'
 import {ComponentsStore as _ComponentsStore} from './comp'

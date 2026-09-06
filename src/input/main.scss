@@ -468,5 +468,127 @@
         visibility: visible;
     }
 }
+// ColorPicker specific styles
+#{$input-prefix}.#{$css-prefix}color-picker {
+
+    position: relative;
+    overflow: hidden;
+
+    .#{$css-prefix}color-picker-hidden-input {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        z-index: 3;
+        opacity: 0;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    .#{$css-prefix}color-picker-color-text-wrapper {
+        position: absolute;
+        left: 60px;
+        top: 0;
+        z-index: 4;
+        width: 80px;
+        line-height: 20px;
+        cursor: text;
+    }
+
+    .#{$css-prefix}color-picker-color-text-wrapper-small {
+        line-height: $form-element-small-height;
+    }
+
+    .#{$css-prefix}color-picker-color-text-wrapper-medium {
+        line-height: $form-element-medium-height;
+    }
+
+    .#{$css-prefix}color-picker-color-text-wrapper-large {
+        line-height: $form-element-large-height;
+    }
+
+    .#{$css-prefix}color-picker-placeholder {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+        font-size: 12px;
+        padding: 0 8px;
+        color: #999999;
+    }
+
+    .#{$css-prefix}color-picker-display-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+        padding: 4px 8px;
+        width: 50px;
+        height: 20px;
+        border: none;
+    }
+
+    .#{$css-prefix}color-picker-color-display {
+        cursor: pointer;
+        transition: all $motion-duration-immediately $motion-linear;
+        width: 40px;
+        display: block;
+        border-radius: 2px;
+        height: 100%;
+
+        &:hover {
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+
+
+    .#{$css-prefix}color-picker-color-text {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        color: $input-text-color;
+        padding-left: 8px;
+        cursor: text;
+    }
+
+    &.#{$css-prefix}disabled {
+        cursor: not-allowed;
+
+        .#{$css-prefix}color-picker-color-display {
+            cursor: not-allowed;
+            opacity: 0.6;
+
+            &:hover {
+                box-shadow: none;
+            }
+        }
+
+        .#{$css-prefix}color-picker-color-text {
+            color: $input-disabled-color;
+        }
+    }
+
+    // Size variations
+    &.#{$css-prefix}small {
+        .#{$css-prefix}color-picker-color-display {
+            height: 16px;
+        }
+
+        .#{$css-prefix}color-picker-color-text {
+            font-size: 11px;
+        }
+    }
+
+    &.#{$css-prefix}large {
+        .#{$css-prefix}color-picker-color-display {
+            height: 24px;
+        }
+
+        .#{$css-prefix}color-picker-color-text {
+            font-size: 13px;
+        }
+    }
+}
+
 
 @import './rtl.scss';

@@ -3,10 +3,10 @@ import Upload from './upload';
 import {getByAny, parseJsonObject} from "../util/func";
 import classnames from "classnames";
 import ConfigProvider from "../config-provider";
-import {RenderFileAutoBySuffix} from "../previews/renderFileImage";
+import {RenderFileAutoBySuffix, RenderFileDownload, RenderFileImage, RenderFileWebOffice} from "../previews/renderFileImage";
+import {getLastFileNameFromUrl} from "../util/string";
 
 const defaultPrefix = ConfigProvider.defaultPrefix;
-
 
 
 const formatItem = (item) => {
@@ -41,37 +41,117 @@ const formatItem = (item) => {
 }
 
 
-const SimpleJSONUploadPreview = React.memo( (props)=> {
-    const {value} = props;
-    if (!value || typeof value !== "string") {
-        return (<span />)
+const PreviewModeAutoBySuffix = React.memo((props) => {
+    const {value, isList} = props;
+    if (!value) {
+        return (<span/>)
     }
-    return <RenderFileAutoBySuffix value={value} />
+    return <RenderFileAutoBySuffix value={value} isList={isList}/>
 });
+
+
+const PreviewModeDownload = React.memo((props) => {
+    const {value} = props;
+    if (!value) {
+        return (<span/>)
+    }
+    return <RenderFileDownload value={value}/>
+});
+
+const PreviewModeImage = React.memo((props) => {
+    const {value} = props;
+    if (!value) {
+        return (<span/>)
+    }
+    return <RenderFileImage value={value}/>
+});
+
+const PreviewModeWebOffice = React.memo((props) => {
+    const {value} = props;
+    if (!value) {
+        return (<span/>)
+    }
+    return <RenderFileWebOffice value={value}/>
+});
+
+
+
+const parseValueObject = (value, deep) => {
+    if (deep > 5) {
+        return [];
+    }
+
+    if(!value) {
+        return [];
+    }
+
+    if (typeof value === "string") {
+        if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('/')) {
+            const name = getLastFileNameFromUrl(value) || 'File';
+            return [
+                {
+                    name: name,
+                    state: 'done',
+                    url: value,
+                    downloadURL: value,
+                    imgURL: value,
+                }
+            ]
+        }
+        const obj = parseJsonObject(value) || [];
+        if (Array.isArray(obj)) {
+            return obj.map(item => {
+                const arr = parseValueObject(item, deep + 1) || [];
+                return arr[0];
+            });
+        }
+        return parseValueObject(obj, deep + 1)
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(item => {
+            const arr = parseValueObject(item, deep + 1) || [];
+            return arr[0];
+        });
+    }
+
+    if (typeof value === "object" && value.downloadURL) {
+        if (!value.imgURL) {
+            value.imgURL = value.downloadURL
+        }
+        if (!value.name) {
+            value.name = getLastFileNameFromUrl(value.downloadURL) || 'File';
+        }
+        return [value];
+    }
+
+    return [];
+}
 
 
 function SimpleJSONUpload(props) {
     let {
         isPreview,
-        isAutoStylePreview,
+        previewMode = 'default',
         prefix,
         value,
         onChange,
         onChange2,
         className,
+        listType = 'image',
         uploadComponent,
         ...otherProps
     } = props;
 
     if (!prefix) {
-        prefix =  defaultPrefix;
+        prefix = defaultPrefix;
     }
 
+    const UploadImpl = uploadComponent || Upload;
+
     const newValue = useMemo(() => {
-        if (typeof value === "string") {
-            return parseJsonObject(value) || []
-        }
-        return value;
+        const arr = parseValueObject(value, 0);
+        return arr.filter(Boolean);
     }, [value])
 
 
@@ -80,7 +160,7 @@ function SimpleJSONUpload(props) {
             onChange(value, uploadFiles)
         }
         if (typeof onChange2 === "function") {
-            onChange2(value, { uploadFiles, originNextValue } )
+            onChange2(value, {uploadFiles, originNextValue})
         }
     }
 
@@ -109,22 +189,42 @@ function SimpleJSONUpload(props) {
 
     if (isPreview) {
         const cls = classnames(`${prefix}simple-json-upload-preview`, className);
-        if (!isAutoStylePreview) {
-            return (<div className={cls}>{value}</div>)
+        if (previewMode === 'auto') {
+            return (
+                <PreviewModeAutoBySuffix className={cls} value={value}/>
+            );
         }
-        return (
-            <SimpleJSONUploadPreview className={cls} value={value} />
-        );
+        if (previewMode === 'auto-list') {
+            return (
+                <PreviewModeAutoBySuffix className={cls} value={value} isList={true}/>
+            );
+        }
+        if (previewMode === 'download') {
+            return (
+                <PreviewModeDownload className={cls} value={value} />
+            );
+        }
+        if (previewMode === 'image') {
+            return (
+                <PreviewModeImage className={cls} value={value}/>
+            );
+        }
+        if (previewMode === 'weboffice') {
+            return (
+                <PreviewModeWebOffice className={cls} value={value}/>
+            );
+        }
     }
 
-
-    const UploadImpl = uploadComponent || Upload;
+    // previewMode = default
     return (
         <UploadImpl {...otherProps}
                     className={className}
                     prefix={prefix}
                     value={newValue}
-                    onChange={handleOnChange} />
+                    isPreview={isPreview}
+                    listType={listType}
+                    onChange={handleOnChange}/>
     );
 }
 

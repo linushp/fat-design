@@ -60,5 +60,5 @@ export interface PreviewProps extends Omit<IDialogPropTypes, 'onClose'> {
     onChange?: (current: any, prev: any) => void;
     visible: boolean;
 }
-declare function Preview(props: PreviewProps): React.JSX.Element;
+declare function Preview(props: PreviewProps): import("react/jsx-runtime").JSX.Element;
 export default Preview;

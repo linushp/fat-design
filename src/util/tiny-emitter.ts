@@ -19,7 +19,7 @@ class TinyEmitter {
             listener: listener
         })
     }
-    off = (eventName: string, listener: ListenerType) => {
+    off = (eventName: string, listener?: ListenerType) => {
         if (!eventName) {
             return;
         }

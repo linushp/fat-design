@@ -8,10 +8,11 @@ declare class TableProImpl extends React.Component<TableProProps, TableProState>
     static displayName: string;
     constructor(props: any);
     updateColumns: () => Promise<void>;
+    applyStyleSetting: () => Promise<void>;
     componentDidMount(): void;
-    paginationTotalRender: (total: string) => React.JSX.Element;
-    rowSelectedMsgRender: (tableProps: any) => React.JSX.Element;
-    render(): React.JSX.Element;
+    paginationTotalRender: (total: string) => import("react/jsx-runtime").JSX.Element;
+    rowSelectedMsgRender: (tableProps: any) => import("react/jsx-runtime").JSX.Element;
+    render(): import("react/jsx-runtime").JSX.Element;
 }
 declare const TableProInner: typeof TableProImpl;
 export { TableProInner };

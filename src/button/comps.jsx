@@ -234,8 +234,37 @@ function ActionButton(props) {
 }
 
 
+
+function LoadingButton(props) {
+    let { onClick, children, renderChildren, ...others} = props;
+    const [loading, setLoading] = useState(false);
+    const handleClick = async ()=>{
+        if (typeof onClick === "function") {
+            const res = onClick();
+            if (res && typeof res.then === "function") {
+                try {
+                    setLoading(true);
+                    await res;
+                } catch (e) {
+                    console.error('LoadingButton', e)
+                } finally {
+                    setLoading(false);
+                }
+            }
+        }
+    }
+
+    if (typeof renderChildren === "function") {
+        children = renderChildren(loading);
+    }
+    return (
+        <Button1 {...others} onClick={handleClick} loading={loading} children={children} />
+    )
+}
+
 export {
     Button1,
     ActionButton,
-    SaveButton
+    SaveButton,
+    LoadingButton
 }

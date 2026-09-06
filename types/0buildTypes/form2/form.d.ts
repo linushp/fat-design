@@ -1,7 +1,6 @@
-import React from "react";
 import FormItem from './form-item';
 import { FormProps } from "./form-types";
-declare function Form(formProps: FormProps): React.JSX.Element;
+declare function Form(formProps: FormProps): import("react/jsx-runtime").JSX.Element;
 declare namespace Form {
     var defaultProps: {
         prefix: string;
@@ -30,7 +29,7 @@ declare namespace Form {
     var Button: any;
     var ButtonGroup: any;
     var ItemCard: any;
-    var schemaToFormItems: (schema: any) => React.JSX.Element[];
+    var schemaToFormItems: (schema: any) => import("react/jsx-runtime").JSX.Element[];
     var useFormChildren: (props: FormProps) => any[];
 }
 export default Form;

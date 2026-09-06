@@ -60,8 +60,6 @@ export function DemoForm1() {
 
     return (
         <PageCard>
-            {/*<div style={{width: '600px', marginLeft: '30px'}}>*/}
-
             <Button onClick={() => {
                 setState(Date.now());
             }}>A
@@ -291,20 +289,6 @@ export function DemoForm1() {
                 />
 
 
-
-                {/*<FormItem label={'FormSubmit'}*/}
-                {/*          name={'button2'}*/}
-                {/*          component={'FormSubmit'}*/}
-                {/*/>*/}
-
-                {/*<FormItem label={'FormReset toDefault'} component={'FormReset'} xProps={{*/}
-                {/*    toDefault: true,*/}
-                {/*    children: 'FormReset toDefault'*/}
-                {/*}}/>*/}
-
-                {/*<FormItem label={' '} name={'button43434'} component={'FormReset'} xProps={{*/}
-                {/*    toDefault: false*/}
-                {/*}}/>*/}
 
                 <FormItem label={' '}
                           component={'FormButtonGroup'}

@@ -173,6 +173,28 @@ export function isNumeric(str: any) : boolean {
             }
         }
     }
-
     return true;
+}
+
+
+/**
+ * 根据URL获取文件名
+ * @param url
+ */
+export function getLastFileNameFromUrl(url: any): string {
+    try {
+        // 处理空URL情况
+        if (!url || typeof url!=='string') {
+            return '';
+        }
+        // 分割URL，取最后一段非空内容
+        const parts = url.split('/').filter(part => part);
+        return parts.length > 0 ? parts[parts.length - 1] : '';
+    } catch (err) {
+        return ''
+    }
+}
+
+export function isEmptyStr(value: any): boolean {
+    return value === '' ||value === null || typeof value === 'undefined'
 }

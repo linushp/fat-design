@@ -4,6 +4,7 @@ export { default as Avatar } from './avatar';
 export { default as Badge } from './badge';
 export { default as Balloon } from './balloon';
 export { default as BalloonConfirm } from './balloon-confirm';
+export { PopConfirm } from './balloon-confirm';
 export { default as BatchInput } from './batch-input';
 export { default as Breadcrumb } from './breadcrumb';
 export { default as Box } from './box';
@@ -14,6 +15,7 @@ export { default as Cascader } from './cascader';
 export { default as CascaderSelect } from './cascader-select';
 export { default as Checkbox } from './checkbox';
 export { default as Collapse } from './collapse';
+export { default as Comments } from './comments';
 export { default as ConfigProvider } from './config-provider';
 export { default as DatePicker } from './date-picker'; // 实际是：date-picker2
 export { default as DetailPage } from './pages/detail-page';
@@ -38,7 +40,6 @@ export { default as NumberPicker } from './number-picker';
 export { default as Overlay } from './overlay';
 export { default as PageCard } from './pages/page-card';
 export { default as Pagination } from './pagination';
-export { PopConfirm } from './balloon-confirm';
 export { default as Progress } from './progress';
 export { default as QueryForm } from './query-form';
 export { default as Radio } from './radio'
@@ -64,3 +65,4 @@ export { default as Upload } from './upload';
 export { default as VirtualList } from './virtual-list';
 export { default as Image } from './image';
 export { default as Empty } from './empty';
+export { default as Skeleton } from './skeleton';

@@ -1,9 +1,10 @@
 import {FormItemProps, FormItemState, FormItemStateSaved, IFormContext} from "../form-types";
-import {useMemo} from "react";
-import {usePreciseValue} from "../../hooks/usePreciseStore";
+import {useEffect, useMemo, useState} from "react";
+import {PreciseStore, usePreciseValue} from "../../hooks/usePreciseStore";
 import {linkageFormItemState} from "./linkageFormState";
 import {fixItemPropsByState} from "./fixItemProps";
 import {deepEqual} from "../../util/shallowEqual";
+import {getCompositeValue, parseCompositeName} from "./parseCompositeName";
 
 
 function parseFormItemErrors(props: any, itemState: FormItemStateSaved) {
@@ -26,6 +27,37 @@ function parseFormItemErrors(props: any, itemState: FormItemStateSaved) {
 }
 
 
+function useFormItemValue(formStore: PreciseStore, name?: string) {
+    const parsed = useMemo(() => parseCompositeName(name), [name]);
+    const fieldsKey = parsed.fields.join(',');
+
+    const [value, setValue] = useState(() => getCompositeValue(formStore, parsed));
+
+    useEffect(() => {
+        if (parsed.fields.length === 0) {
+            return;
+        }
+
+        const refresh = () => {
+            setValue(getCompositeValue(formStore, parsed));
+        };
+
+        refresh();
+
+        const unsubs = parsed.fields.map((field) => {
+            const path = `values.${field}`;
+            formStore.watch(path, refresh);
+            return () => formStore.unwatch(path, refresh);
+        });
+
+        return () => {
+            unsubs.forEach((unsub) => unsub());
+        };
+    }, [formStore, fieldsKey]);
+
+    return value;
+}
+
 
 function useFormItemState(props: FormItemProps, formContext: IFormContext): FormItemState {
     const {name} = props;
@@ -47,8 +79,7 @@ function useFormItemState(props: FormItemProps, formContext: IFormContext): Form
     }, [name]);
 
 
-
-    const [value] = usePreciseValue(formContext.formStore, `values.${name}`);
+    const value = useFormItemValue(formContext.formStore, name);
     const [itemState] = usePreciseValue(formContext.formStore, `stateMap.${name}`);
     const {state, stateMessage} = parseFormItemErrors(props, itemState)
     const fixedProps = fixItemPropsByState(props, itemState);

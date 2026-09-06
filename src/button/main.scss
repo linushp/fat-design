@@ -45,13 +45,13 @@
             vertical-align: middle;
         }
 
-        > span,
-        > div {
+        >span,
+        >div {
             display: inline-block;
             vertical-align: middle;
         }
 
-        > #{$btn-prefix}-helper {
+        >#{$btn-prefix}-helper {
             text-decoration: inherit;
             display: inline-block;
             vertical-align: middle;
@@ -67,43 +67,40 @@
 
     /* ---------------------------------------- */
     &.#{$css-prefix} {
+
         /* .next-btn .next-small */
         &small {
-            @include next-button-size(
-                $btn-size-s-padding,
+            @include next-button-size($btn-size-s-padding,
                 $btn-size-s-height,
                 $btn-size-s-font,
                 $btn-size-s-border-width,
                 $btn-size-s-corner,
                 $btn-size-s-icon-margin,
                 $btn-size-s-icon-size,
-                $btn-size-s-icon-split-size
-            );
+                $btn-size-s-icon-split-size );
         }
+
         /* .next-btn .next-small */
         &medium {
-            @include next-button-size(
-                $btn-size-m-padding,
+            @include next-button-size($btn-size-m-padding,
                 $btn-size-m-height,
                 $btn-size-m-font,
                 $btn-size-m-border-width,
                 $btn-size-m-corner,
                 $btn-size-m-icon-margin,
                 $btn-size-m-icon-size,
-                $btn-size-m-icon-split-size
-            );
+                $btn-size-m-icon-split-size );
         }
+
         &large {
-            @include next-button-size(
-                $btn-size-l-padding,
+            @include next-button-size($btn-size-l-padding,
                 $btn-size-l-height,
                 $btn-size-l-font,
                 $btn-size-l-border-width,
                 $btn-size-l-corner,
                 $btn-size-l-icon-margin,
                 $btn-size-l-icon-size,
-                $btn-size-l-icon-split-size
-            );
+                $btn-size-l-icon-split-size );
         }
     }
 
@@ -113,8 +110,7 @@
         &-normal {
             border-style: $btn-pure-normal-border-style;
 
-            @include button-color(
-                $btn-pure-normal-color,
+            @include button-color($btn-pure-normal-color,
                 $btn-pure-normal-color-hover,
                 $btn-pure-normal-color-active,
                 $btn-pure-normal-bg,
@@ -122,15 +118,13 @@
                 $btn-pure-normal-bg-active,
                 $btn-pure-normal-border-color,
                 $btn-pure-normal-border-color-hover,
-                $btn-pure-normal-border-color-active
-            );
+                $btn-pure-normal-border-color-active );
         }
 
         &-primary {
             border-style: $btn-pure-primary-border-style;
 
-            @include button-color(
-                $btn-pure-primary-color,
+            @include button-color($btn-pure-primary-color,
                 $btn-pure-primary-color-hover,
                 $btn-pure-primary-color-active,
                 $btn-pure-primary-bg,
@@ -138,15 +132,13 @@
                 $btn-pure-primary-bg-active,
                 $btn-pure-primary-border-color,
                 $btn-pure-primary-border-color-hover,
-                $btn-pure-primary-border-color-active
-            );
+                $btn-pure-primary-border-color-active );
         }
 
         &-secondary {
             border-style: $btn-pure-secondary-border-style;
 
-            @include button-color(
-                $btn-pure-secondary-color,
+            @include button-color($btn-pure-secondary-color,
                 $btn-pure-secondary-color-hover,
                 $btn-pure-secondary-color-active,
                 $btn-pure-secondary-bg,
@@ -154,8 +146,7 @@
                 $btn-pure-secondary-bg-active,
                 $btn-pure-secondary-border-color,
                 $btn-pure-secondary-border-color-hover,
-                $btn-pure-secondary-border-color-active
-            );
+                $btn-pure-secondary-border-color-active );
         }
     }
 
@@ -165,8 +156,7 @@
         cursor: not-allowed;
 
         &#{$btn-prefix}-normal {
-            @include button-color(
-                $btn-pure-normal-color-disabled,
+            @include button-color($btn-pure-normal-color-disabled,
                 $btn-pure-normal-color-disabled,
                 $btn-pure-normal-color-disabled,
                 $btn-pure-normal-bg-disabled,
@@ -174,13 +164,11 @@
                 $btn-pure-normal-bg-disabled,
                 $btn-pure-normal-border-color-disabled,
                 $btn-pure-normal-border-color-disabled,
-                $btn-pure-normal-border-color-disabled
-            );
+                $btn-pure-normal-border-color-disabled );
         }
 
         &#{$btn-prefix}-primary {
-            @include button-color(
-                $btn-pure-primary-color-disabled,
+            @include button-color($btn-pure-primary-color-disabled,
                 $btn-pure-primary-color-disabled,
                 $btn-pure-primary-color-disabled,
                 $btn-pure-primary-bg-disabled,
@@ -188,13 +176,11 @@
                 $btn-pure-primary-bg-disabled,
                 $btn-pure-primary-border-color-disabled,
                 $btn-pure-primary-border-color-disabled,
-                $btn-pure-primary-border-color-disabled
-            );
+                $btn-pure-primary-border-color-disabled );
         }
 
         &#{$btn-prefix}-secondary {
-            @include button-color(
-                $btn-pure-secondary-color-disabled,
+            @include button-color($btn-pure-secondary-color-disabled,
                 $btn-pure-secondary-color-disabled,
                 $btn-pure-secondary-color-disabled,
                 $btn-pure-secondary-bg-disabled,
@@ -202,8 +188,7 @@
                 $btn-pure-secondary-bg-disabled,
                 $btn-pure-secondary-border-color-disabled,
                 $btn-pure-secondary-border-color-disabled,
-                $btn-pure-secondary-border-color-disabled
-            );
+                $btn-pure-secondary-border-color-disabled );
         }
     }
 
@@ -212,8 +197,7 @@
         border-style: $btn-warning-border-style;
 
         &#{$btn-prefix}-primary {
-            @include button-color(
-                $btn-warning-primary-color,
+            @include button-color($btn-warning-primary-color,
                 $btn-warning-primary-color-hover,
                 $btn-warning-primary-color-active,
                 $btn-warning-primary-bg,
@@ -221,12 +205,11 @@
                 $btn-warning-primary-bg-active,
                 $btn-warning-primary-border-color,
                 $btn-warning-primary-border-color-hover,
-                $btn-warning-primary-border-color-active
-            );
+                $btn-warning-primary-border-color-active );
+
             &.disabled,
             &[disabled] {
-                @include button-color(
-                    $btn-warning-primary-color-disabled,
+                @include button-color($btn-warning-primary-color-disabled,
                     $btn-warning-primary-color-disabled,
                     $btn-warning-primary-color-disabled,
                     $btn-warning-primary-bg-disabled,
@@ -234,14 +217,13 @@
                     $btn-warning-primary-bg-disabled,
                     $btn-warning-primary-border-color-disabled,
                     $btn-warning-primary-border-color-disabled,
-                    $btn-warning-primary-border-color-disabled
-                );
+                    $btn-warning-primary-border-color-disabled );
             }
         }
 
+        &#{$btn-prefix}-secondary,
         &#{$btn-prefix}-normal {
-            @include button-color(
-                $btn-warning-normal-color,
+            @include button-color($btn-warning-normal-color,
                 $btn-warning-normal-color-hover,
                 $btn-warning-normal-color-active,
                 $btn-warning-normal-bg,
@@ -249,13 +231,11 @@
                 $btn-warning-normal-bg-active,
                 $btn-warning-normal-border-color,
                 $btn-warning-normal-border-color-hover,
-                $btn-warning-normal-border-color-active
-            );
+                $btn-warning-normal-border-color-active );
 
             &.disabled,
             &[disabled] {
-                @include button-color(
-                    $btn-warning-normal-color-disabled,
+                @include button-color($btn-warning-normal-color-disabled,
                     $btn-warning-normal-color-disabled,
                     $btn-warning-normal-color-disabled,
                     $btn-warning-normal-bg-disabled,
@@ -263,8 +243,7 @@
                     $btn-warning-normal-bg-disabled,
                     $btn-warning-normal-border-color-disabled,
                     $btn-warning-normal-border-color-disabled,
-                    $btn-warning-normal-border-color-disabled
-                );
+                    $btn-warning-normal-border-color-disabled );
             }
         }
     }
@@ -281,8 +260,7 @@
         }
 
         &#{$btn-prefix}-primary {
-            @include button-color(
-                $btn-text-primary-color,
+            @include button-color($btn-text-primary-color,
                 $btn-text-primary-color-hover,
                 $btn-text-primary-color-hover,
                 transparent,
@@ -290,26 +268,24 @@
                 transparent,
                 transparent,
                 transparent,
-                transparent
-            );
+                transparent);
+
             &.disabled,
             &[disabled] {
-                @include button-color(
+                @include button-color($btn-text-disabled-color,
                     $btn-text-disabled-color,
                     $btn-text-disabled-color,
-                    $btn-text-disabled-color,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
-                    transparent
-                );
+                    transparent);
             }
         }
+
         &#{$btn-prefix}-secondary {
-            @include button-color(
-                $btn-text-secondary-color,
+            @include button-color($btn-text-secondary-color,
                 $btn-text-secondary-color-hover,
                 $btn-text-secondary-color-hover,
                 transparent,
@@ -317,26 +293,24 @@
                 transparent,
                 transparent,
                 transparent,
-                transparent
-            );
+                transparent);
+
             &.disabled,
             &[disabled] {
-                @include button-color(
+                @include button-color($btn-text-disabled-color,
                     $btn-text-disabled-color,
                     $btn-text-disabled-color,
-                    $btn-text-disabled-color,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
-                    transparent
-                );
+                    transparent);
             }
         }
+
         &#{$btn-prefix}-normal {
-            @include button-color(
-                $btn-text-normal-color,
+            @include button-color($btn-text-normal-color,
                 $btn-text-normal-color-hover,
                 $btn-text-normal-color-hover,
                 transparent,
@@ -344,71 +318,77 @@
                 transparent,
                 transparent,
                 transparent,
-                transparent
-            );
+                transparent);
+
             &.disabled,
             &[disabled] {
-                @include button-color(
+                @include button-color($btn-text-disabled-color,
                     $btn-text-disabled-color,
                     $btn-text-disabled-color,
-                    $btn-text-disabled-color,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
                     transparent,
-                    transparent
-                );
+                    transparent);
             }
         }
+
         &.#{$css-prefix}large {
-            @include next-button-size(
-                0px,
+            @include next-button-size(0px,
                 $btn-text-size-l-height,
                 $btn-text-size-l-font,
                 0,
                 0,
                 $btn-text-icon-l-margin,
                 $btn-size-l-icon-size,
-                $btn-size-l-icon-split-size
-            );
+                $btn-size-l-icon-split-size );
         }
+
         &.#{$css-prefix}medium {
-            @include next-button-size(
-                0px,
+            @include next-button-size(0px,
                 $btn-text-size-m-height,
                 $btn-text-size-m-font,
                 0,
                 0,
                 $btn-text-icon-m-margin,
                 $btn-size-m-icon-size,
-                $btn-size-m-icon-split-size
-            );
+                $btn-size-m-icon-split-size );
         }
+
         &.#{$css-prefix}small {
-            @include next-button-size(
-                0px,
+            @include next-button-size(0px,
                 $btn-text-size-s-height,
                 $btn-text-size-s-font,
                 0,
                 0,
                 $btn-text-icon-s-margin,
                 $btn-size-s-icon-size,
-                $btn-size-s-icon-split-size
-            );
+                $btn-size-s-icon-split-size );
         }
+
         &#{$btn-prefix}-loading {
-            @include button-color(
+            @include button-color($btn-text-loading-color,
                 $btn-text-loading-color,
                 $btn-text-loading-color,
-                $btn-text-loading-color,
                 transparent,
                 transparent,
                 transparent,
                 transparent,
                 transparent,
-                transparent
-            );
+                transparent);
+        }
+
+        &#{$btn-prefix}-warning {
+            @include button-color(#f04631,
+                #f04631,
+                #f04631,
+                transparent,
+                transparent,
+                transparent,
+                transparent,
+                transparent,
+                transparent);
         }
     }
 
@@ -416,6 +396,7 @@
     /* ---------------------------------------- */
     &-loading {
         pointer-events: none;
+
         &:before {
             font-family: $icon-font-family;
             content: $icon-content-loading;
@@ -423,6 +404,7 @@
             visibility: visible;
             animation: loadingCircle 2s infinite linear;
         }
+
         &:after {
             content: '';
             display: inline-block;
@@ -442,18 +424,22 @@
     &-ghost {
         box-shadow: none;
         border-style: $btn-ghost-border-style;
+
         &#{$btn-prefix}-dark {
-            @include button-color( $btn-ghost-dark-color, $btn-ghost-dark-color-hover, $btn-ghost-dark-color-hover, $btn-ghost-dark-bg-normal, $btn-ghost-dark-bg-hover, $btn-ghost-dark-bg-hover, $btn-ghost-dark-border-color, $btn-ghost-dark-border-color-hover, $btn-ghost-dark-border-color-hover);
+            @include button-color($btn-ghost-dark-color, $btn-ghost-dark-color-hover, $btn-ghost-dark-color-hover, $btn-ghost-dark-bg-normal, $btn-ghost-dark-bg-hover, $btn-ghost-dark-bg-hover, $btn-ghost-dark-border-color, $btn-ghost-dark-border-color-hover, $btn-ghost-dark-border-color-hover);
+
             &.disabled,
             &[disabled] {
-                @include button-color( $btn-ghost-dark-color-disabled, $btn-ghost-dark-color-disabled, $btn-ghost-dark-color-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-border-color-disabled, $btn-ghost-dark-border-color-disabled, $btn-ghost-dark-border-color-disabled);
+                @include button-color($btn-ghost-dark-color-disabled, $btn-ghost-dark-color-disabled, $btn-ghost-dark-color-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-bg-disabled, $btn-ghost-dark-border-color-disabled, $btn-ghost-dark-border-color-disabled, $btn-ghost-dark-border-color-disabled);
             }
         }
+
         &#{$btn-prefix}-light {
-            @include button-color( $btn-ghost-light-color, $btn-ghost-light-color-hover, $btn-ghost-light-color-hover, $btn-ghost-light-bg-normal, $btn-ghost-light-bg-hover, $btn-ghost-light-bg-hover, $btn-ghost-light-border-color, $btn-ghost-light-border-color-hover, $btn-ghost-light-border-color-hover);
+            @include button-color($btn-ghost-light-color, $btn-ghost-light-color-hover, $btn-ghost-light-color-hover, $btn-ghost-light-bg-normal, $btn-ghost-light-bg-hover, $btn-ghost-light-bg-hover, $btn-ghost-light-border-color, $btn-ghost-light-border-color-hover, $btn-ghost-light-border-color-hover);
+
             &.disabled,
             &[disabled] {
-                @include button-color( $btn-ghost-light-color-disabled, $btn-ghost-light-color-disabled, $btn-ghost-light-color-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-border-color-disabled, $btn-ghost-light-border-color-disabled, $btn-ghost-light-border-color-disabled);
+                @include button-color($btn-ghost-light-color-disabled, $btn-ghost-light-color-disabled, $btn-ghost-light-color-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-bg-disabled, $btn-ghost-light-border-color-disabled, $btn-ghost-light-border-color-disabled, $btn-ghost-light-border-color-disabled);
             }
         }
     }
@@ -465,7 +451,7 @@
         display: inline-block;
         vertical-align: middle;
 
-        > #{$btn-prefix} {
+        >#{$btn-prefix} {
             position: relative;
             float: left;
             box-shadow: none;
@@ -476,6 +462,7 @@
             &.active {
                 z-index: 1;
             }
+
             &.disabled,
             &[disabled] {
                 z-index: 0;
@@ -490,30 +477,57 @@
             border-radius: 0;
         }
 
-        > #{$btn-prefix}:first-child {
+        >#{$btn-prefix}:first-child {
             margin: 0;
         }
 
-        > #{$btn-prefix}:first-child:not(:last-child) {
+        >#{$btn-prefix}:first-child:not(:last-child) {
             border-bottom-right-radius: 0;
             border-top-right-radius: 0;
         }
 
-        > #{$btn-prefix}:last-child:not(:first-child) {
+        >#{$btn-prefix}:last-child:not(:first-child) {
             border-bottom-left-radius: 0;
             border-top-left-radius: 0;
         }
 
-        > #{$btn-prefix}-primary:not(:first-child) {
+        >#{$btn-prefix}-primary:not(:first-child) {
             border-left-color: rgba($color-white, .2);
 
             &:hover {
                 border-left-color: transparent;
             }
+
             &.disabled,
             &[disabled] {
                 border-left-color: $color-line1-1;
             }
+        }
+    }
+}
+
+
+#{$btn-prefix} {
+    &.fatd-btn-tooltip-disabled {
+        cursor: not-allowed;
+        background: var(--color-fill1-1, #f2f3f5);
+        border-color: var(--color-fill1-4, #d2d7de);
+        color: var(--color-line1-4, #bbc3cc);
+        &:hover {
+            cursor: not-allowed;
+            background: var(--color-fill1-1, #f2f3f5);
+            border-color: var(--color-fill1-4, #d2d7de);
+            color: var(--color-line1-4, #bbc3cc);
+        }
+    }
+}
+
+#{$btn-prefix} {
+    &.fatd-btn-tooltip-text-disabled {
+        color: #c4c7cc;
+        cursor: not-allowed;
+        &:hover {
+            cursor: not-allowed;
         }
     }
 }

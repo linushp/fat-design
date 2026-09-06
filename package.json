@@ -1,14 +1,17 @@
 {
   "name": "fat-design",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
-    "build": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs",
-    "build:prod": "tsc && cross-env TARGET_ENV=npm vite build && node script/make-build.cjs -p",
-    "build:demo": "tsc && cross-env TARGET_ENV=demo vite build",
-    "preview": "vite preview"
+    "build": "tsc && cross-env TARGET_ENV=npm vite build",
+    "build:prod": "tsc && cross-env TARGET_ENV=npm BUILD_PROD=1 vite build",
+    "build:demo": "tsc && cross-env NODE_ENV=production TARGET_ENV=demo vite build",
+    "preview": "vite preview",
+    "upload": "node scripts/deployAssets.cjs -upload",
+    "release": "node scripts/deployAssets.cjs -deploy",
+    "buildDeployRelease": "npm run build:demo && node scripts/deployAssets.cjs -upload -deploy"
   },
   "dependencies": {
     "big.js": "^6.2.1",
@@ -31,7 +34,6 @@
     "react": "React"
   },
   "devDependencies": {
-    "cross-env": "^6.0.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/lodash.clonedeep": "^4.5.9",
     "@types/lodash.debounce": "^4.0.7",
@@ -40,14 +42,22 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/react-lifecycles-compat": "^3.0.1",
-    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react": "^6.1.0",
+    "cross-env": "^6.0.0",
+    "esbuild": "^0.28.2",
+    "less": "^4.5.1",
     "react-dom": "^18.2.0",
     "rollup-plugin-visualizer": "^5.9.0",
-    "sass": "1.58.3",
+    "sass": "^1.70.0",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^8.2.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "uifaasDeploy": {
+    "serverOrigin": "https://devops-admin.uifaas.com",
+    "baseCdnUrl1": "/ns/static/cdnjsx/assets",
+    "baseCdnUrl": "//cdnjsx.oss-cn-shanghai.aliyuncs.com/assets"
   }
 }

@@ -298,6 +298,7 @@ function SortableTableImpl(props: SortableTableProps, ref: any) {
 SortableTableImpl.defaultProps = {
     prefix: defaultPrefix,
     isZebra: true,
+    size: 'medium',
 };
 
 

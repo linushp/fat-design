@@ -4,6 +4,7 @@
 @import "scss/variable";
 @import "scss/mixin";
 @import "scss/placeholder";
+@import "scss/left";
 
 #{$tab-prefix} {
     & {
@@ -13,6 +14,7 @@
 
     &-bar {
         outline: none;
+
         &-popup {
             overflow-y: auto;
             max-height: 480px;
@@ -37,6 +39,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+
         &::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
@@ -53,6 +56,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
+
         &-enter,
         &-appear {
             animation: fadeInLeft .4s cubic-bezier(.78, .14, .15, .86);
@@ -78,6 +82,7 @@
             position: relative;
             cursor: pointer;
             text-decoration: none;
+            user-select: none !important;
         }
 
         &:before {
@@ -90,13 +95,12 @@
             font-weight: $tab-item-font-weight-selected;
         }
 
-        @include tabs-tab-close-icon(
-            $tab-close-icon-color,
+        @include tabs-tab-close-icon($tab-close-icon-color,
             $tab-close-icon-color-hover,
             $tab-close-icon-color-selected,
-            $tab-close-icon-color-disabled
-        );
+            $tab-close-icon-color-disabled );
     }
+
     &-tab:focus {
         outline: none;
     }
@@ -156,9 +160,11 @@
     &-btn-next {
         right: $tab-nav-arrow-right-positon-right;
     }
+
     &-btn-prev {
         right: $tab-nav-arrow-left-positon-right;
     }
+
     &-btn-down {
         right: $tab-nav-arrow-down-positon-right;
     }
@@ -181,7 +187,7 @@
 
     /* position: vertical */
     /* ----------------- */
-    &-vertical > #{$tab-prefix}-bar {
+    &-vertical>#{$tab-prefix}-bar {
         #{$tab-prefix}-nav {
             width: 100%;
         }
@@ -194,27 +200,23 @@
     /* Size */
     /* ----------------- */
     &.#{$css-prefix}medium {
-        @include tabs-size(
-            $tab-item-padding-tb-size-m,
+        @include tabs-size($tab-item-padding-tb-size-m,
             $tab-item-padding-lr-size-m,
             $tab-item-text-size-m,
             $tab-nav-tab-icon-size-m,
             $tab-nav-close-icon-size-m,
             $tab-nav-close-icon-padding-l-size-m,
-            $tab-nav-scroll-padding-right-m
-        );
+            $tab-nav-scroll-padding-right-m );
     }
 
     &.#{$css-prefix}small {
-        @include tabs-size(
-            $tab-item-padding-tb-size-s,
+        @include tabs-size($tab-item-padding-tb-size-s,
             $tab-item-padding-lr-size-s,
             $tab-item-text-size-s,
             $tab-nav-tab-icon-size-s,
             $tab-nav-close-icon-size-s,
             $tab-nav-close-icon-padding-l-size-s,
-            $tab-nav-scroll-padding-right-s
-        );
+            $tab-nav-scroll-padding-right-s );
     }
 
     &-show-add {
@@ -231,6 +233,7 @@
             align-self: stretch;
             overflow: hidden;
             white-space: nowrap;
+
             &::after {
                 position: absolute;
                 height: 100%;
@@ -238,7 +241,7 @@
                 right: 0;
                 content: "";
                 pointer-events: none;
-                box-shadow: -2px 0 3px 0px  rgba(0, 0, 0, .12);
+                box-shadow: -2px 0 3px 0px rgba(0, 0, 0, .12);
                 z-index: 1;
             }
         }
@@ -251,11 +254,13 @@
                 position: initial;
                 right: auto;
             }
+
             #{$tab-prefix}-btn-next {
                 position: initial;
                 margin-left: $s-2;
                 right: auto;
             }
+
             #{$tab-prefix}-btn-down {
                 margin-left: $s-2;
                 position: initial;
@@ -263,18 +268,23 @@
             }
         }
     }
+
     &.#{$css-prefix}small #{$tab-prefix}-nav-operations {
         #{$tab-prefix}-btn-prev {
             margin-left: $s-2;
         }
+
         #{$tab-prefix}-btn-next {
-            margin-right: $s-2;;
+            margin-right: $s-2;
+            ;
         }
     }
+
     &.#{$css-prefix}medium #{$tab-prefix}-nav-operations {
         #{$tab-prefix}-btn-prev {
             margin-left: $s-3;
         }
+
         #{$tab-prefix}-btn-next {
             margin-right: $s-3;
         }
@@ -282,7 +292,7 @@
 
     /* shape: pure */
     /* ----------------- */
-    &-pure > #{$tab-prefix}-bar {
+    &-pure>#{$tab-prefix}-bar {
         border-bottom: $tab-pure-divider-line;
         background-color: $tab-pure-bg-color;
 
@@ -291,19 +301,16 @@
             box-shadow: $tab-pure-divider-shadow;
 
             #{$tab-prefix}-tab {
-                @include tabs-tab-statement(
-                    $tab-pure-text-color-normal, // text color
+                @include tabs-tab-statement($tab-pure-text-color-normal, // text color
                     $tab-pure-text-color-hover,
                     $tab-pure-text-color-selected,
                     $tab-pure-text-color-disabled,
                     transparent, // bg color
                     transparent,
                     transparent,
-                    transparent
-                );
+                    transparent);
 
-                @include tabs-tab-inkbar(
-                    $tab-pure-ink-bar-width,
+                @include tabs-tab-inkbar($tab-pure-ink-bar-width,
                     $tab-pure-ink-bar-color,
                     0%,
                     0%,
@@ -316,31 +323,28 @@
 
     /* Shape: wrapped */
     /* --------------------- */
-    &-wrapped > #{$tab-prefix}-bar {
+    &-wrapped>#{$tab-prefix}-bar {
         background: $tab-wrapped-bar-bg-color;
 
         #{$tab-prefix}-tab {
-            @include tabs-tab-statement(
-                $tab-wrapped-text-color,
+            @include tabs-tab-statement($tab-wrapped-text-color,
                 $tab-wrapped-text-color-hover,
                 $tab-wrapped-text-color-selected,
                 $tab-wrapped-text-color-disabled,
                 $tab-wrapped-bg-color,
                 $tab-wrapped-bg-color-hover,
                 $tab-wrapped-bg-color-selected,
-                $tab-wrapped-bg-color-disabled
-            );
+                $tab-wrapped-bg-color-disabled );
 
-            @include tabs-tab-close-icon(
-                $tab-close-icon-color,
+            @include tabs-tab-close-icon($tab-close-icon-color,
                 $tab-close-icon-color-hover,
                 $tab-close-icon-color-selected,
-                $tab-close-icon-color-disabled
-            );
+                $tab-close-icon-color-disabled );
         }
     }
 
-    &-wrapped:before, &-wrapped:after {
+    &-wrapped:before,
+    &-wrapped:after {
         content: "";
         display: table;
     }
@@ -349,13 +353,14 @@
         clear: both;
     }
 
-    &-wrapped > #{$tab-prefix}-content {
+    &-wrapped>#{$tab-prefix}-content {
         position: relative;
     }
 
     /* Shape: wrapped(top) */
-    &-wrapped#{$tab-prefix}-top > #{$tab-prefix}-bar {
+    &-wrapped#{$tab-prefix}-top>#{$tab-prefix}-bar {
         position: relative;
+
         #{$tab-prefix}-nav-extra {
             position: absolute;
             top: 50%;
@@ -364,23 +369,20 @@
         }
 
         #{$tab-prefix}-tab {
-            + #{$tab-prefix}-tab {
+            +#{$tab-prefix}-tab {
                 margin-left: $tab-wrapped-tab-margin-right;
             }
 
-            @include tabs-tab-border(
-                $tab-wrapped-bar-border,
+            @include tabs-tab-border($tab-wrapped-bar-border,
                 null,
                 $tab-wrapped-tab-top-border-radius,
                 $tab-wrapped-border-line-color-hover,
                 $tab-wrapped-border-line-color,
                 $tab-wrapped-border-line-color,
                 $tab-wrapped-bg-color-selected,
-                $tab-wrapped-border-line-color
-            );
+                $tab-wrapped-border-line-color );
 
-            @include tabs-tab-inkbar(
-                $tab-wrapped-ink-bar-width,
+            @include tabs-tab-inkbar($tab-wrapped-ink-bar-width,
                 $tab-wrapped-ink-bar-color,
                 calc(0px - #{$tab-wrapped-border-line-width}),
                 $tab-wrapped-tab-corner-radius,
@@ -388,13 +390,14 @@
                 'top'
             );
             border-width: $tab-wrapped-border-side-width $tab-wrapped-border-side-width $tab-wrapped-border-line-width $tab-wrapped-border-side-width;
+
             &.active {
                 border-width: $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width;
             }
         }
     }
 
-    &-wrapped#{$tab-prefix}-top > #{$tab-prefix}-bar:before {
+    &-wrapped#{$tab-prefix}-top>#{$tab-prefix}-bar:before {
         content: '';
         position: absolute;
         top: 100%;
@@ -406,8 +409,9 @@
     }
 
     /* Shape: wrapped(bottom) */
-    &-wrapped#{$tab-prefix}-bottom > #{$tab-prefix}-bar {
+    &-wrapped#{$tab-prefix}-bottom>#{$tab-prefix}-bar {
         position: relative;
+
         #{$tab-prefix}-nav-extra {
             position: absolute;
             top: 50%;
@@ -422,52 +426,56 @@
         }
     }
 
-    &-wrapped#{$tab-prefix}-bottom > #{$tab-prefix}-content {
+    &-wrapped#{$tab-prefix}-bottom>#{$tab-prefix}-content {
         top: $tab-wrapped-content-position-top;
         border-bottom: $tab-wrapped-content-border;
     }
 
     /* Shape: wrapped(left) */
-    &-wrapped#{$tab-prefix}-left > #{$tab-prefix}-bar {
+    &-wrapped#{$tab-prefix}-left>#{$tab-prefix}-bar {
         float: left;
+
         #{$tab-prefix}-tab {
             float: none;
             margin-bottom: $tab-wrapped-tab-margin-bottom;
-            @include tabs-tab-border( $tab-wrapped-bar-border, null, $tab-wrapped-tab-left-border-radius, $tab-wrapped-border-line-color-hover, $tab-wrapped-border-line-color, $tab-wrapped-bg-color-selected, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color);
+            @include tabs-tab-border($tab-wrapped-bar-border, null, $tab-wrapped-tab-left-border-radius, $tab-wrapped-border-line-color-hover, $tab-wrapped-border-line-color, $tab-wrapped-bg-color-selected, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color);
             @include tabs-tab-inkbar($tab-wrapped-ink-bar-width, $tab-wrapped-ink-bar-color, calc(0px - #{$tab-wrapped-border-line-width}), $tab-wrapped-tab-corner-radius, $tab-wrapped-ink-bar-padding-l, 'left');
             border-width: $tab-wrapped-border-side-width $tab-wrapped-border-line-width $tab-wrapped-border-side-width $tab-wrapped-border-side-width;
+
             &.active {
                 border-width: $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width;
             }
         }
     }
 
-    &-wrapped#{$tab-prefix}-left > #{$tab-prefix}-content {
+    &-wrapped#{$tab-prefix}-left>#{$tab-prefix}-content {
         right: $tab-wrapped-content-position-right;
         border-left: $tab-wrapped-content-border;
     }
 
     /* Shape: wrapped(right) */
-    &-wrapped#{$tab-prefix}-right > #{$tab-prefix}-bar {
+    &-wrapped#{$tab-prefix}-right>#{$tab-prefix}-bar {
         float: right;
+
         #{$tab-prefix}-tab {
             float: none;
             margin-bottom: $tab-wrapped-tab-margin-bottom;
-            @include tabs-tab-border( $tab-wrapped-bar-border, null, $tab-wrapped-tab-right-border-radius, $tab-wrapped-border-line-color-hover, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color, $tab-wrapped-bg-color-selected);
+            @include tabs-tab-border($tab-wrapped-bar-border, null, $tab-wrapped-tab-right-border-radius, $tab-wrapped-border-line-color-hover, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color, $tab-wrapped-border-line-color, $tab-wrapped-bg-color-selected);
             @include tabs-tab-inkbar($tab-wrapped-ink-bar-width, $tab-wrapped-ink-bar-color, calc(0px - #{$tab-wrapped-border-line-width}), $tab-wrapped-tab-corner-radius, $tab-wrapped-ink-bar-padding-l, 'right');
             border-width: $tab-wrapped-border-side-width $tab-wrapped-border-side-width $tab-wrapped-border-side-width $tab-wrapped-border-line-width;
+
             &.active {
                 border-width: $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width $tab-wrapped-border-line-width;
             }
         }
     }
 
-    &-wrapped#{$tab-prefix}-right > #{$tab-prefix}-content {
+    &-wrapped#{$tab-prefix}-right>#{$tab-prefix}-content {
         right: calc(0px - #{$tab-wrapped-content-position-right});
         border-right: $tab-wrapped-content-border;
     }
 
-    &-capsule > #{$tab-prefix}-bar {
+    &-capsule>#{$tab-prefix}-bar {
         #{$tab-prefix}-tab {
             transition: background-color $motion-duration-immediately $motion-linear;
             border: $tab-capsule-tab-border;
@@ -499,34 +507,31 @@
                 border-color: $tab-capsule-tab-border-line-color-hover;
             }
 
-            @include tabs-tab-statement(
-                $tab-capsule-text-color,
+            @include tabs-tab-statement($tab-capsule-text-color,
                 $tab-capsule-text-color-hover,
                 $tab-capsule-text-color-selected,
                 $tab-capsule-text-color-disabled,
                 $tab-capsule-bg-color,
                 $tab-capsule-bg-color-hover,
                 $tab-capsule-bg-color-selected,
-                $tab-capsule-bg-color-disabled
-            );
+                $tab-capsule-bg-color-disabled );
         }
     }
 
     /* Shape: text */
     /* ------------------- */
 
-    &-text > #{$tab-prefix}-bar {
+    &-text>#{$tab-prefix}-bar {
 
         #{$tab-prefix}-tab {
-            @include tabs-tab-statement(
-                $tab-text-text-color-normal,
+            @include tabs-tab-statement($tab-text-text-color-normal,
                 $tab-text-text-color-hover,
                 $tab-text-text-color-selected,
                 $tab-text-text-color-disabled,
                 transparent, // no bg
                 transparent, // no hover bg
                 transparent, // no selected bg
-                transparent  // no disabled bg
+                transparent // no disabled bg
             );
 
             &:not(:last-child):after {
@@ -541,8 +546,9 @@
         }
     }
 
-    &-pure > #{$tab-prefix}-bar {
+    &-pure>#{$tab-prefix}-bar {
         position: relative;
+
         #{$tab-prefix}-nav-extra {
             position: absolute;
             top: 50%;
@@ -551,8 +557,9 @@
         }
     }
 
-    &-capsule > #{$tab-prefix}-bar {
+    &-capsule>#{$tab-prefix}-bar {
         position: relative;
+
         #{$tab-prefix}-nav-extra {
             position: absolute;
             top: 50%;
@@ -561,8 +568,9 @@
         }
     }
 
-    &-text > #{$tab-prefix}-bar {
+    &-text>#{$tab-prefix}-bar {
         position: relative;
+
         #{$tab-prefix}-nav-extra {
             position: absolute;
             top: 50%;

@@ -16,11 +16,7 @@ const initialValues = {
 
 
 const formItemLayout = {
-    // labelCol: {
-    // fixedSpan: 10,
-    // },
     wrapperCol: {
-        // span: 14,
         columns: 3
     },
 };
@@ -63,7 +59,6 @@ export function DemoFormLayout() {
                       layoutProps={{
                           columns: 3
                       }}
-                    // colon={true}
                       onSubmit={onSubmit}
                       onCreated={onCreated}
                       autoValidateOnCreated={true}

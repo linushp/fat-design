@@ -3,6 +3,39 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {defaultPrefix} from "../config-provider";
 import './native-select.scss'
+import {pickProps} from "../util/object.js";
+import {renderFormPreview} from "../util/render-utils.jsx";
+
+
+const NativeSelectPreview = React.memo((props) => {
+    const {value, style, prefix, dataSource, className, previewPlaceholder} = props;
+    let displayValue = previewPlaceholder;
+    if (Array.isArray(dataSource)) {
+        for (let i = 0; i < dataSource.length; i++) {
+            const element = dataSource[i];
+            if (typeof element === 'string' || typeof element === 'number' || typeof element === 'boolean') {
+                if (value === element) {
+                    displayValue = element;
+                }
+            } else {
+                if (element && value === element.value) {
+                    displayValue = element.label || element.value;
+                }
+            }
+        }
+    }
+    return renderFormPreview({
+        displayValue, className, style, prefix, previewPlaceholder
+    });
+});
+
+function renderNativeSelectPreview(props) {
+    const newProps = pickProps("value,style,prefix,dataSource,className,previewPlaceholder", props);
+    return (
+        <NativeSelectPreview {...newProps} />
+    );
+
+}
 
 /**
  * 原生选择框组件
@@ -14,29 +47,34 @@ import './native-select.scss'
  * @param {string} [props.placeholder] - 占位文本
  * @param {boolean} [props.disabled] - 是否禁用
  */
-const NativeSelect = ({
-                          value,
-                          size = 'medium',
-                          prefix = defaultPrefix,
-                          onChange,
-                          dataSource,
-                          className = '',
-                          placeholder = '请选择',
-                          disabled = false,
-                          style
-                      }) => {
-
+const NativeSelect = (props) => {
+    const {
+        value,
+        isPreview,
+        size = 'medium',
+        prefix = defaultPrefix,
+        onChange,
+        dataSource,
+        className = '',
+        placeholder = '请选择',
+        disabled = false,
+        style
+    } = props;
     const handleChange = (event) => {
         if (typeof onChange === "function") {
             onChange(event.target.value);
         }
     }
 
-    console.log('NativeSelect', value)
+    // console.log('NativeSelect', value)
 
     let selectValue = value;
     if (typeof value === "undefined" || value === null) {
         selectValue = "";
+    }
+
+    if (isPreview) {
+        return renderNativeSelectPreview({...props, prefix})
     }
 
     return (
@@ -66,6 +104,8 @@ const NativeSelect = ({
     );
 };
 
+NativeSelect._supportPreview = true;
+
 NativeSelect.propTypes = {
     value: PropTypes.any,
     onChange: PropTypes.func.isRequired,
@@ -77,7 +117,8 @@ NativeSelect.propTypes = {
     ).isRequired,
     className: PropTypes.string,
     placeholder: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    prefix: PropTypes.string,
 };
 
 export {
