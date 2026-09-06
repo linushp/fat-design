@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import type { GroupProps } from './types';
 /**
  * Nav.Group
@@ -10,19 +11,19 @@ declare class Group extends Component<GroupProps> {
         /**
          * 自定义类名
          */
-        className: any;
+        className: PropTypes.Requireable<string>;
         /**
          * 标签内容
          */
-        label: any;
+        label: PropTypes.Requireable<PropTypes.ReactNodeLike>;
         /**
          * 导航项和子导航
          */
-        children: any;
+        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
     };
     static contextTypes: {
-        prefix: any;
-        iconOnly: any;
+        prefix: PropTypes.Requireable<string>;
+        iconOnly: PropTypes.Requireable<boolean>;
     };
     render(): import("react/jsx-runtime").JSX.Element;
 }

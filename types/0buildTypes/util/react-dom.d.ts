@@ -14,7 +14,10 @@ declare class ReactDOMProxy {
     private isReact19;
     configReactDOM(ReactDOM: any): void;
     configReactDOM18(ReactDOM: any, ReactDOMClient: any): void;
-    configReactDOM19(ReactDOM: any, ReactDOMClient: any): void;
+    /**
+     * 当前库版本不支持 React 19，请使用 configReactDOM / configReactDOM18。
+     */
+    configReactDOM19(_ReactDOM?: any, _ReactDOMClient?: any): void;
     get reactDOM(): IReactDOM;
     createRoot(container: any, options?: any): IReactRoot;
     createPortal(element: any, container: any): any;

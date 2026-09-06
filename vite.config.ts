@@ -111,7 +111,8 @@ function fatDesignPackagePlugin(version: string, pkg: FatDesignPkg): Plugin {
                 main: 'index.umd.js',
                 module: 'index.js',
                 typings: 'types/index.d.ts',
-                dependencies: pkg.npmPackageDependencies,
+                // react / react-dom 由宿主安装并注入，不写入 dependencies
+                dependencies: {},
                 peerDependencies: pkg.npmPackageDependencies,
                 devDependencies: {},
                 repository: {
@@ -200,7 +201,8 @@ export default defineConfig((): UserConfig => {
         return {
             plugins: [
                 emitDtsPlugin(),
-                react(),
+                // classic：避免把开发依赖里的 React 18 jsx-runtime 打进产物，保证宿主 React 16.8/17/18 同源
+                react({ jsxRuntime: 'classic' }),
                 esmExternalRequirePlugin({
                     external: ['react'],
                 }),

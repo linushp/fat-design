@@ -169,18 +169,25 @@ class ReactDOMProxy {
 
     configReactDOM18(ReactDOM: any, ReactDOMClient: any) {
         this.isReact18 = true;
+        this.isReact19 = false;
         this._reactDOM = createReactDOMProxy18(ReactDOM, ReactDOMClient);
     }
 
-    configReactDOM19(ReactDOM: any, ReactDOMClient: any) {
-        this.isReact19 = true;
-        this._reactDOM = createReactDOMProxy19(ReactDOM, ReactDOMClient);
+    /**
+     * 当前库版本不支持 React 19，请使用 configReactDOM / configReactDOM18。
+     */
+    configReactDOM19(_ReactDOM?: any, _ReactDOMClient?: any) {
+        throw new Error(
+            'fat-design 当前正式支持 React 16.8 / 17 / 18，不支持 React 19。请使用 configReactDOM（16/17）或 configReactDOM18（18）。'
+        );
     }
 
 
     get reactDOM(): IReactDOM {
         if (!this._reactDOM) {
-            throw "必须通过configReactDOM18或configReactDOM配置依赖的ReactDOM";
+            throw new Error(
+                '必须先调用 configReactDOM(ReactDOM)（React 16/17）或 configReactDOM18(ReactDOM, ReactDOMClient)（React 18）配置 ReactDOM'
+            );
         }
         return this._reactDOM;
     }
